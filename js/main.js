@@ -130,6 +130,10 @@ MetronicApp.controller('HeaderController', ['$scope', '$state','$uibModal', func
         //    // $log.info('Modal dismissed at: ' + new Date());
         //});
     }
+    $scope.RedirectToAbout = function () {
+        $state.go("About");
+    }
+
 }]);
 
 /* Setup Layout Part - Sidebar */
