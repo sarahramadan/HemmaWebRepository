@@ -107,14 +107,11 @@ MetronicApp.controller('HeaderController', ['$scope', '$state','$uibModal', func
     $scope.$on('$includeContentLoaded', function() {
         Layout.initHeader(); // init header
     });
-    $scope.LoginPage = function () {
-        //$location.path('/Login');
-        $state.go("Login", null, {reload:true});
-    }
+    //open login model
     $scope.OpenLoginModel = function (IsRegister, IsEnterprise, IsGeneral) {
         $scope.MainObj = { PageType: IsRegister, PersonType: IsEnterprise, General: IsGeneral };
         var modalInstance = $uibModal.open({
-            templateUrl: 'views/Security/Login.html',
+            templateUrl: 'views/general/Login.html',
             controller: 'LoginModelController',
             size: 'lg',
             resolve: {
@@ -123,16 +120,13 @@ MetronicApp.controller('HeaderController', ['$scope', '$state','$uibModal', func
                 }
             }
         });
-
-        //modalInstance.result.then(function (selectedItem) {
-        //    $scope.selected = selectedItem;
-        //}, function () {
-        //    // $log.info('Modal dismissed at: ' + new Date());
-        //});
     }
+    //redirect to About page
     $scope.RedirectToAbout = function () {
         $state.go("About");
     }
+    //Login logout 
+
 
 }]);
 
