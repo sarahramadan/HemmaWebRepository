@@ -58,7 +58,7 @@
     $scope.OpenLoginModel = function (IsRegister, IsEnterprise,IsGeneral) {
         $scope.MainObj = { PageType: IsRegister, PersonType: IsEnterprise, General: IsGeneral };
         var modalInstance = $uibModal.open({
-            templateUrl: 'views/Security/Login.html',
+            templateUrl: 'views/general/Login.html',
             controller: 'LoginModelController',
             size: 'lg',
             resolve: {
