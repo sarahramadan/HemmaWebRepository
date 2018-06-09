@@ -61,7 +61,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
                             //'assets/js/owl.carousel.js',
                             //'assets/js/SmoothScroll.min.js',
                             'js/controllers/general/HomeController.js',
-                            'js/controllers/Security/LoginController.js',
+                            'js/controllers/general/LoginController.js',
                             'js/factories/UserAccountFactory.js'
                         ]
                     });
@@ -106,7 +106,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
         })
                  .state('Login', {
                      url: "/Login",
-                     templateUrl: "views/general/HomePage.html",
+                     templateUrl: "views/general/Home.html",
                      parent: "Public",
                      data: { pageTitle: 'تسجيل دخول' },
                      controller: "LoginController",
@@ -116,7 +116,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
                                  name: 'MetronicApp',
                                  insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                                  files: [
-                                     'js/controllers/Security/LoginController.js',
+                                     'js/controllers/general/LoginController.js',
                                      'js/factories/UserAccountFactory.js'
                                  ]
                              });
@@ -146,6 +146,50 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
                     }
                 })
 
-        /*=========================End Student==========================*/
+    /*=========================End Student==========================*/
+    /*=========================Start Teacher==========================*/
+         .state('TeacherProfile', {
+             url: "/TeacherProfile",
+             templateUrl: "views/Teacher/TeacherProfile.html",
+             parent: "Admin",
+             data: { pageTitle: 'ملف تعريفي للمعلم' },
+             controller: "TeacherProfileController",
+             resolve: {
+                 deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                     return $ocLazyLoad.load({
+                         name: 'MetronicApp',
+                         insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                         files: [
+                             /*'assets/global/plugins/angularjs/plugins/ui-select/select.min.css',
+                             'assets/global/plugins/angularjs/plugins/ui-select/select.min.js',*/
+                             'js/controllers/Teacher/TeacherProfileController.js',
+                         ]
+                     });
+                 }]
+             }
+         })
+    /*=========================End Teacher==========================*/
+    /*=========================Start Admin==========================*/
+                  .state('EnterpriseProfile', {
+                      url: "/EnterpriseProfile",
+                      templateUrl: "views/Admin/AdminProfile.html",
+                      parent: "Admin",
+                      data: { pageTitle: 'ملف تعريفي للموسسة' },
+                      controller: "AdminProfileController",
+                      resolve: {
+                          deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                              return $ocLazyLoad.load({
+                                  name: 'MetronicApp',
+                                  insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                                  files: [
+                                      /*'assets/global/plugins/angularjs/plugins/ui-select/select.min.css',
+                                      'assets/global/plugins/angularjs/plugins/ui-select/select.min.js',*/
+                                      'js/controllers/Admin/AdminProfileController.js',
+                                  ]
+                              });
+                          }]
+                      }
+                  })
+    /*=========================End Admin==========================*/
 
 }]);
