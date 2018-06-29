@@ -1,0 +1,163 @@
+﻿<h1>اضافة يوم همة جديد</h1>
+<form name="addEvent" novalidate>
+    <div class="panel panel-primary font-lg">
+        <div class="panel-heading">يوم الهمة الموعد والمكان</div>
+        <div class="panel-body">
+            <div class="input-group input-group-md col-md-12">
+                <span class="input-group-addon" id="sizing-addon1">اسم يوم الهمة</span>
+                <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+                <span class="input-group-addon" id="sizing-addon1">مكان يوم الهمة</span>
+                <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+            </div>
+            <div class="input-group input-group-md col-md-12">
+                <span class="input-group-addon" id="sizing-addon1">موعد يوم الهمة</span>
+                <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-primary font-lg" ng-init="ShowEventProgramData=false" ng-click="ShowEventProgramData=!ShowEventProgramData">
+        <div class="panel-heading">فروع برنامج يوم الهمة</div>
+    </div>
+    <div class="panel-body" ng-show="ShowEventProgramData">
+        <table class="table ng-table-responsive table-bordered table-striped col-md-12">
+            <thead>
+                <tr>
+                    <th class="col-md-2">فروع البرنامج</th>
+                    <th class="col-md-2">مقدار</th>
+                    <th class="col-md-2"> الكمية</th>
+                    <th class="col-md-2">من</th>
+                    <th class="col-md-2">الي</th>
+                    <th class="col-md-2">الغاء </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="EventProgramobj in EventProgram track by $index">
+                    <td class="col-xs-2"><input type="text" name="ProgramName{{$index}}" ng-required="true" placeholder="اسم الفرع" ng-model="EventProgramobj.ProgramName" class="col-xs-12" /></td>
+                    <td class="col-xs-2"><input type="text" placeholder="عدد الاجزاء" ng-model="EventProgramobj.ProgramQuantity" class="col-xs-12" /></td>
+                    <td class="col-xs-2"> <input type="text" placeholder="عدد الاوجه" ng-model="EventProgramobj.ProgramQuantityValue" class="col-xs-12" /></td>
+                    <td class="col-xs-2"><input type="text" placeholder="اسم السورة" class="col-xs-12" /></td>
+                    <td class="col-xs-2"><input type="text" placeholder="اسم السورة" class="col-xs-12" /></td>
+                    <td class="col-xs-2"><a href="#" ng-click="removeRecord('EventProgram',$index)" ng-hide="hideRemoveButton"><span class="glyphicon glyphicon-remove"></span></a></td>
+                </tr>
+                <tr>
+                    <td class="col-md-2" colspan="6"><a href="#" ng-click="AddRecord('EventProgram',10)" ng-hide="hideAddButton"><span class="glyphicon glyphicon-plus"></span></a></td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="button" ng-click="sumbitTest()" />
+    </div>
+
+    <div class="panel panel-primary font-lg" ng-init="ShowEventPlanData=false" ng-click="ShowEventPlanData=!ShowEventPlanData">
+        <div class="panel-heading">الجدول الزمني  ليوم الهمة</div>
+    </div>
+    <!--<label>لتوحيد الجدول الزمني للكل الايام</label>
+    <input  type="checkbox" name="SamePlane" ng-model="SamePlane"/>-->
+    <div class="panel-body" ng-show="ShowEventPlanData">
+        <uib-tabset active="active">
+            <uib-tab index="$index" ng-repeat="DayPlan in EventPlans track by $index" ng-init="parentOrder=$index" heading="{{DayOrderEnum[$index+1]}}">
+                <div class="">
+                    <!--name:{{DayOrderEnum[$index+1]}}-parent:{{$index}}-obj:{{EventPlans}}-->
+                    <table class="table ng-table-responsive table-bordered table-striped col-md-12">
+
+                        <thead>
+                            <tr>
+                                <th class="col-md-2">م</th>
+                                <th class="col-md-2">الفقرة</th>
+                                <th class="col-md-2"> المقدم</th>
+                                <th class="col-md-2" >من</th>
+                                <th class="col-md-2">الي</th>
+                                <th class="col-md-2">ملحوظات</th>
+                                <th class="col-md-2">الغاء </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                            <!--<tr>-->
+                            <tr ng-repeat="record in DayPlan.DayPlanRecord track by $index">
+                                <!--<td> parent:{{parentOrder}}</td>-->
+                                <td class="col-xs-2"><input type="text" name="ProgramName{{$index}}" ng-required="true" placeholder="الرقم" ng-model="obj[parentOrder+'-'+$index].AgendaIndex" ng-value="$index+1" class="col-xs-12" />{{obj[parentOrder+'-'+$index].AgendaIndex}}</td>
+                                <td class="col-xs-2"><input type="text" placeholder="اسم الفقرة" ng-model="obj[parentOrder+'-'+$index].Agenda" class="col-xs-12" />{{parentOrder+'-'+$index}}</td>
+                                <td class="col-xs-2"><input type="text" placeholder="اسم المقدم" ng-model="obj[parentOrder+'-'+$index].Presenter" class="col-xs-12" /></td>
+                                <td class="col-xs-2"><input type="text" placeholder="من الساعة" class="col-xs-12" ng-model="obj[parentOrder+'-'+$index].TimeFrom" /></td>
+                                <td class="col-xs-2"><input type="text" placeholder="الي الساعة" class="col-xs-12" ng-model="obj[parentOrder+'-'+$index].TimeTo" /></td>
+                                <td class="col-xs-2"><input type="text" placeholder="ملحوظات" class="col-xs-12" ng-model="obj[parentOrder+'-'+$index].Note" /></td>
+                                <td class="col-xs-2"><a href="#" ng-click="removePlaneRecord('EventPlans',parentOrder,$index)"><span class="glyphicon glyphicon-remove"></span></a></td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="6"><a href="#" ng-click="AddPlaneRecord('EventPlans',15,parentOrder)"><span class="glyphicon glyphicon-plus"></span></a></td>
+                            </tr>
+                    </table>
+                </div>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+</form>
+<div class='input-group date' id='datetimepicker2'>
+    <input type='text' class="form-control" />
+    <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+    </span>
+</div>
+<!--<h1>اضافة يوم همة جديد</h1>
+<form name="addEvent" novalidate>
+    <div class="form-group  row">
+        <div class="col-12" ng-init="ShowEventMainData=false" ng-click="ShowEventMainData=!ShowEventMainData"><span><i class="la" ng-class="{'la-plus':!ShowEventMainData,'la-minus':ShowEventMainData}"></i>البيانات اساسية عن يوم الهمة</span></div>
+        <div class="d-flex col-12 flex-wrap noPad" ng-show="ShowEventMainData">
+            <div class="col-md-4 col-sm-12">
+                <label>
+                    اسم اليوم:
+                </label>
+                <div class="myForm">
+                    <input type="text" name="hemmaName" ng-model="Event.Name" />
+
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <label>
+                    التاريخ
+                </label>
+                <div class="myForm">
+                    <!--<div class="col-md-12" ng-controller="calenderController as calenderVM">-->
+<!--<div class='input-group date' id='datetimepicker2'>
+    <input type='text' class="form-control" data-ng-model="dateFrom" data-ng-change="changeDate($event,$view)"/>
+    <button type="button" class="input-group-addon" data-ng-click="calenderVM.open($event)">
+        <span class="glyphicon glyphicon-calendar"></span>
+    </button>
+</div>
+
+{{dt}}-->
+<!--</div>-->
+<!--</div>
+            </div>
+        </div>
+    </div>
+</form>--->
+<!--<input ng-model="Dates.ToDate" name="ToDate" readonly id="cal1" type="text" class="form-control" datepicker-popup="{{calenderVM.format}}" is-open="calenderVM.opened" min-date="calenderVM.minDate" datepicker-options="calenderVM.dateOptions"
+       close-text="Close" />
+<span class="input-group-btn">
+    <button type="button" class="btn btn-default" ng-click="calenderVM.open($event)">
+        <i class="glyphicon glyphicon-calendar"></i>
+    </button>
+</span>-->
+<!--<script>
+    $('#datetimepicker-ar').datetimepicker({
+        format: 'dd/MM/yyyy',
+        language: 'ar'
+    });
+</script>-->
+<!--<script type="text/javascript">
+$(function () {
+    // Umm ALqura Calendar
+    //$('#datetimepicker2').datetimepicker({
+    //    locale: { calender: 'ummalqura', lang: 'ar', dateFormat: 'MM dd, yy'}
+    //});
+    //$('#datetimepicker2').datetimepicker()
+    //    .on(picker_event, function (e) {
+    //        alert("Handler for .change() called.", e);
+    //    });
+});
+//$("#datetimepicker2").change(function () {
+//    alert("Handler for .change() called.");
+//});
+</script>-->

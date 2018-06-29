@@ -50,7 +50,8 @@
                 <div class="alert alert-danger col-md-10 footerBtn" ng-if="ErrorMessage.length>0 && RegisterNew==false">
                     <p ng-repeat="msg in ErrorMessage track by $index">{{msg}}</p>
                 </div>
-                <button type="button" class="btn btn-primary btn-lg btn-right footerBtn" ng-click="login(loginForm.$valid,loginObj.Email,loginObj.UserPassword)" ng-disabled="submitted">  تسجيل دخول مستخدم</button>
+                {{submitted}}
+                <button type="button" class="btn btn-primary btn-lg btn-right footerBtn" ng-disabled="showLoader" ng-click="login(loginForm.$valid,loginObj.Email,loginObj.UserPassword)" ng-disabled="submitted">  تسجيل دخول مستخدم</button>
                 <button type="button" class="btn btn-warning  btn-lg btn-right footerBtn" ng-click="Cancel(loginForm)">إلغاء</button>
             </div>
         </form>

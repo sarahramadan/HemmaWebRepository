@@ -1,4 +1,4 @@
-﻿MetronicApp.factory('RequestFactory', ['$http', '$rootScope', 'appConfigs', function ($http, $rootScope, appConfigs) {
+﻿MetronicApp.factory('RequestFactory', ['$http', '$rootScope', 'appConfigs', '$state', function ($http, $rootScope, appConfigs, $state) {
     return {
         Request: function (method,url,data,responseType) {
             var header = {};
@@ -20,8 +20,8 @@
                 $('.page-spinner-bar').addClass("hide");
 
                 if (status === 401) {
-                    // window.location = "login.html";
-                    $state.go('login');
+                   // window.location = "/Login";
+                   $state.go('Login');
                 }
                 else if (status === 400) {
                     $rootScope.submitted = false;
@@ -73,18 +73,18 @@
     }
 }]);
 
-//MetronicApp.factory('sessionInjector', ['$cookieStore', function ($cookieStore) {
-//    var sessionInjector = {
-//        request: function (config) {
-//            // if (!SessionService.isAnonymus) {
-//            config.headers['cache'] = false;
-//            //config.headers['foobar'] = new Date().getTime();
-//            if ($cookieStore.get('key')) {
-//                config.headers['Authorization'] = 'Bearer ' + $cookieStore.get('key');
-//            }
-//            //  }
-//            return config;
-//        }
-//    };
-//    return sessionInjector;
-//}]);
+MetronicApp.factory('sessionInjector', ['$cookieStore', function ($cookieStore) {
+    var sessionInjector = {
+        request: function (config) {
+            // if (!SessionService.isAnonymus) {
+            config.headers['cache'] = false;
+            //config.headers['foobar'] = new Date().getTime();
+            if ($cookieStore.get('key')) {
+                config.headers['Authorization'] = 'Bearer ' + $cookieStore.get('key');
+            }
+            //  }
+            return config;
+        }
+    };
+    return sessionInjector;
+}]);
