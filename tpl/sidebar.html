@@ -1,4 +1,4 @@
-<div class="page-sidebar navbar-collapse collapse">
+<div class="page-sidebar navbar-collapse collapse customMargin">
     <!-- BEGIN SIDEBAR MENU -->
     <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
     <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
@@ -13,82 +13,20 @@
                 <span class="title">Dashboard</span>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" ng-repeat="feature in features track by $index">
             <a href="javascript:;" class="nav-link nav-toggle">
-                <i class="icon-settings"></i>
-                <span class="title">AngularJS Features</span>
+                
+                <i class="{{feature.MenuIcon}}"></i>
+                <span class="title">{{feature.FeatureNameAr}}</span>
                 <span class="arrow "></span>
             </a>
             <ul class="sub-menu">
-                <li>
-                    <a href="#/ui_bootstrap.html">
-                        <i class="icon-puzzle"></i> UI Bootstrap</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#/file_upload.html">
-                        <i class="icon-paper-clip"></i> File Upload</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#/ui_select.html">
-                        <i class="icon-check"></i> UI Select</span>
+                <li  ng-repeat="right in feature.Rights track by $index">
+                    <a href="{{right.RightURL}}">
+                        <i class="icon-puzzle"></i>{{right.RightNameAr}}</span>
                     </a>
                 </li>
             </ul>
-        </li>
-        <li class="nav-item">
-            <a href="javascript:;" class="nav-link nav-toggle">
-                <i class="icon-wrench"></i>
-                <span class="title">jQuery Plugins</span>
-                <span class="arrow "></span>
-            </a>
-            <ul class="sub-menu">
-                <li>
-                    <a href="#/form-tools">
-                        <i class="icon-puzzle"></i> Form Tools </a>
-                </li>
-                <li>
-                    <a href="#/pickers">
-                        <i class="icon-calendar"></i> Date & Time Pickers </a>
-                </li>
-                <li>
-                    <a href="#/dropdowns">
-                        <i class="icon-refresh"></i> Custom Dropdowns </a>
-                </li>
-                <li>
-                    <a href="#/tree">
-                        <i class="icon-share"></i> Tree View </a>
-                </li>
-                <li class="nav-item">
-                    <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-briefcase"></i> Datatables
-                        <span class="arrow "></span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="#/datatables/managed.html">
-                                <i class="icon-tag"></i> Managed Datatables </a>
-                        </li>
-                        <li>
-                            <a href="#/datatables/ajax.html">
-                                <i class="icon-refresh"></i> Ajax Datatables </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a href="#/profile/dashboard" id="sidebar_menu_link_profile">
-                <i class="icon-user"></i>
-                <span class="title">User Profile</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="#/todo">
-                <i class="icon-check"></i>
-                <span class="title">Task & Todo</span>
-            </a>
         </li>
     </ul>
     <!-- END SIDEBAR MENU -->

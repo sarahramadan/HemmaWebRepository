@@ -25,7 +25,7 @@
 });
 
 //var LoginModelController =
-angular.module('MetronicApp').controller('LoginModelController', function ($scope, $modalInstance, UserAccountFactory, MainObj, $cookieStore) {
+angular.module('MetronicApp').controller('LoginModelController', function ($scope, $modalInstance, UserAccountFactory, MainObj, $cookieStore, $rootScope, $state) {
 
     console.log("enter login model new");
     $scope.edit = false;
@@ -33,37 +33,42 @@ angular.module('MetronicApp').controller('LoginModelController', function ($scop
     $scope.newTeacherObj = {};
     $scope.newEnterpriseObj = {};
     $scope.ErrorMessage = [];
+    $rootScope.showLoader = false;
 
     $scope.saveData = function (formValid, type, obj) {
         $scope.edit = true;
         if (formValid && obj) {
+            $rootScope.showLoader = true;
             obj.IsEnterprise = type;
             UserAccountFactory.RegisterAccount(obj).then(function (data) {
-                console.log("data", data);
                 if (data.data.ErrorMessage && data.data.ErrorMessage.length > 0) {
                     $scope.ErrorMessage = data.data.ErrorMessage;
                 } else {
                     //login
                     $scope.login(formValid, data.data.Result.UserEmail, data.data.Result.UserPassword);
                 }
+                $rootScope.submitted = false;
             });
         }
     };
     $scope.login = function (formValid, usermail, password) {
         $scope.edit = true;
         if (formValid) {
+            $rootScope.showLoader = true;
             UserAccountFactory.LoginAccount(usermail, password).success(function (data, status, headers, config) {
-                console.log("rettrun from login", data, status, headers, config);
                 $cookieStore.put('key', data.access_token);
-                document.getElementsByClassName('page-spinner-bar');
-                var element = angular.element(document.getElementsByClassName('page-spinner-bar')[0]);
-                element.removeClass('hide');
+                //document.getElementsByClassName('page-spinner-bar');
+                //var element = angular.element(document.getElementsByClassName('page-spinner-bar')[0]);
+                //element.removeClass('hide');
                 //window.location = "index.html";
+                $scope.GetAuthRedirectPage();
             })
             .error(function (data, status, headers, config) {
-                var errorMsg = data.error;
                 if (data && data.error) {
-                    $scope.ErrorMessage =["كلمة المرور او البريد الالكتروني غير صحيحين من فضلك تاكد منهم"];
+                    var obj = {};
+                    obj.UserEmail=usermail;
+                    obj.UserPassword = password;
+                    $scope.GetUnAuthRedirectPage(obj,data);
                 }
             });
             //reset form
@@ -101,9 +106,37 @@ angular.module('MetronicApp').controller('LoginModelController', function ($scop
     };
     $scope.ResetModel = function () {
         $scope.edit = false;
+        $rootScope.showLoader = false;
         $scope.addForm.$setPristine();
         $scope.addForm.$setUntouched();
     };
+    $scope.GetAuthRedirectPage = function () {
+        UserAccountFactory.GetAuthUserRole().then(function (data) {
+            $scope.CloseModel();
+            if (data.data == RoleEnum.SystemAdmin) {
+                $state.go("ManageAccounts");
+            } else if (data.data == RoleEnum.AdminRole) {
+                $state.go("EnterpriseProfile");
+            }else if (data.data == RoleEnum.TeacherRole) {
+                $state.go("TeacherProfile");
+            }else {
+                $state.go("Home");
+            }
+        });
+    };
+
+    $scope.GetUnAuthRedirectPage = function (obj,data) {
+        UserAccountFactory.GetUnAuthUser(obj).then(function (data) {
+            debugger;
+            if (data.data!=null && data.data.ID && data.data.RoleID == RoleEnum.AdminRole && data.data.IsActive == false) {
+                $scope.CloseModel();
+                $state.go("AdminWelcome", { id: data.data.ID, UnAuthUserObj: data.data});
+            } else {
+                var errorMsg = data.error;
+                $scope.ErrorMessage = ["كلمة المرور او البريد الالكتروني غير صحيحين من فضلك تاكد منهم"];
+            }
+        });
+    }
 
     if (MainObj) {
         $scope.RegisterNew = MainObj.PageType;

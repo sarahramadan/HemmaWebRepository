@@ -9,7 +9,8 @@ var MetronicApp = angular.module("MetronicApp", [
     "oc.lazyLoad",  
     "ngSanitize",
     "ui.select",
-    "ngCookies"
+    "ngCookies",
+    "ngTable"
 ]); 
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
@@ -81,6 +82,7 @@ MetronicApp.factory('settings', ['$rootScope', function($rootScope) {
         assetsPath: 'assets',
         globalPath: 'assets/global',
         layoutPath: 'assets/layouts/layout2',
+        dateFormat:"dd/MM/yyyy"
     };
 
     $rootScope.settings = settings;
@@ -103,7 +105,7 @@ initialization can be disabled and Layout.init() should be called on page load c
 ***/
 
 /* Setup Layout Part - Header */
-MetronicApp.controller('HeaderController', ['$scope', '$state','$uibModal', function ($scope, $state, $uibModal) {
+MetronicApp.controller('HeaderController', ['$scope', '$state', '$uibModal', '$rootScope', function ($scope, $state, $uibModal, $rootScope) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initHeader(); // init header
     });
@@ -125,15 +127,71 @@ MetronicApp.controller('HeaderController', ['$scope', '$state','$uibModal', func
     $scope.RedirectToAbout = function () {
         $state.go("About");
     }
-    //Login logout 
+    //log out function
+    $scope.Logout = function () {
+        $rootScope.user = undefined;
+        $rootScope.features = undefined;
+        $cookieStore.remove("key");
+        $state.go("Home");
+    }
+
+
+
+}]);
+
+/* Setup Layout Part -Admin  Header */
+MetronicApp.controller('AdminHeaderController', ['$scope', '$state', '$uibModal', 'UserAccountFactory', '$rootScope','$cookieStore', function ($scope, $state, $uibModal, UserAccountFactory, $rootScope, $cookieStore) {
+    $scope.$on('$includeContentLoaded', function () {
+        Layout.initHeader(); // init header
+        if ($cookieStore.get("key")) {
+            //getCurrent user 
+            UserAccountFactory.getCurrentUser().success(function (data, status, headers, config) {
+                $rootScope.user = data;
+                console.log("user", $rootScope.user);
+            });
+        } else {
+            $state.go("Login");
+        }
+
+    });
+    //open login model
+    $scope.OpenLoginModel = function (IsRegister, IsEnterprise, IsGeneral) {
+        $scope.MainObj = { PageType: IsRegister, PersonType: IsEnterprise, General: IsGeneral };
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/general/Login.html',
+            controller: 'LoginModelController',
+            size: 'lg',
+            resolve: {
+                MainObj: function () {
+                    return $scope.MainObj;
+                }
+            }
+        });
+    }
+    //redirect to About page
+    $scope.RedirectToAbout = function () {
+        $state.go("About");
+    }
+    //log out function
+    $scope.Logout = function () {
+        $rootScope.user = undefined;
+        $rootScope.features = undefined;
+        $cookieStore.remove("key");
+        $state.go("Home");
+    }
+
 
 
 }]);
 
 /* Setup Layout Part - Sidebar */
-MetronicApp.controller('SidebarController', ['$scope', function($scope) {
+MetronicApp.controller('SidebarController', ['$scope', 'UserAccountFactory', '$rootScope', function ($scope, UserAccountFactory, $rootScope) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initSidebar(); // init sidebar
+        UserAccountFactory.SideMenu().success(function (data, status, headers, config) {
+            $rootScope.features = data;
+            console.log("features", $rootScope.features);
+        });
     });
 }]);
 
@@ -176,5 +234,4 @@ MetronicApp.run(["$rootScope", "settings", "$state", function($rootScope, settin
         //console.log("fromState", fromState);
         //console.log("fromParams", fromParams);
     });
-
 }]);

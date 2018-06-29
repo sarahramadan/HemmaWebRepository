@@ -1,6 +1,9 @@
-﻿/* Setup Rounting For All Pages */
-MetronicApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-    //$httpProvider.interceptors.push('sessionInjector');
+﻿/// <reference path="../assets/js/easyResponsiveTabs.js" />
+/// <reference path="../assets/js/calender/jquery.calendars.min.js" />
+/// <reference path="../assets/js/ngTable.js" />
+/* Setup Rounting For All Pages */
+MetronicApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    $httpProvider.interceptors.push('sessionInjector');
     // Redirect any unmatched url
     $urlRouterProvider.otherwise("/Public/Home");
 
@@ -123,6 +126,25 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
                          }]
                      }
                  })
+          .state('AdminWelcome', {
+              url: "/AdminWelcome/:id",
+              templateUrl: "views/general/AdminWelcomePage.html",
+              parent: "Public",
+              data: { pageTitle: 'صفحة الترحيب' },
+              params : { UnAuthUserObj: null},
+              controller: "AdminWelcomeController",
+              resolve: {
+                  deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                      return $ocLazyLoad.load({
+                          name: 'MetronicApp',
+                          insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                          files: [
+                              'js/controllers/general/AdminWelcomeController.js'
+                          ]
+                      });
+                  }]
+              }
+          })
         /*=========================End public==========================*/
         /*=========================Start Student==========================*/
                 .state('StudentRegister', {
@@ -190,6 +212,50 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
                           }]
                       }
                   })
+
+          .state('AddEvent', {
+              url: "/AddEvent",
+              templateUrl: "views/Admin/AddEvent.html",
+              parent: "Admin",
+              data: { pageTitle: 'إضافة يوم همة' },
+              controller: "AddEventController",
+              resolve: {
+                  deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                      return $ocLazyLoad.load({
+                          name: 'MetronicApp',
+                          insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                          files: [
+                              'js/controllers/general/CalenderController.js',
+                              'js/service/CalenderService.js',
+                              //'assets/CSS/responsiveTabs.css',
+                              'js/controllers/Admin/AddEventController.js',
+                              //'assets/js/easyResponsiveTabs.js'
+
+                          ]
+                      });
+                  }]
+              }
+          })
     /*=========================End Admin==========================*/
+        /*=========================Start System Admin==========================*/
+                  .state('ManageAccounts', {
+                      url: "/ManageAccounts",
+                      templateUrl: "views/SystemAdmin/ManageAccounts.html",
+                      parent: "Admin",
+                      data: { pageTitle: 'ادارة الحسابات' },
+                      controller: "ManageAccountsController",
+                      resolve: {
+                          deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                              return $ocLazyLoad.load({
+                                  name: 'MetronicApp',
+                                  insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                                  files: [
+                                      'js/controllers/SystemAdmin/ManageAccountsController.js',
+                                  ]
+                              });
+                          }]
+                      }
+                  })
+    /*=========================End system Admin==========================*/
 
 }]);
