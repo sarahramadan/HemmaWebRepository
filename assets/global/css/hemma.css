@@ -1,8 +1,8 @@
 ﻿
-.ui-select-bootstrap .ui-select-toggle > .caret {
+/*.ui-select-bootstrap .ui-select-toggle > .caret {
      position: absolute;
    right: initial!important;
-   left: 10px; /* or any other value - it should be the same as the original right value */
+   left: 10px; *//* or any other value - it should be the same as the original right value 
     margin-top: -2px;
 }
 
@@ -29,4 +29,4 @@
 }
 .customMargin{
     margin-top:130px;
-}
+}*/
