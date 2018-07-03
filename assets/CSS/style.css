@@ -1,10 +1,23 @@
-
+/*
+ * Droid Arabic Kufi (Arabic) http://www.google.com/fonts/earlyaccess
+ */
+@font-face {
+  font-family: 'Droid Arabic Kufi';
+  font-style: normal;
+  font-weight: 400;
+  src: url(//fonts.gstatic.com/ea/droidarabickufi/v6/DroidKufi-Regular.eot);
+  src: url(//fonts.gstatic.com/ea/droidarabickufi/v6/DroidKufi-Regular.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/droidarabickufi/v6/DroidKufi-Regular.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/droidarabickufi/v6/DroidKufi-Regular.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/droidarabickufi/v6/DroidKufi-Regular.ttf) format('truetype');
+}
 
 html, body{
     font-size: 100%;
-	font-family:'PT Sans', sans-serif;
+
 	background:#ffffff;
 	margin:0px!important;
+    overflow-x: hidden;
 }
 p{
 	margin:0;
@@ -12,7 +25,7 @@ p{
     color: white ;
 }
 h1,h2,h3,h4,h5,h6{
-	font-family: 'Josefin Sans', sans-serif;
+	font-family: 'Droid Arabic Kufi', sans-serif;
    margin:0;
 }
 ul,label{
@@ -44,7 +57,7 @@ input[type="submit"],.w3l_header_left ul li a,.related-post-right h4 a,.comments
 }
 .modal-dialog {
     width: 600px;
-    margin: 96px auto;
+        margin: 14px auto;
 }
 /*--//model--*/
 p {
@@ -67,7 +80,7 @@ p {
 }
 /*-- logo --*/
 .navbar-header img {
-        height: 200px;
+      height: 98px;
 }
 
 /*-- //logo --*/
@@ -93,7 +106,7 @@ ul.nav.navbar-nav {
 
 
 .navbar-nav {
-        margin-top: 77px;
+        margin-top: 59px;
     font-size: 25px;
     color: #0c4999;
 
@@ -102,13 +115,14 @@ ul.nav.navbar-nav.navbar-right {
     margin-left: 10%;
 }
 .navbar-default .navbar-nav > li > a {
-    font-size: 0.9em;
+    font-size: 12pt;
     padding: 1em 0.9em 1.2em;
     position: relative;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: #0c4999;
+    line-height: 67px;
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus,.navbar-default .navbar-nav li a.active {
     color: #fe423f;
@@ -377,7 +391,7 @@ ul.dropdown-menu.multi-column ul li a:hover{
 /*-- /banner --*/
 .baner-info{
 	padding-top: 12em;
-    margin: 0 auto;
+    margin:449px auto;
     text-align: center;
 }
 .baner-info h3 {
@@ -508,17 +522,17 @@ a.login.reg {
 }
 .banner-bottom-girds {
     width: 54%;
-    z-index: 1;
+    z-index: 100;
     position: absolute;
     left: 24%;
-    top: -29%;
+    top: -72%;
     border: 1px solid rgba(226, 226, 226, 0.56);
     border-width: 0px 1px 1px;
 }
 .agileits-banner-grid {
     float: left;
     background: #fff;
-    width: 50%;
+    width: 33.33%;
     padding: 2em;
     border-top: 10px solid #0c4999;
 }
@@ -1237,7 +1251,7 @@ button.btn1:hover i.fa.fa-paper-plane-o{
 }
 @media screen and (max-width: 1366px){
 	.baner-info {
-		padding-top: 7em;
+		padding-top: 15em;
 	}
 }
 @media screen and (max-width: 1280px){
@@ -1945,7 +1959,7 @@ col-xs-15 {
 }
 
 @media (min-width: 1200px) {
-    .col-lg-15 {
+    .col-lg-15 {sssss
         width: 20%;
         float: right;
     }
@@ -1958,4 +1972,271 @@ col-xs-15 {
 .portlet.light.testPadding{
     
     padding: 0px;
+      
+}
+
+
+.baner-info{
+     background: 
+       
+        linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3))
+ ;
+    background-size: cover;
+    background-repeat: no-repeat;
+   
+
+}
+
+
+
+
+.navbar-default .navbar-nav > li > a{
+    color:#0c4999; 
+}
+
+
+
+.navbar-fixed-bottom, .navbar-fixed-top{
+    position: inherit;
+}
+
+
+/**carouse **/
+
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: #080d15;
+    opacity: .7;
+}
+
+.carousel-inner{
+        height: 600px;
+}
+
+ul.nav.navbar-nav{
+      
+    font-size: 23px;
+    margin-top: 0px;
+}
+
+
+.navbar-default .navbar-nav > li > a{
+    color:#0c4999;
+}
+
+
+#home1{
+        background:#0c4999;
+}
+
+
+a.dropdown-toggle{
+    color:#fff;
+}
+
+
+.page-container{
+    margin-top: 104px;
+}
+
+
+
+.portlet.light>.portlet-title>.caption>.caption-subject{
+    
+    font-size: 34px;
+    color: #0c4999;
+}
+
+
+.page-footer.ng-scope{
+        background-color: #0c4999;
+}
+
+.scroll-to-top>i{
+    color: #fff;
+}
+
+.portlet{
+        margin-bottom: 0px;
+}
+
+
+
+/**Modal**/
+
+.modal-content{
+        padding: 0px;
+    max-width: 600px;
+     margin: 23px auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+
+
+
+.tab-group {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+}
+.tab-group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.tab-group a{
+    display: block;
+  text-decoration: none;
+  padding: 15px;
+  background: #fec825;
+  color: #0c4999;
+  font-size: 20px;
+  float: left;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  transition: .5s ease;
+}
+
+.tab-group  a:hover {
+  background: #0c4999;
+  color: #ffffff;
+}
+.tab-group .active a {
+  background: #0c4999;
+  color: #ffffff;
+}
+
+
+
+.caption-subject 
+{
+      text-align: center;
+  color: #0c4999;
+  font-weight: 300;
+  margin: 0 0 40px;
+}
+
+
+
+label {
+  position: absolute;
+  -webkit-transform: translateY(6px);
+          transform: translateY(6px);
+  left: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  transition: all 0.25s ease;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none;
+  font-size: 22px;
+}
+
+
+
+label .font-red-mint{
+    margin: 2px;
+  color: #0c4999;
+}
+
+
+label.active {
+  -webkit-transform: translateY(50px);
+          transform: translateY(50px);
+  left: 2px;
+  font-size: 14px;
+}
+label.active .font-red-mint {
+  opacity: 0;
+}
+
+label.highlight {
+  color: #ffffff;
+}
+
+
+input, textarea {
+  font-size: 22px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 5px 10px;
+  background: none;
+  background-image: none;
+  border: 1px solid #a0b3b0;
+  color: #ffffff;
+  border-radius: 0;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+
+
+textarea {
+  border: 2px solid #a0b3b0;
+  resize: vertical;
+}
+
+
+.registerModel.modal-dialog.ng-scope{
+    padding: 27px;
+}
+.overlay { 
+    
+  position:absolute;
+  z-index:12;
+  top:0%;
+  left:0;
+  width:100%;
+  text-align:center;
+}
+.overlay h3{
+        font-size: 47px;
+          margin-top: 133px;
+
+}
+.overlay p{
+       color: #fff;
+    font-size: 2em;
+
+}
+
+
+.overlay span{
+       color: #fec825;
+
+}
+
+/* Carousel base class */
+.carousel {
+  margin-bottom: 60px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 1;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel .item {
+  height: 400px;
+  background-color:#555;
+}
+.carousel img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 400px;
+}
+.footerBtn{
+    margin-top: 10px;
+}
+
+button.close{
+    
+        margin-bottom: 21px;
+}
+.nav>li, .nav>li>a{
+    display: inline-block;
 }

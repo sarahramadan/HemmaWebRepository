@@ -12,6 +12,8 @@
             $scope.Events = data[2].data;
         });
     };
+    
+    $scope.Events=[{HemmaEventAr:"سوم الهمة الاول",Enterprise:{EnterpriseAr:"الموسسة الازلي"}},{HemmaEventAr:"سوم الهمة التاني",Enterprise:{EnterpriseAr:"الموسسة الازلي"}}]
     $scope.SelectEvent = function (eventID) {
         if (eventID) {
             $scope.EventProgram = $filter('filter')($scope.Events, function (item) { return item.HemmaEventID === eventID; })[0].HemmaEventPrograms;
