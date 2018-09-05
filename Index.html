@@ -48,8 +48,9 @@ License: You must have a valid license purchased only from themeforest(the above
         <link href="assets/CSS/ngTable.css" rel="stylesheet" type="text/css" />
         <!-- END THEME STYLES -->
         <!-- Calender -->
-        <link href="assets/js/calender/bootstrap-datetimepicker.min.css" media="all" rel="stylesheet" />
-
+        <!--<link href="assets/CSS/jquery.calendars.picker.css" media="all" rel="stylesheet" />-->
+        <!--<link href="assets/js/calender/bootstrap-datetimepicker.min.css" media="all" rel="stylesheet" />-->
+<link href="assets/layouts/layout2/css/profile-rtl.min.css" rel="stylesheet" type="text/css"/>
         
         <link rel="shortcut icon" href="favicon.ico" /> </head>
     <!-- END HEAD -->
@@ -66,11 +67,12 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <body ng-controller="AppController" class="page-header-fixed page-sidebar-closed-hide-logo page-on-load" ng-class="{'page-content-white': settings.layout.pageContentWhite,'page-container-bg-solid': settings.layout.pageBodySolid,'page-sidebar-closed': settings.layout.pageSidebarClosed}">
         <!-- BEGIN PAGE SPINNER -->
-        <div ng-spinner-bar class="page-spinner-bar">
-            <div class="bounce1"></div>
-            <div class="bounce2"></div>
-            <div class="bounce3"></div>
-        </div>
+            <div ng-spinner-bar class="page-spinner-bar">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+
         <!-- END PAGE SPINNER -->
         <!-- BEGIN HEADER -->
         <!--<div data-ng-include="'tpl/header.html'" data-ng-controller="HeaderController" class="page-header navbar navbar-fixed-top"> </div>-->
@@ -128,11 +130,31 @@ License: You must have a valid license purchased only from themeforest(the above
          <!--<script src="assets/global/scripts/ui-bootbox.min.js" type="text/javascript"></script>-->
         <!-- END APP LEVEL JQUERY SCRIPTS -->
         <!-- END JAVASCRIPTS -->
-        <script src="assets/js/calender/jquery.calendars.min.js"></script>
+        <script type=text/javascript src="assets/Calender/js/jquery.calendars.min.js"></script>
+        <script type=text/javascript src="assets/Calender/js/jquery.calendars-ar.js"></script>
+        <script type=text/javascript src="assets/Calender/js/jquery.calendars-ar-EG.js"></script>
+         <script type="text/javascript" src="assets/Calender/js/jquery.plugin.min.js"></script>
+        <script type="text/javascript" src="assets/Calender/js/jquery.calendars.picker.min.js"></script>
+        <script type="text/javascript" src="assets/Calender/js/jquery.calendars.picker-ar.js"></script>
+        <script type="text/javascript" src="assets/Calender/js/jquery.calendars.picker-ar-EG.js"></script>
+         <script type="text/javascript" src="assets/Calender/js/jquery.calendars.picker.lang.min.js"></script>
+        <script type="text/javascript" src="assets/Calender/js/jquery.calendars.ummalqura.min.js"></script>
+        <script type="text/javascript" src="assets/Calender/js/jquery.calendars.ummalqura-ar.js"></script>
+        <script type="text/javascript" src="assets/Calender/js/jquery.calendars.plus.min.js"></script>
+
+        <script type="application/javascript" src="assets/Calender/plugin/kdate.module.js"></script>
+        <script type="text/javascript" src="assets/Calender/plugin/kdate.filter.js"></script>
+        <script type="text/javascript" src="assets/Calender/plugin/kdate.picker.js"></script>
+        <!--<script type="text/javascript" src="app.module.js"></script>
+        <script src="assets/Calender/plugin/kdate.module.js" type="text/javascript"></script>
+        <script src="assets/Calender/plugin/kdate.filter.js" type="text/javascript"></script>
+        <script src="assets/Calender/plugin/kdate.picker.js" type="text/javascript"></script>-->
+
+        <!--<script src="assets/js/calender/jquery.calendars.min.js"></script>
         <script src="assets/js/calender/jquery.calendars.ummalqura.min.js"></script>
         <script src="assets/js/calender/jquery.calendars.ummalqura-ar.js"></script>
         <script src="assets/js/calender/bootstrap-calendars.min.js"></script>
-        <script src="assets/js/calender/bootstrap-datetimepicker.min.js"></script>
+        <script src="assets/js/calender/bootstrap-datetimepicker.min.js"></script>-->
         <script src="assets/js/calender/moment.js"></script>
         <script src="assets/js/calender/moment-hijri.js"></script>
         <script>

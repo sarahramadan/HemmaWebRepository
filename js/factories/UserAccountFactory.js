@@ -23,6 +23,22 @@
         },
         GetUnAuthUser: function (obj) {
             return RequestFactory.Request('POST', appConfigs.apiBaseURL + "UserAccount/UnAuthUser", obj, null);
-    }
+        },
+        ForgetPassword: function (obj) {
+            return RequestFactory.Request('POST', appConfigs.apiBaseURL + "Registers/ForgetPassword", obj, null);
+        },
+        ActivateAccount: function (UserID) {
+            return RequestFactory.Request('POST', appConfigs.apiBaseURL + "Registers/ActivateAccount/" + UserID,null, null);
+        },
+        GetUserAccountInfo: function (UID) {
+            return RequestFactory.Request('GET', appConfigs.apiBaseURL + "UserAccount/GetUserAccountInfo/" + UID, null, null);
+        },
+        UpdateAccount: function (Obj) {
+            return RequestFactory.Request('POST', appConfigs.apiBaseURL + "UserAccount/UpdateAccount/" + Obj, null, null);
+        },
+        SiginInAccount: function (obj) {
+            return RequestFactory.Request('POST', appConfigs.apiBaseURL + "UserAccount/SignIn", obj, null);
+        }
+
     }
 }]);

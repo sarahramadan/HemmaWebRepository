@@ -16,7 +16,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   
                   
-         <div class="pull-right">
+         <!--<div class="pull-right">
                         <ul class="nav pull-right">
                                <li><a  class="scroll" ng-click="OpenLoginModel(false,undefined,true)">تسجيل دخول </a></li>
                             
@@ -34,8 +34,23 @@
                                                  
 
                         </ul>
-                      </div>
-      
+                      </div>-->
+                    <div class="pull-right">
+                        <ul class="nav pull-right">
+                            <li><a class="scroll" ng-show="user==undefined" ng-click="OpenLoginModel()">تسجيل دخول </a></li>      
+                            <li class="dropdown" ng-show="user!=undefined">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">مرحبا , {{user.UserName}} <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li ng-repeat="feature in features track by $index">
+                                        <a><i class="{{feature.MenuIcon}}"></i> {{feature.FeatureNameAr}}</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li><a ng-click="LogoutFunction()"><i class="icon-signout"></i>تسجيل خروج</a>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
                     </div>
                 <div class="clearfix"> </div>
             </nav>
