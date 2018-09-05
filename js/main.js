@@ -10,7 +10,8 @@ var MetronicApp = angular.module("MetronicApp", [
     "ngSanitize",
     "ui.select",
     "ngCookies",
-    "ngTable"
+    "ngTable",
+    "kdate"
 ]); 
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
@@ -82,7 +83,10 @@ MetronicApp.factory('settings', ['$rootScope', function($rootScope) {
         assetsPath: 'assets',
         globalPath: 'assets/global',
         layoutPath: 'assets/layouts/layout2',
-        dateFormat:"dd/MM/yyyy"
+        dateFormat: "dd/MM/yyyy",
+        pageSize: 10,
+        mediumDate:'MMM d, y'
+
     };
 
     $rootScope.settings = settings;
@@ -105,7 +109,7 @@ initialization can be disabled and Layout.init() should be called on page load c
 ***/
 
 /* Setup Layout Part - Header */
-MetronicApp.controller('HeaderController', ['$scope', '$state', '$uibModal', '$rootScope', function ($scope, $state, $uibModal, $rootScope) {
+MetronicApp.controller('HeaderController', ['$scope', '$state', '$uibModal', 'UserAccountFactory', '$rootScope','$cookieStore', function ($scope, $state, $uibModal, UserAccountFactory, $rootScope,$cookieStore) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initHeader(); // init header
     });
@@ -128,11 +132,19 @@ MetronicApp.controller('HeaderController', ['$scope', '$state', '$uibModal', '$r
         $state.go("About");
     }
     //log out function
-    $scope.Logout = function () {
+    $scope.LogoutFunction = function () {
         $rootScope.user = undefined;
         $rootScope.features = undefined;
         $cookieStore.remove("key");
         $state.go("Home");
+    }
+
+    if ($cookieStore.get("key") && !$rootScope.user) {
+        //getCurrent user 
+        UserAccountFactory.getCurrentUser().success(function (data, status, headers, config) {
+            $rootScope.user = data;
+            console.log("public page user", $rootScope.user);
+        });
     }
 
 
@@ -147,7 +159,7 @@ MetronicApp.controller('AdminHeaderController', ['$scope', '$state', '$uibModal'
             //getCurrent user 
             UserAccountFactory.getCurrentUser().success(function (data, status, headers, config) {
                 $rootScope.user = data;
-                console.log("user", $rootScope.user);
+                console.log("admin page user", $rootScope.user);
             });
         } else {
             $state.go("Login");
@@ -173,17 +185,56 @@ MetronicApp.controller('AdminHeaderController', ['$scope', '$state', '$uibModal'
         $state.go("About");
     }
     //log out function
-    $scope.Logout = function () {
+    $scope.LogoutFunction = function () {
         $rootScope.user = undefined;
         $rootScope.features = undefined;
         $cookieStore.remove("key");
         $state.go("Home");
     }
-
-
-
 }]);
+MetronicApp.controller('SystemHeaderController', ['$scope', '$state', '$uibModal', 'UserAccountFactory', '$rootScope', '$cookieStore', function ($scope, $state, $uibModal, UserAccountFactory, $rootScope, $cookieStore) {
+    $scope.$on('$includeContentLoaded', function () {
+        Layout.initHeader(); // init header
+        if ($cookieStore.get("key")) {
+            //getCurrent user 
+            UserAccountFactory.getCurrentUser().success(function (data, status, headers, config) {
+                $rootScope.user = data;
+                if ($rootScope.user.RoleID != 1) {
+                    $state.go("Login");
+                }
+                console.log("admin page user", $rootScope.user);
+            });
+        } else {
+            $state.go("Login");
+        }
 
+    });
+    //open login model
+    $scope.OpenLoginModel = function (IsRegister, IsEnterprise, IsGeneral) {
+        $scope.MainObj = { PageType: IsRegister, PersonType: IsEnterprise, General: IsGeneral };
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/general/Login.html',
+            controller: 'LoginModelController',
+            size: 'lg',
+            resolve: {
+                MainObj: function () {
+                    return $scope.MainObj;
+                }
+            }
+        });
+    }
+    //redirect to About page
+    $scope.RedirectToAbout = function () {
+        $state.go("About");
+    }
+    //log out function
+    $scope.LogoutFunction = function () {
+        $rootScope.user = undefined;
+        $rootScope.features = undefined;
+        $cookieStore.remove("key");
+        $state.go("Home");
+    }
+}]);
 /* Setup Layout Part - Sidebar */
 MetronicApp.controller('SidebarController', ['$scope', 'UserAccountFactory', '$rootScope', function ($scope, UserAccountFactory, $rootScope) {
     $scope.$on('$includeContentLoaded', function() {

@@ -1,1 +1,39 @@
-﻿<h1>Account List</h1>
+﻿<div class="portlet-title">
+    <div class="caption font-red-sunglo font-lg">
+
+        <span class="caption-subject bold uppercase">ادارة حسابات المستخدم</span>
+    </div>
+</div>
+
+<div class="portlet-body">
+    <div class="row">
+        <div class="col-md-12">
+            <table ng-table="bookingsTable" class="table table-responsive table-striped table-bordered table-hover" show-filter="true">
+                <thead>
+                    <tr class="text-info">
+                        <th width="10%" sortable="'EnterpriseID'" title="'رقم'">رقم</th>
+                        <th width="15%" sortable="'EnterpriseAr'" title="'اسم الحساب'"> اسم الحساب</th>
+                        <th width="15%" sortable="'Email'" title="'البريد الالكتروني'"> البريد الالكتروني</th>
+                        <th width="15%" sortable="'Phone'" title="'رقم التليفون'">رقم التليفون</th>
+                        <th width="15%" sortable="'Phone'" title="'تاريخ التسجيل'">تاريخ التسجيل</th>
+                        <th width="40%" title="'العمليات'">العمليات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-info" ng-repeat="account in Accounts track by $index">
+                        <td width="10%">{{account.EnterpriseUID}}</td>
+                        <td width="15%">{{account.EnterpriseAr}}</td>
+                        <td width="15%">{{account.UserAccount.UserEmail}}</td>
+                        <td width="15%">{{account.UserAccount.PhoneNumber}}</td>
+                        <td width="15%">{{FormatDate(account.UserAccount.CreationDate)}}</td>
+                        <td width="40%">
+                            <button class="btn btn-primary" ng-show="account.UserAccount.IsActive!=true" ng-click="ActivateAccount(account.UserAccount.UserAccountUID)" ng-disabled="showLoader"><i class="fa fa-user-circle-o"></i>تفعيل الحساب</button>
+                            <button class="btn btn-danger" ng-show="account.UserAccount.IsActive==true" ng-click="ActivateAccount(account.UserAccount.UserAccountUID)"  ng-disabled="showLoader"><i class="fa fa-user-circle-o"></i>غلق الحساب</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

@@ -1,5 +1,6 @@
 ﻿angular.module('MetronicApp').controller('LoginController', function ($rootScope, $scope, $http, $timeout, CRUDFactory, $q, $filter, $state, $uibModal, $log, UserAccountFactory) {
     console.log("enter login controller");
+    $rootScope.ShowLoader = true;
     //redirect to login page 
     $scope.OpenLoginModel = function (IsRegister, IsEnterprise, IsGeneral) {
         $scope.MainObj = { PageType: IsRegister, PersonType: IsEnterprise, General: IsGeneral };
@@ -13,19 +14,11 @@
                 }
             }
         });
-
-        //modalInstance.result.then(function (selectedItem) {
-        //    $scope.selected = selectedItem;
-        //}, function () {
-        //    // $log.info('Modal dismissed at: ' + new Date());
-        //});
     }
     $scope.OpenLoginModel();
-    //if login is correct redirect to right page
 });
 
-//var LoginModelController =
-angular.module('MetronicApp').controller('LoginModelController', function ($scope, $modalInstance, UserAccountFactory, MainObj, $cookieStore, $rootScope, $state) {
+angular.module('MetronicApp').controller('LoginModelController', function ($scope, $modalInstance, UserAccountFactory, $cookieStore, $rootScope, $state) {
 
     console.log("enter login model new");
     $scope.edit = false;
@@ -34,6 +27,8 @@ angular.module('MetronicApp').controller('LoginModelController', function ($scop
     $scope.newEnterpriseObj = {};
     $scope.ErrorMessage = [];
     $rootScope.showLoader = false;
+    $scope.ForgetPassowrdFlag = false;
+    //$rootScope.submitted = true;
 
     $scope.saveData = function (formValid, type, obj) {
         $scope.edit = true;
@@ -41,41 +36,49 @@ angular.module('MetronicApp').controller('LoginModelController', function ($scop
             $rootScope.showLoader = true;
             obj.IsEnterprise = type;
             UserAccountFactory.RegisterAccount(obj).then(function (data) {
+                console.log("data", data);
+                $rootScope.showLoader = false;
                 if (data.data.ErrorMessage && data.data.ErrorMessage.length > 0) {
+                    $scope.ShowMessage = type;
                     $scope.ErrorMessage = data.data.ErrorMessage;
                 } else {
-                    //login
-                    $scope.login(formValid, data.data.Result.UserEmail, data.data.Result.UserPassword);
+                    var page = data.data.Result.RedirectPage;
+                    var token = JSON.parse(data.data.Result.Token);
+                    $cookieStore.put('key', token.access_token);
+                    $scope.CloseModel();
+                    $state.go(page);
                 }
-                $rootScope.submitted = false;
             });
+        } else {
+            angular.element('input.ng-invalid').first().focus();
         }
     };
-    $scope.login = function (formValid, usermail, password) {
+
+    $scope.login = function (formValid,obj) {
         $scope.edit = true;
         if (formValid) {
             $rootScope.showLoader = true;
-            UserAccountFactory.LoginAccount(usermail, password).success(function (data, status, headers, config) {
-                $cookieStore.put('key', data.access_token);
-                //document.getElementsByClassName('page-spinner-bar');
-                //var element = angular.element(document.getElementsByClassName('page-spinner-bar')[0]);
-                //element.removeClass('hide');
-                //window.location = "index.html";
-                $scope.GetAuthRedirectPage();
-            })
-            .error(function (data, status, headers, config) {
-                if (data && data.error) {
-                    var obj = {};
-                    obj.UserEmail=usermail;
-                    obj.UserPassword = password;
-                    $scope.GetUnAuthRedirectPage(obj,data);
+            UserAccountFactory.SiginInAccount(obj).success(function (data, status, headers, config) {
+                console.log("dddd", data);
+                $rootScope.showLoader = false;
+                if (data.ErrorMessage && data.ErrorMessage.length > 0) {
+                    $scope.ErrorMessageLogin = data.ErrorMessage;
+                } else {
+                    var page = data.Result.RedirectPage;
+                    var token = JSON.parse(data.Result.Token);
+                    $cookieStore.put('key', token.access_token);
+                    $scope.CloseModel();
+                    $state.go(page);
                 }
             });
             //reset form
-            $scope.loginObj = {};         
-            $scope.ResetModel();
+            //$scope.loginObj = {};         
+            //$scope.ResetModel();
+        } else {
+            angular.element('input.ng-invalid').first().focus();
         }
     };
+
     $scope.hasError = function (form, field, validation) {
         $scope.addForm = form;
         if (validation) {
@@ -83,33 +86,19 @@ angular.module('MetronicApp').controller('LoginModelController', function ($scop
         }
         return ($scope.addForm[field].$dirty && $scope.addForm[field].$invalid) || ($scope.edit && $scope.addForm[field].$invalid);
     };
-    $scope.HeaderTitel = function () {
-        var type = '';
-        if (!$scope.IsEnterprise) {
-            type = " معلم ";
-        } else {
-            type = " دار ";
-        }
-        if ($scope.RegisterNew) {
-            return  " تسجيل" + type + "جديد";
-        } else {
-            return  "تسجيل دخول مستخدم";
-        }
-    };
-    $scope.toggleRegister = function (IsEnterprise) {
-        $scope.IsEnterprise = IsEnterprise;
-        $scope.RegisterNew = !$scope.RegisterNew;
-        $scope.ResetModel();
-    };
+
     $scope.CloseModel = function () {
         $modalInstance.close();
     };
+
     $scope.ResetModel = function () {
         $scope.edit = false;
         $rootScope.showLoader = false;
         $scope.addForm.$setPristine();
         $scope.addForm.$setUntouched();
+        $scope.ErrorMessage = [];
     };
+
     $scope.GetAuthRedirectPage = function () {
         UserAccountFactory.GetAuthUserRole().then(function (data) {
             $scope.CloseModel();
@@ -138,10 +127,29 @@ angular.module('MetronicApp').controller('LoginModelController', function ($scop
         });
     }
 
-    if (MainObj) {
-        $scope.RegisterNew = MainObj.PageType;
-        $scope.IsEnterprise = MainObj.PersonType;
-        $scope.IsGeneral = MainObj.General
+    $scope.ForgetPasswordToggle = function (form) {
+        $scope.addForm = form;
+        $scope.ForgetPassowrdFlag = !$scope.ForgetPassowrdFlag;
+        $scope.ResetModel();
+    };
+
+    $scope.ChangePassword = function (formValid, obj) {
+        $scope.edit = true;
+        if (formValid && obj) {
+            $rootScope.showLoader = true;
+            UserAccountFactory.ForgetPassword(obj).then(function (data) {
+                if (data.data.ErrorMessage && data.data.ErrorMessage.length > 0) {
+                    $scope.ShowMessage = type;
+                    $scope.ErrorMessage = data.data.ErrorMessage;
+                } else {
+                    //close model
+                    $scope.CloseModel();
+                }
+                $rootScope.showLoader = false;
+            });
+        } else {
+            angular.element('input.ng-invalid').first().focus();
+        }
     }
 });
 

@@ -24,9 +24,17 @@
                    $state.go('Login');
                 }
                 else if (status === 400) {
+                    debugger;
                     $rootScope.submitted = false;
+                    var message = "<ul><li>بيانات الاستمارة غير صحيح</li></ul>";
+                    var dataSeralize = JSON.parse(data.Message);
+                    if (dataSeralize.ErrorMessage.length > 0) {
+                        message = "<ul>"
+                        dataSeralize.ErrorMessage.forEach(function (msg) { message += "<li>" + msg + "</li>"; });
+                        message += "</ul>"
+                    }
                     bootbox.alert({
-                        message: "بيانات الاستمارة غير صحيحة",
+                        message: message,
                         buttons: {
                             ok: {
                                 label: "اغلاق"
