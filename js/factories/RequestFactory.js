@@ -1,4 +1,4 @@
-﻿MetronicApp.factory('RequestFactory', ['$http', '$rootScope', 'appConfigs', '$state', function ($http, $rootScope, appConfigs, $state) {
+﻿MetronicApp.factory('RequestFactory', ['$http', '$rootScope', 'appConfigs', function ($http, $rootScope, appConfigs) {
     return {
         Request: function (method,url,data,responseType) {
             var header = {};
@@ -20,21 +20,13 @@
                 $('.page-spinner-bar').addClass("hide");
 
                 if (status === 401) {
-                   // window.location = "/Login";
-                   $state.go('Login');
+                    // window.location = "login.html";
+                    $state.go('login');
                 }
                 else if (status === 400) {
-                    debugger;
                     $rootScope.submitted = false;
-                    var message = "<ul><li>بيانات الاستمارة غير صحيح</li></ul>";
-                    var dataSeralize = JSON.parse(data.Message);
-                    if (dataSeralize.ErrorMessage.length > 0) {
-                        message = "<ul>"
-                        dataSeralize.ErrorMessage.forEach(function (msg) { message += "<li>" + msg + "</li>"; });
-                        message += "</ul>"
-                    }
                     bootbox.alert({
-                        message: message,
+                        message: "بيانات الاستمارة غير صحيحة",
                         buttons: {
                             ok: {
                                 label: "اغلاق"
@@ -81,18 +73,18 @@
     }
 }]);
 
-MetronicApp.factory('sessionInjector', ['$cookieStore', function ($cookieStore) {
-    var sessionInjector = {
-        request: function (config) {
-            // if (!SessionService.isAnonymus) {
-            config.headers['cache'] = false;
-            //config.headers['foobar'] = new Date().getTime();
-            if ($cookieStore.get('key')) {
-                config.headers['Authorization'] = 'Bearer ' + $cookieStore.get('key');
-            }
-            //  }
-            return config;
-        }
-    };
-    return sessionInjector;
-}]);
+//MetronicApp.factory('sessionInjector', ['$cookieStore', function ($cookieStore) {
+//    var sessionInjector = {
+//        request: function (config) {
+//            // if (!SessionService.isAnonymus) {
+//            config.headers['cache'] = false;
+//            //config.headers['foobar'] = new Date().getTime();
+//            if ($cookieStore.get('key')) {
+//                config.headers['Authorization'] = 'Bearer ' + $cookieStore.get('key');
+//            }
+//            //  }
+//            return config;
+//        }
+//    };
+//    return sessionInjector;
+//}]);

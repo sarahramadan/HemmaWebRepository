@@ -525,7 +525,7 @@ a.login.reg {
     z-index: 100;
     position: absolute;
     left: 24%;
-    top: -72%;
+        top: -85%;
     border: 1px solid rgba(226, 226, 226, 0.56);
     border-width: 0px 1px 1px;
 }
@@ -2014,7 +2014,7 @@ col-xs-15 {
 }
 
 .carousel-inner{
-        height: 600px;
+        height: 400px;
 }
 
 ul.nav.navbar-nav{
@@ -2194,8 +2194,7 @@ textarea {
 }
 .overlay h3{
         font-size: 47px;
-          margin-top: 133px;
-           color: #fff;
+    margin-top: 26px;
 
 }
 .overlay p{
@@ -2222,7 +2221,7 @@ textarea {
 /* Declare heights because of positioning of img element */
 .carousel .item {
   height: 400px;
-  background-color:#555;
+  background-color:#fff;
 }
 .carousel img {
   position: absolute;
@@ -2240,7 +2239,4 @@ button.close{
 }
 .nav>li, .nav>li>a{
     display: inline-block;
-}
-.label-as-badge {
-    border-radius: 1em;
 }
