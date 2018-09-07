@@ -1,4 +1,4 @@
-/***
+﻿/***
 Metronic AngularJS App Main Script
 ***/
 
@@ -162,7 +162,9 @@ MetronicApp.controller('AdminHeaderController', ['$scope', '$state', '$uibModal'
                 console.log("admin page user", $rootScope.user);
             });
         } else {
-            $state.go("Login");
+            //this code for ui
+            $rootScope.user = { UserName: "دار الفرقان", UserAccountUID: "605e7bd4-7ac1-453f-8ac3-b4f00db0d3e0", RoleID: 2, IsActive: true };
+            //$state.go("Login");
         }
 
     });
@@ -239,10 +241,20 @@ MetronicApp.controller('SystemHeaderController', ['$scope', '$state', '$uibModal
 MetronicApp.controller('SidebarController', ['$scope', 'UserAccountFactory', '$rootScope', function ($scope, UserAccountFactory, $rootScope) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initSidebar(); // init sidebar
-        UserAccountFactory.SideMenu().success(function (data, status, headers, config) {
-            $rootScope.features = data;
-            console.log("features", $rootScope.features);
-        });
+        //UserAccountFactory.SideMenu().success(function (data, status, headers, config) {
+        //    $rootScope.features = data;
+        //    console.log("features", $rootScope.features);
+        //});
+        $rootScope.features = [{
+            FeatureNameAr:
+    "الملف الشخصي"
+, MenuIcon: "icon-user", FeatureID: 1, Rights: [{ RightNameAr: "ملئ بيانات الاساسية", RightOrder: 0, RightURL: "#/Admin/AdminProfile" }, { RightNameAr: "ادارة حساب المستخدم", RightOrder: 0, RightURL: "#/Admin/AdminProfile" }, { RightNameAr: "اضافة يوم همة", RightOrder: 0, RightURL: "#/Admin/AddEvent" }]
+        },
+            { FeatureNameAr: "شئون طلاب ", MenuIcon: "icon-bulb", FeatureID: 2, Rights: [{ RightNameAr: "ملئ بيانات الاساسية", RightOrder: 0, RightURL: "#/Admin/AdminProfile" }, { RightNameAr: "ادارة حساب المستخدم", RightOrder: 0, RightURL: "#/Admin/AdminProfile" }, { RightNameAr: "اضافة يوم همة", RightOrder: 0, RightURL: "#/Admin/AddEvent" }] },
+                        { FeatureNameAr: "شئون تعليمية ", MenuIcon: "icon-briefcase", FeatureID: 2, Rights: [{ RightNameAr: "ملئ بيانات الاساسية", RightOrder: 0, RightURL: "#/Admin/AdminProfile" }, { RightNameAr: "ادارة حساب المستخدم", RightOrder: 0, RightURL: "#/Admin/AdminProfile" }, { RightNameAr: "اضافة يوم همة", RightOrder: 0, RightURL: "#/Admin/AddEvent" }] },
+                        { FeatureNameAr: "التقارير", MenuIcon: "icon-layers", FeatureID: 2, Rights: [{ RightNameAr: "ملئ بيانات الاساسية", RightOrder: 0, RightURL: "#/Admin/AdminProfile" }, { RightNameAr: "ادارة حساب المستخدم", RightOrder: 0, RightURL: "#/Admin/AdminProfile" }, { RightNameAr: "اضافة يوم همة", RightOrder: 0, RightURL: "#/Admin/AddEvent" }] },
+
+        ]
     });
 }]);
 
