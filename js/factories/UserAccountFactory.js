@@ -12,8 +12,8 @@
           });
             return result;
         },
-        getCurrentUser: function () {
-            return RequestFactory.Request('GET', appConfigs.apiBaseURL + "UserAccount/CurrentUser", null, null);
+        getCurrentUser: function (UID) {
+            return RequestFactory.Request('GET', appConfigs.apiBaseURL + "UserAccount/CurrentUser?UserAccountUID=" + UID, null, null);
         },
         SideMenu: function () {
             return RequestFactory.Request('GET', appConfigs.apiBaseURL + "UserAccount/SideMenu", null, null);
@@ -31,10 +31,10 @@
             return RequestFactory.Request('POST', appConfigs.apiBaseURL + "Registers/ActivateAccount/" + UserID,null, null);
         },
         GetUserAccountInfo: function (UID) {
-            return RequestFactory.Request('GET', appConfigs.apiBaseURL + "UserAccount/GetUserAccountInfo/" + UID, null, null);
+            return RequestFactory.Request('GET', appConfigs.apiBaseURL + "UserAccount/GetUserAccountInfo?UID=" + UID, null, null);
         },
         UpdateAccount: function (Obj) {
-            return RequestFactory.Request('POST', appConfigs.apiBaseURL + "UserAccount/UpdateAccount/" + Obj, null, null);
+            return RequestFactory.Request('POST', appConfigs.apiBaseURL + "UserAccount/UpdateAccount", Obj, null);
         },
         SiginInAccount: function (obj) {
             return RequestFactory.Request('POST', appConfigs.apiBaseURL + "UserAccount/SignIn", obj, null);

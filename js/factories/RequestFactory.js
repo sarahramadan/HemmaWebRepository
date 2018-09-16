@@ -1,6 +1,6 @@
 ﻿MetronicApp.factory('RequestFactory', ['$http', '$rootScope', 'appConfigs', '$state', function ($http, $rootScope, appConfigs, $state) {
     return {
-        Request: function (method,url,data,responseType) {
+        Request: function (method, url, data, responseType) {
             var header = {};
             header['method'] = method;
             header['url'] = url;
@@ -20,8 +20,8 @@
                 $('.page-spinner-bar').addClass("hide");
 
                 if (status === 401) {
-                   // window.location = "/Login";
-                   $state.go('Login');
+                    // window.location = "/Login";
+                    $state.go('Login');
                 }
                 else if (status === 400) {
                     debugger;
@@ -76,7 +76,33 @@
 
             });
             return request;
-          
+
+        },
+        // },
+        upload: function (method, url, data, file, responseType) {
+
+            var header = {};
+            header['method'] = method;
+            header['url'] = url; //+ '?token=' + $cookieStore.get('key');
+
+            if (data) {
+                header['fields'] = data;
+            }
+            if (file) {
+                header['file'] = file;
+            }
+            if (responseType) {
+                header['responseType'] = responseType;
+            }
+
+            //var result = Upload.upload(header).error(function (data, status, headers, config) {
+            //    if (status == 401)
+            //        $state.go('Login');
+            //        //window.location = "login.html";
+            //    else if (status == 500)
+            //        alert("upload failed");
+            //});
+            return result;
         }
     }
 }]);

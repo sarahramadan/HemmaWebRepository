@@ -7,7 +7,9 @@
             <div class="portlet light profile-sidebar-portlet ">
                 <!-- SIDEBAR USERPIC -->
                 <div>
-                    <img class="img-responsive thumbnail" src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="صورة الشعار" />
+                    <img style="width:200px; height:150px;" class="img-responsive thumbnail" src="http://localhost/ElationWebSite/assets/images/logo1.png" onerror="this.src = 'http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image'" alt="صورة الشعار" />
+
+                    <!--<img class="img-responsive thumbnail" src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="صورة الشعار" />-->
                 </div>
                 <!-- END SIDEBAR USERPIC -->
                 <!-- SIDEBAR USER TITLE -->
@@ -101,7 +103,7 @@
                                     <a ng-click="ShowTabs('ChangeImg')" data-toggle="tab">تغير الصورة</a>
                                 </li>
                                 <li>
-                                    <a ng-click="ShowTabs('ChangePassword')" data-toggle="tab">تغير بيانات المرور</a>
+                                    <a ng-click="ShowTabs('ChangePassword')" data-toggle="tab" ng-class="{'disabled':DisabledAccount}">تغير بيانات المرور</a>
                                 </li>
                                 <!--<li>
                                     <a href="#/EnterpriseProfile/PersonalInfo" data-toggle="tab">Privacy Settings</a>
@@ -112,191 +114,138 @@
                             <div class="tab-content">
                                 <!-- PERSONAL INFO TAB -->
                                 <div class="tab-pane active" ng-class="{'active':personalInfoFlag==true}" id="tab_1_1" ng-show="personalInfoFlag==true">
-                                    <form role="form">
-                                        <div class="row">
+                                    <form role="form" name="EnterpriseInfo" novalidate>
+                                        <!--<div class="row">
                                             <div class="form-group form-md-line-input has-info col-md-10 footerBtn">
                                                 <div class="input-group col-xs-12">
-                                                    <input type="text" ng-model="newEnterpriseObj.UserName" class="form-control" name="entrpriseName" placeholder="ادخل اسم الدار ......" required ng-minlength="3" ng-maxlength="100">
-                                                    <label for="form_control_1">اسم المؤسسة<span class="font-red-mint">*</span></label>
+                                                    <input type="text" ng-model="newEnterpriseObj.UserName" class="form-control" name="entrpriseName1" placeholder="ادخل اسم المستخدم ......" required ng-minlength="3" ng-maxlength="100">
+                                                    <label for="form_control_1">اسم المستخدم<span class="font-red-mint">*</span></label>
 
                                                 </div>
-                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(addEnterpriseForm,'entrpriseName', 'required' )">مطلوب ادخال اسم الدار</span>
-                                                <!--<span id="url2-error" class="font-red-mint error" ng-show="hasError(addEnterpriseForm,'entrpriseName', 'pattern' )">مطلوب ادخال حروف فقط بدون ارقام </span>-->
-                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(addEnterpriseForm,'entrpriseName', 'minlength' )">مطلوب ادخال اسم لا يقل عن ثلاث حروف </span>
-                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(addEnterpriseForm,'entrpriseName', 'maxlength' )">مطلوب ادخال اسم لا يزيد عن مئة حرف </span>
+                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(EnterpriseInfo,'entrpriseName1', 'required' )">مطلوب ادخال اسم المستخدم</span>
+                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(EnterpriseInfo,'entrpriseName1', 'minlength' )">مطلوب ادخال اسم لا يقل عن ثلاث حروف </span>
+                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(EnterpriseInfo,'entrpriseName1', 'maxlength' )">مطلوب ادخال اسم لا يزيد عن مئة حرف </span>
                                             </div>
                                             <div class="form-group form-md-line-input has-info col-md-10 footerBtn">
                                                 <div class="input-group col-xs-12">
-                                                    <input type="text" ng-model="newEnterpriseObj.PhoneNumber" class="form-control" name="enterprisePhoneNumber" placeholder="ادخل رقم الجوال ......" required>
+                                                    <input type="text" ng-model="newEnterpriseObj.PhoneNumber" class="form-control" name="enterprisePhoneNumber1" placeholder="ادخل رقم الجوال ......" required>
                                                     <label for="form_control_1">رقم الجوال<span class="font-red-mint">*</span></label>
                                                 </div>
-                                                <span id="url2-error" class="error font-red-mint" ng-show="edit && hasError(addEnterpriseForm,'enterprisePhoneNumber', 'required' )">مطلوب إدخال رقم الجوال</span>
+                                                <span id="url2-error" class="error font-red-mint" ng-show="edit && hasError(EnterpriseInfo,'enterprisePhoneNumber1', 'required' )">مطلوب إدخال رقم الجوال</span>
                                             </div>
                                             <div class="form-group form-md-line-input has-info col-md-10 footerBtn">
                                                 <div class="input-group col-xs-12">
-                                                    <input type="email" ng-model="newEnterpriseObj.UserEmail" class="form-control" name="enterpriseEmail" placeholder="ادخل البريد الالكتروني ......" required autocomplete="email">
+                                                    <input type="email" ng-model="newEnterpriseObj.UserEmail" class="form-control" name="enterpriseEmail1" placeholder="ادخل البريد الالكتروني ......" required autocomplete="email">
                                                     <label for="form_control_1">البريد الالكتروني<span class="font-red-mint">*</span></label>
 
                                                 </div>
-                                                <span id="url2-error" class="error font-red-mint" ng-show="edit && hasError(addEnterpriseForm,'enterpriseEmail', 'required' )">مطلوب إدخال البريد الالكتروني</span>
-                                                <span id="url2-error" class="error font-red-mint" ng-show="edit && hasError(addEnterpriseForm,'enterpriseEmail', 'email' )">  البريد الالكتروني غير  مطابق للتنسيق مثال :example@gmail.com </span>
+                                                <span id="url2-error" class="error font-red-mint" ng-show="edit && hasError(EnterpriseInfo,'enterpriseEmail1', 'required' )">مطلوب إدخال البريد الالكتروني</span>
+                                                <span id="url2-error" class="error font-red-mint" ng-show="edit && hasError(EnterpriseInfo,'enterpriseEmail1', 'email' )">  البريد الالكتروني غير  مطابق للتنسيق مثال :example@gmail.com </span>
                                             </div>
                                             <div class="form-group form-md-line-input has-info col-md-10 footerBtn">
                                                 <div class="input-group col-xs-12">
-                                                    <input type="password" ng-model="newEnterpriseObj.UserPassword" class="form-control" name="enterprisePassword" placeholder="ادخل رقم الهوية ......" required ng-minlength="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" autocomplete="current-password">
+                                                    <input type="password" ng-model="newEnterpriseObj.UserPassword" class="form-control" name="enterprisePassword1" placeholder="ادخل رقم الهوية ......" required ng-minlength="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" autocomplete="current-password">
                                                     <label for="form_control_1">ادخل كلمة المرور<span class="font-red-mint">*</span></label>
 
                                                 </div>
-                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(addEnterpriseForm,'enterprisePassword', 'required' )">مطلوب إدخال كلمة المرور</span>
-                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(addEnterpriseForm,'enterprisePassword', 'pattern' )">كلمة المرور عبارة عن احرف انجليزية تحتوي علي ارقام وحروف كبيرة وصغيرة ولا تقل عن 6 احرف مثال:Hemma123 </span>
+                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(EnterpriseInfo,'enterprisePassword1', 'required' )">مطلوب إدخال كلمة المرور</span>
+                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(EnterpriseInfo,'enterprisePassword1', 'pattern' )">كلمة المرور عبارة عن احرف انجليزية تحتوي علي ارقام وحروف كبيرة وصغيرة ولا تقل عن 6 احرف مثال:Hemma123 </span>
                                             </div>
                                             <div class="form-group form-md-line-input has-info col-md-10 footerBtn">
                                                 <div class="input-group col-xs-12">
-                                                    <input type="password" ng-model="newEnterpriseObj.ConfirmPassword" class="form-control" name="enterpriseConfirmPassword" placeholder="ادخل كلمة المرور ......" required ng-minlength="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" autocomplete="new-password" compare-to="newEnterpriseObj.UserPassword">
+                                                    <input type="password" ng-model="newEnterpriseObj.ConfirmPassword" class="form-control" name="enterpriseConfirmPassword1" placeholder="ادخل كلمة المرور ......" required ng-minlength="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" autocomplete="new-password" compare-to="newEnterpriseObj.UserPassword">
                                                     <label for="form_control_1">تاكيد كلمة المرور<span class="font-red-mint">*</span></label>
 
                                                 </div>
-                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(addEnterpriseForm,'enterpriseConfirmPassword', 'required' )">مطلوب إدخال تاكيد كلمة المرور</span>
-                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(addEnterpriseForm,'enterpriseConfirmPassword', 'pattern' )">كلمة المرور يجب ان تحتوي علي الاقل حرف كبير  و حرف صغير و رقم ولا تقل عن ستة احرف </span>
+                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(EnterpriseInfo,'enterpriseConfirmPassword1', 'required' )">مطلوب إدخال تاكيد كلمة المرور</span>
+                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(EnterpriseInfo,'enterpriseConfirmPassword1', 'pattern' )">كلمة المرور يجب ان تحتوي علي الاقل حرف كبير  و حرف صغير و رقم ولا تقل عن ستة احرف </span>
                                                 <span id="url2-error" class="font-red-mint error" ng-show="hasError(addEnterpriseForm,'enterpriseConfirmPassword', 'compareTo' )">تاكيد كلمة المرور غير مطابقة لكلمة المرور الاصلية </span>
                                             </div>
-                                        </div>
-                                        <div class="margiv-top-10">
-                                            <a href="javascript:;" class="btn green"> Save Changes </a>
+                                        </div>-->
+                                        <!--<div class="margiv-top-10">
+                                            <a href="javascript:;" class="btn green" ng-hide="DisabledAccount"> Save Changes </a>
                                             <a href="javascript:;" class="btn default"> Cancel </a>
-                                        </div>
+                                        </div>-->
                                     </form>
                                 </div>
                                 <!-- END PERSONAL INFO TAB -->
                                 <!-- CHANGE AVATAR TAB -->
                                 <div class="tab-pane" id="tab_1_2" ng-class="{'active':changeImgFlag==true}" ng-show="changeImgFlag==true">
                                     <p>
-                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                        eiusmod.
+                                   يمكنك إضافة صورة الشعار الخاص بالمؤسسة كما يمكنك تعديله  
                                     </p>
-                                    <form  role="form">
+                                    <form  role="form" name="logoInfo">
                                         <div class="form-group">
-                                            <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                                                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
-                                                </div>
-                                                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
-                                                <div>
-                                                    <span class="btn default btn-file">
-                                                        <span class="fileinput-new"> Select image </span>
-                                                        <span class="fileinput-exists"> Change </span>
-                                                        <input type="file" name="...">
-                                                    </span>
-                                                    <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"> Remove </a>
-                                                </div>
+                                            <div class="col-xs-12 col-md-9 col-lg-9 text-center">
+                                                <div id="dp" class="dropzone" style="width:250px; height:200px;" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods" ng-dropzone></div>
+                                                <!--<p class="font-red-mint error" ng-show="validImg">{{'products.extensionerror'|translate}} </p>-->
                                             </div>
-                                            <div class="clearfix margin-top-10">
-                                                <span class="label label-danger">NOTE! </span>
-                                                <span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only </span>
+                                            <div class="row alert-danger col-md-10 clearfix margin-top-10 col-xs-12">
+                                                <span> الصورة يجب ان تكون بإمتدد <span> (.jpg , .png) </span>و الا تقل ابعادهاعن<span> 250*250px </span></span>
                                             </div>
                                         </div>
-                                        <div class="margin-top-10">
-                                            <a href="javascript:;" class="btn green"> Submit </a>
-                                            <a href="javascript:;" class="btn default"> Cancel </a>
+                                        <div class="row margin-top-10 col-xs-12">
+                                            <a ng-click="editLogoInfo()" class="btn green">تعديل صور الشعار </a>
                                         </div>
                                     </form>
                                 </div>
                                 <!-- END CHANGE AVATAR TAB -->
                                 <!-- CHANGE PASSWORD TAB -->
-                                <form novalidate name="changeAccountInfoFrm">
+                                <form novalidate name="AccountInfoForm">
                                     <div class="tab-pane" id="tab_1_3" ng-class="{'active':changeAccountInfoFlag==true}" ng-show="changeAccountInfoFlag==true">
                                         <div class="row">
                                             <div class="form-group form-md-line-input has-info col-md-10 footerBtn">
                                                 <div class="input-group col-xs-12">
-                                                    <input type="email" ng-model="editAcccount.UserEmail" class="form-control" name="enterpriseEmail" placeholder="ادخل البريد الالكتروني ......" required autocomplete="email">
+                                                    <input type="text" ng-model="editAcccount.UserName" class="form-control" name="editAcccountUserName" placeholder="ادخل اسم المستخدم ......" required ng-minlength="3" ng-maxlength="100">
+                                                    <label for="form_control_1">اسم المستخدم<span class="font-red-mint">*</span></label>
+
+                                                </div>
+                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(AccountInfoForm,'editAcccountUserName', 'required' )">مطلوب ادخال اسم الدار</span>
+                                                <!--<span id="url2-error" class="font-red-mint error" ng-show="hasError(addEnterpriseForm,'entrpriseName', 'pattern' )">مطلوب ادخال حروف فقط بدون ارقام </span>-->
+                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(AccountInfoForm,'editAcccountUserName', 'minlength' )">مطلوب ادخال اسم لا يقل عن ثلاث حروف </span>
+                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(AccountInfoForm,'editAcccountUserName', 'maxlength' )">مطلوب ادخال اسم لا يزيد عن مئة حرف </span>
+                                            </div>
+                                            <div class="form-group form-md-line-input has-info col-md-10 footerBtn">
+                                                <div class="input-group col-xs-12">
+                                                    <input type="email" ng-model="editAcccount.UserEmail" class="form-control" name="editAcccountEmail" placeholder="ادخل البريد الالكتروني ......" required autocomplete="email">
                                                     <label for="form_control_1">البريد الالكتروني<span class="font-red-mint">*</span></label>
 
                                                 </div>
-                                                <span id="url2-error" class="error font-red-mint" ng-show="edit3 && hasError(changeAccountInfoFrm,'enterpriseEmail', 'required' )">مطلوب إدخال البريد الالكتروني</span>
-                                                <span id="url2-error" class="error font-red-mint" ng-show="edit3 && hasError(changeAccountInfoFrm,'enterpriseEmail', 'email' )">  البريد الالكتروني غير  مطابق للتنسيق مثال :example@gmail.com </span>
+                                                <span id="url2-error" class="error font-red-mint" ng-show="edit3 && hasError(AccountInfoForm,'editAcccountEmail', 'required' )">مطلوب إدخال البريد الالكتروني</span>
+                                                <span id="url2-error" class="error font-red-mint" ng-show="edit3 && hasError(AccountInfoForm,'editAcccountEmail', 'email' )">  البريد الالكتروني غير  مطابق للتنسيق مثال :example@gmail.com </span>
                                             </div>
                                             <div class="form-group form-md-line-input has-info col-md-10 footerBtn">
                                                 <div class="input-group col-xs-12">
-                                                    <input type="text" ng-model="editAcccount.PhoneNumber" class="form-control" name="enterprisePhoneNumber" placeholder="ادخل رقم الجوال ......" required>
+                                                    <input type="text" ng-model="editAcccount.PhoneNumber" class="form-control" name="editAcccountPhoneNumber" placeholder="ادخل رقم الجوال ......" required>
                                                     <label for="form_control_1">رقم الجوال<span class="font-red-mint">*</span></label>
                                                 </div>
-                                                <span id="url2-error" class="error font-red-mint" ng-show="edit3 && hasError(changeAccountInfoFrm,'enterprisePhoneNumber', 'required' )">مطلوب إدخال رقم الجوال</span>
+                                                <span id="url2-error" class="error font-red-mint" ng-show="edit3 && hasError(AccountInfoForm,'editAcccountPhoneNumber', 'required' )">مطلوب إدخال رقم الجوال</span>
                                             </div>
                                             <div class="form-group form-md-line-input has-info col-md-10 footerBtn">
                                                 <div class="input-group col-xs-12">
-                                                    <input type="password" ng-model="editAcccount.UserPassword" class="form-control" name="enterprisePassword" placeholder="ادخل رقم الهوية ......" required ng-minlength="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" autocomplete="current-password">
+                                                    <input type="password" ng-model="editAcccount.UserPassword" class="form-control" name="editAcccountPassword" placeholder="ادخل رقم الهوية ......" required ng-minlength="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" autocomplete="current-password">
                                                     <label for="form_control_1">ادخل كلمة المرورالجديدة <span class="font-red-mint">*</span></label>
 
                                                 </div>
-                                                <span id="url2-error" class="font-red-mint error" ng-show="edit3 && hasError(changeAccountInfoFrm,'enterprisePassword', 'required' )">مطلوب إدخال كلمة المرور</span>
-                                                <span id="url2-error" class="font-red-mint error" ng-show="edit3 && hasError(changeAccountInfoFrm,'enterprisePassword', 'pattern' )">كلمة المرور عبارة عن احرف انجليزية تحتوي علي ارقام وحروف كبيرة وصغيرة ولا تقل عن 6 احرف مثال:Hemma123 </span>
+                                                <span id="url2-error" class="font-red-mint error" ng-show="edit3 && hasError(AccountInfoForm,'editAcccountPassword', 'required' )">مطلوب إدخال كلمة المرور</span>
+                                                <span id="url2-error" class="font-red-mint error" ng-show="edit3 && hasError(AccountInfoForm,'editAcccountPassword', 'pattern' )">كلمة المرور عبارة عن احرف انجليزية تحتوي علي ارقام وحروف كبيرة وصغيرة ولا تقل عن 6 احرف مثال:Hemma123 </span>
                                             </div>
                                             <div class="form-group form-md-line-input has-info col-md-10 footerBtn">
                                                 <div class="input-group col-xs-12">
-                                                    <input type="password" ng-model="editAcccount.ConfirmPassword" class="form-control" name="enterpriseConfirmPassword" placeholder="ادخل كلمة المرور ......" required ng-minlength="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" autocomplete="new-password">
+                                                    <input type="password" ng-model="editAcccount.ConfirmPassword" class="form-control" name="editAcccountConfirmPassword" placeholder="ادخل كلمة المرور ......" required ng-minlength="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" autocomplete="new-password" compare-to="editAcccount.UserPassword">
                                                     <label for="form_control_1">تاكيد كلمة المرور الجديدة<span class="font-red-mint">*</span></label>
 
                                                 </div>
-                                                <span id="url2-error" class="font-red-mint error" ng-show="edit3 && hasError(changeAccountInfoFrm,'enterpriseConfirmPassword', 'required' )">مطلوب إدخال تاكيد كلمة المرور</span>
-                                                <span id="url2-error" class="font-red-mint error" ng-show="edit3 && hasError(changeAccountInfoFrm,'enterpriseConfirmPassword', 'pattern' )">كلمة المرور يجب ان تحتوي علي الاقل حرف كبير  و حرف صغير و رقم ولا تقل عن ستة احرف </span>
-                                                <!--<span id="url2-error" class="font-red-mint error" ng-show="hasError(changeAccountInfoFrm,'enterpriseConfirmPassword', 'compareTo' )">تاكيد كلمة المرور غير مطابقة لكلمة المرور الاصلية </span>-->
+                                                <span id="url2-error" class="font-red-mint error" ng-show="edit3 && hasError(AccountInfoForm,'editAcccountConfirmPassword', 'required' )">مطلوب إدخال تاكيد كلمة المرور</span>
+                                                <span id="url2-error" class="font-red-mint error" ng-show="edit3 && hasError(AccountInfoForm,'editAcccountConfirmPassword', 'pattern' )">كلمة المرور يجب ان تحتوي علي الاقل حرف كبير  و حرف صغير و رقم ولا تقل عن ستة احرف </span>
+                                                <span id="url2-error" class="font-red-mint error" ng-show="hasError(AccountInfoForm,'editAcccountConfirmPassword', 'compareTo' )">تاكيد كلمة المرور غير مطابقة لكلمة المرور الاصلية </span>
                                             </div>
                                         </div>
                                         <div class="margin-top-10">
-                                            <button ng-click="editAccountInfo()" class="btn green">تعديل حساب الدخول </button>
-                                            <button ng-click="cancelAccountInfo()" class="btn default"> الغاء </button>
+                                            <button ng-click="editAccountInfo(AccountInfoForm,editAcccount)" ng-disabled="DisabledUpdateAccountBtn" class="btn green" ng-hide="DisabledAccountTab">تعديل حساب الدخول </button>
                                         </div>
                                     </div>
                                 </form>
-
-                                <!-- END CHANGE PASSWORD TAB -->
-                                <!-- PRIVACY SETTINGS TAB -->
-                                <!--<div class="tab-pane" id="tab_1_4">
-                                    <form action="#">
-                                        <table class="table table-light table-hover">
-                                            <tr>
-                                                <td> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus.. </td>
-                                                <td>
-                                                    <label class="uniform-inline">
-                                                        <input type="radio" name="optionsRadios1" value="option1" /> Yes
-                                                    </label>
-                                                    <label class="uniform-inline">
-                                                        <input type="radio" name="optionsRadios1" value="option2" checked /> No
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td> Enim eiusmod high life accusamus terry richardson ad squid wolf moon </td>
-                                                <td>
-                                                    <label class="uniform-inline">
-                                                        <input type="checkbox" value="" /> Yes
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td> Enim eiusmod high life accusamus terry richardson ad squid wolf moon </td>
-                                                <td>
-                                                    <label class="uniform-inline">
-                                                        <input type="checkbox" value="" /> Yes
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td> Enim eiusmod high life accusamus terry richardson ad squid wolf moon </td>
-                                                <td>
-                                                    <label class="uniform-inline">
-                                                        <input type="checkbox" value="" /> Yes
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        end profile-settings
-                                        <div class="margin-top-10">
-                                            <a href="javascript:;" class="btn red"> Save Changes </a>
-                                            <a href="javascript:;" class="btn default"> Cancel </a>
-                                        </div>
-                                    </form>
-                                </div>-->
                                 <!-- END PRIVACY SETTINGS TAB -->
                             </div>
                         </div>

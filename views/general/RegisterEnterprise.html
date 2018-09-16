@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="form-group form-md-line-input has-info col-md-10 footerBtn">
                         <div class="input-group col-xs-12">
-                            <input type="text" ng-model="newEnterpriseObj.UserName" class="form-control" name="entrpriseName" placeholder="ادخل اسم الدار ......" required ng-minlength="3" ng-maxlength="100">
+                            <input type="text" ng-model="newEnterpriseObj.EnterpriseName" class="form-control" name="entrpriseName" placeholder="ادخل اسم الدار ......" required ng-minlength="3" ng-maxlength="100">
                             <label for="form_control_1">اسم المؤسسة<span class="font-red-mint">*</span></label>
 
                         </div>
@@ -24,6 +24,17 @@
                         <!--<span id="url2-error" class="font-red-mint error" ng-show="hasError(addEnterpriseForm,'entrpriseName', 'pattern' )">مطلوب ادخال حروف فقط بدون ارقام </span>-->
                         <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(addEnterpriseForm,'entrpriseName', 'minlength' )">مطلوب ادخال اسم لا يقل عن ثلاث حروف </span>
                         <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(addEnterpriseForm,'entrpriseName', 'maxlength' )">مطلوب ادخال اسم لا يزيد عن مئة حرف </span>
+                    </div>
+                    <div class="form-group form-md-line-input has-info col-md-10 footerBtn">
+                        <div class="input-group col-xs-12">
+                            <input type="text" ng-model="newEnterpriseObj.UserName" class="form-control" name="userName" placeholder="ادخل اسم المستخدم ......" required ng-minlength="3" ng-maxlength="100">
+                            <label for="form_control_1">اسم المستخدم<span class="font-red-mint">*</span></label>
+
+                        </div>
+                        <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(addEnterpriseForm,'userName', 'required' )">مطلوب ادخال اسم الدار</span>
+                        <!--<span id="url2-error" class="font-red-mint error" ng-show="hasError(addEnterpriseForm,'entrpriseName', 'pattern' )">مطلوب ادخال حروف فقط بدون ارقام </span>-->
+                        <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(addEnterpriseForm,'userName', 'minlength' )">مطلوب ادخال اسم لا يقل عن ثلاث حروف </span>
+                        <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(addEnterpriseForm,'userName', 'maxlength' )">مطلوب ادخال اسم لا يزيد عن مئة حرف </span>
                     </div>
                     <div class="form-group form-md-line-input has-info col-md-10 footerBtn">
                         <div class="input-group col-xs-12">

@@ -1,4 +1,4 @@
-﻿/***
+/***
 Metronic AngularJS App Main Script
 ***/
 
@@ -11,7 +11,8 @@ var MetronicApp = angular.module("MetronicApp", [
     "ui.select",
     "ngCookies",
     "ngTable",
-    "kdate"
+    "kdate",
+     "thatisuday.dropzone"
 ]); 
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
@@ -138,12 +139,14 @@ MetronicApp.controller('HeaderController', ['$scope', '$state', '$uibModal', 'Us
         $cookieStore.remove("key");
         $state.go("Home");
     }
-
+    $rootScope.user = undefined;
+    $rootScope.features = undefined;
     if ($cookieStore.get("key") && !$rootScope.user) {
         //getCurrent user 
         UserAccountFactory.getCurrentUser().success(function (data, status, headers, config) {
             $rootScope.user = data;
-            console.log("public page user", $rootScope.user);
+            $rootScope.features = data.Feature;
+            console.log("currentUser", $rootScope.user);
         });
     }
 
@@ -152,19 +155,20 @@ MetronicApp.controller('HeaderController', ['$scope', '$state', '$uibModal', 'Us
 }]);
 
 /* Setup Layout Part -Admin  Header */
-MetronicApp.controller('AdminHeaderController', ['$scope', '$state', '$uibModal', 'UserAccountFactory', '$rootScope','$cookieStore', function ($scope, $state, $uibModal, UserAccountFactory, $rootScope, $cookieStore) {
+MetronicApp.controller('AdminHeaderController', ['$scope', '$state', '$uibModal', 'UserAccountFactory', '$rootScope', '$cookieStore', '$stateParams', function ($scope, $state, $uibModal, UserAccountFactory, $rootScope, $cookieStore, $stateParams) {
     $scope.$on('$includeContentLoaded', function () {
         Layout.initHeader(); // init header
+        $rootScope.user = undefined;
+        $rootScope.features = undefined;
         if ($cookieStore.get("key")) {
             //getCurrent user 
-            UserAccountFactory.getCurrentUser().success(function (data, status, headers, config) {
+            UserAccountFactory.getCurrentUser($stateParams.id).success(function (data, status, headers, config) {
                 $rootScope.user = data;
+                $rootScope.features = data.Feature;
                 console.log("admin page user", $rootScope.user);
             });
         } else {
-            //this code for ui
-            $rootScope.user = { UserName: "دار الفرقان", UserAccountUID: "605e7bd4-7ac1-453f-8ac3-b4f00db0d3e0", RoleID: 2, IsActive: true };
-            //$state.go("Login");
+            $state.go("Login");
         }
 
     });
@@ -197,10 +201,13 @@ MetronicApp.controller('AdminHeaderController', ['$scope', '$state', '$uibModal'
 MetronicApp.controller('SystemHeaderController', ['$scope', '$state', '$uibModal', 'UserAccountFactory', '$rootScope', '$cookieStore', function ($scope, $state, $uibModal, UserAccountFactory, $rootScope, $cookieStore) {
     $scope.$on('$includeContentLoaded', function () {
         Layout.initHeader(); // init header
+        $rootScope.user = undefined;
+        $rootScope.features = undefined;
         if ($cookieStore.get("key")) {
             //getCurrent user 
             UserAccountFactory.getCurrentUser().success(function (data, status, headers, config) {
                 $rootScope.user = data;
+                $rootScope.features = data.Feature;
                 if ($rootScope.user.RoleID != 1) {
                     $state.go("Login");
                 }
@@ -241,20 +248,10 @@ MetronicApp.controller('SystemHeaderController', ['$scope', '$state', '$uibModal
 MetronicApp.controller('SidebarController', ['$scope', 'UserAccountFactory', '$rootScope', function ($scope, UserAccountFactory, $rootScope) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initSidebar(); // init sidebar
-        //UserAccountFactory.SideMenu().success(function (data, status, headers, config) {
-        //    $rootScope.features = data;
-        //    console.log("features", $rootScope.features);
-        //});
-        $rootScope.features = [{
-            FeatureNameAr:
-    "الملف الشخصي"
-, MenuIcon: "icon-user", FeatureID: 1, Rights: [{ RightNameAr: "ملئ بيانات الاساسية", RightOrder: 0, RightURL: "#/Admin/AdminProfile" }, { RightNameAr: "ادارة حساب المستخدم", RightOrder: 0, RightURL: "#/Admin/AdminProfile" }, { RightNameAr: "اضافة يوم همة", RightOrder: 0, RightURL: "#/Admin/AddEvent" }]
-        },
-            { FeatureNameAr: "شئون طلاب ", MenuIcon: "icon-bulb", FeatureID: 2, Rights: [{ RightNameAr: "ملئ بيانات الاساسية", RightOrder: 0, RightURL: "#/Admin/AdminProfile" }, { RightNameAr: "ادارة حساب المستخدم", RightOrder: 0, RightURL: "#/Admin/AdminProfile" }, { RightNameAr: "اضافة يوم همة", RightOrder: 0, RightURL: "#/Admin/AddEvent" }] },
-                        { FeatureNameAr: "شئون تعليمية ", MenuIcon: "icon-briefcase", FeatureID: 2, Rights: [{ RightNameAr: "ملئ بيانات الاساسية", RightOrder: 0, RightURL: "#/Admin/AdminProfile" }, { RightNameAr: "ادارة حساب المستخدم", RightOrder: 0, RightURL: "#/Admin/AdminProfile" }, { RightNameAr: "اضافة يوم همة", RightOrder: 0, RightURL: "#/Admin/AddEvent" }] },
-                        { FeatureNameAr: "التقارير", MenuIcon: "icon-layers", FeatureID: 2, Rights: [{ RightNameAr: "ملئ بيانات الاساسية", RightOrder: 0, RightURL: "#/Admin/AdminProfile" }, { RightNameAr: "ادارة حساب المستخدم", RightOrder: 0, RightURL: "#/Admin/AdminProfile" }, { RightNameAr: "اضافة يوم همة", RightOrder: 0, RightURL: "#/Admin/AddEvent" }] },
-
-        ]
+        UserAccountFactory.SideMenu().success(function (data, status, headers, config) {
+            //$rootScope.features = data;
+            console.log("features", $rootScope.features);
+        });
     });
 }]);
 
