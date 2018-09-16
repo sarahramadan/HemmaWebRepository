@@ -29,6 +29,7 @@
                         <td width="40%">
                             <button class="btn btn-primary" ng-show="account.UserAccount.IsActive!=true" ng-click="ActivateAccount(account.UserAccount.UserAccountUID)" ng-disabled="showLoader"><i class="fa fa-user-circle-o"></i>تفعيل الحساب</button>
                             <button class="btn btn-danger" ng-show="account.UserAccount.IsActive==true" ng-click="ActivateAccount(account.UserAccount.UserAccountUID)"  ng-disabled="showLoader"><i class="fa fa-user-circle-o"></i>غلق الحساب</button>
+                            <button class="btn btn-danger" ng-show="account.UserAccount.IsActive==true" ng-click="manageAccount(account.UserAccount.UserAccountUID)" ng-disabled="showLoader"><i class="fa fa-user-circle-o"></i>إدارة الحساب</button>
                         </td>
                     </tr>
                 </tbody>

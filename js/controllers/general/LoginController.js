@@ -15,6 +15,38 @@
             }
         });
     }
+
+    //login
+    $scope.OpenLoginModel = function () {
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/general/Login.html',
+            controller: 'LoginModelController',
+            size: 'lg'
+        });
+
+    }
+
+
+    //Register Teacher
+    $scope.OpenRegisterTeacherModel = function () {
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/general/RegisterTeacher.html',
+            controller: 'LoginModelController',
+            size: 'lg'
+        });
+
+    }
+
+
+    //Register enterprise
+    $scope.OpenRegisterEnterpriseModel = function () {
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/general/RegisterEnterprise.html',
+            controller: 'LoginModelController',
+            size: 'lg'
+        });
+
+    }
     $scope.OpenLoginModel();
 });
 
@@ -42,11 +74,16 @@ angular.module('MetronicApp').controller('LoginModelController', function ($scop
                     $scope.ShowMessage = type;
                     $scope.ErrorMessage = data.data.ErrorMessage;
                 } else {
+                    if($cookieStore.get("key")){
+                        $cookieStore.remove("key");
+                    }
                     var page = data.data.Result.RedirectPage;
-                    var token = JSON.parse(data.data.Result.Token);
-                    $cookieStore.put('key', token.access_token);
+                    if (data.data.Result.Token && data.data.Result.Token != null && data.data.Result.RoleID != RoleEnum.AdminRole) {
+                        var token = JSON.parse(data.data.Result.Token);
+                        $cookieStore.put('key', token.access_token);
+                    }
                     $scope.CloseModel();
-                    $state.go(page);
+                    $state.go(page,{id:data.data.Result.UserAccountUID});
                 }
             });
         } else {
@@ -59,21 +96,24 @@ angular.module('MetronicApp').controller('LoginModelController', function ($scop
         if (formValid) {
             $rootScope.showLoader = true;
             UserAccountFactory.SiginInAccount(obj).success(function (data, status, headers, config) {
-                console.log("dddd", data);
                 $rootScope.showLoader = false;
                 if (data.ErrorMessage && data.ErrorMessage.length > 0) {
                     $scope.ErrorMessageLogin = data.ErrorMessage;
                 } else {
+                    if ($cookieStore.get("key")) {
+                        $cookieStore.remove("key");
+                    }
                     var page = data.Result.RedirectPage;
-                    var token = JSON.parse(data.Result.Token);
-                    $cookieStore.put('key', token.access_token);
+                    if (data.Result.Token && data.Result.Token != null) {
+                        var token = JSON.parse(data.Result.Token);
+                        $cookieStore.put('key', token.access_token);
+                    }
                     $scope.CloseModel();
-                    $state.go(page);
+                    $state.go(page, { id: data.Result.UserAccountUID });
+
+                    //$state.go(page);
                 }
             });
-            //reset form
-            //$scope.loginObj = {};         
-            //$scope.ResetModel();
         } else {
             angular.element('input.ng-invalid').first().focus();
         }
@@ -99,33 +139,33 @@ angular.module('MetronicApp').controller('LoginModelController', function ($scop
         $scope.ErrorMessage = [];
     };
 
-    $scope.GetAuthRedirectPage = function () {
-        UserAccountFactory.GetAuthUserRole().then(function (data) {
-            $scope.CloseModel();
-            if (data.data == RoleEnum.SystemAdmin) {
-                $state.go("ManageAccounts");
-            } else if (data.data == RoleEnum.AdminRole) {
-                $state.go("EnterpriseProfile");
-            }else if (data.data == RoleEnum.TeacherRole) {
-                $state.go("TeacherProfile");
-            }else {
-                $state.go("Home");
-            }
-        });
-    };
+    //$scope.GetAuthRedirectPage = function () {
+    //    UserAccountFactory.GetAuthUserRole().then(function (data) {
+    //        $scope.CloseModel();
+    //        if (data.data == RoleEnum.SystemAdmin) {
+    //            $state.go("ManageAccounts");
+    //        } else if (data.data == RoleEnum.AdminRole) {
+    //            $state.go("EnterpriseProfile");
+    //        }else if (data.data == RoleEnum.TeacherRole) {
+    //            $state.go("TeacherProfile");
+    //        }else {
+    //            $state.go("Home");
+    //        }
+    //    });
+    //};
 
-    $scope.GetUnAuthRedirectPage = function (obj,data) {
-        UserAccountFactory.GetUnAuthUser(obj).then(function (data) {
-            debugger;
-            if (data.data!=null && data.data.ID && data.data.RoleID == RoleEnum.AdminRole && data.data.IsActive == false) {
-                $scope.CloseModel();
-                $state.go("AdminWelcome", { id: data.data.ID, UnAuthUserObj: data.data});
-            } else {
-                var errorMsg = data.error;
-                $scope.ErrorMessage = ["كلمة المرور او البريد الالكتروني غير صحيحين من فضلك تاكد منهم"];
-            }
-        });
-    }
+    //$scope.GetUnAuthRedirectPage = function (obj,data) {
+    //    UserAccountFactory.GetUnAuthUser(obj).then(function (data) {
+    //        debugger;
+    //        if (data.data!=null && data.data.ID && data.data.RoleID == RoleEnum.AdminRole && data.data.IsActive == false) {
+    //            $scope.CloseModel();
+    //            $state.go("AdminWelcome", { id: data.data.ID, UnAuthUserObj: data.data});
+    //        } else {
+    //            var errorMsg = data.error;
+    //            $scope.ErrorMessage = ["كلمة المرور او البريد الالكتروني غير صحيحين من فضلك تاكد منهم"];
+    //        }
+    //    });
+    //}
 
     $scope.ForgetPasswordToggle = function (form) {
         $scope.addForm = form;
@@ -153,21 +193,3 @@ angular.module('MetronicApp').controller('LoginModelController', function ($scop
     }
 });
 
-MetronicApp.directive("compareTo", function () {
-    return {
-        require: "ngModel",
-        scope: {
-            otherModelValue: "=compareTo"
-        },
-        link: function (scope, element, attributes, ngModel) {
-
-            ngModel.$validators.compareTo = function (modelValue) {
-                return modelValue == scope.otherModelValue;
-            };
-
-            scope.$watch("otherModelValue", function () {
-                ngModel.$validate();
-            });
-        }
-    };
-});
