@@ -69,6 +69,9 @@ p {
 .header-w3-agileits {
     background: white;
     padding:0;
+    box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+
+
 }
 .inner-header-agile {
     padding: 0 5em;
@@ -2351,32 +2354,35 @@ background-color: #fff!important;
 
 .panel-primary>.panel-heading
 {
-    
-        color: #fec825;
+    background-color: #0c4999!important;
+        color: #fff;
+        border-color: #0c4999!important; 
+    cursor: pointer;
 }
 
 .btn.default:not(.btn-outline){
         color: #fff!important; 
-    background-color: #337ab7!important; 
-    border-color: #337ab7!important; 
+    background-color: #0c4999!important; 
+    border-color: #0c4999!important; 
 }
 span.round-tab i {
-     color: #337ab7;
+     color: #0c4999;
 }
 span.round-tab{
-        border: 2px solid  #fec825;
+        border: 2px solid  #0c4999;
             left: -255px!important;
 
 }
 .connecting-line
 {
-    width: 100%;
+    width: 50%;
         background: #fec825;
+    left: 7px;
 }
 
 .page-sidebar, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover
 {
-    background-color: #337ab7!important; 
+    background-color: ##0c4999!important; 
 }
 
 .page-sidebar .page-sidebar-menu>li>a>i[class*=icon-], .page-sidebar .page-sidebar-menu>li>a>i[class^=icon-]
@@ -2386,7 +2392,7 @@ span.round-tab{
 
 .page-sidebar .page-sidebar-menu>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li>a
 {
-        border-top: 1px solid #337ab7!important; 
+        border-top: 1px solid ##0c4999!important; 
 }
 
 .page-sidebar .page-sidebar-menu li:hover>a>.arrow.open:before, .page-sidebar .page-sidebar-menu li:hover>a>.arrow:before, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li:hover>a>.arrow.open:before, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li:hover>a>.arrow:before
@@ -2396,38 +2402,42 @@ span.round-tab{
 
 
 body {
-    background-color: #337ab7!important;
+    background-color: #fff!important;
 }
 
 
 h1{
-    color:#337ab7;
+    color:#0c4999;
+    border-bottom: 3px solid #fec825;
+    padding-bottom: 7px;
+    line-height: 1.75em;
+    display: inline;
 }
 
 .page-content
 {
-        background-color: #F8F8F8!important
+        background-color: #fff!important
 }
 
 .wizard {
     margin: 20px auto;
-    background: #F8F8F8!important;
+    background: #fff!important;
 }
 
 .wizard li.active span.round-tab i
 
 {
-        color: #337ab7;
+        color: #0c4999;
 }
 
 .wizard li.active span.round-tab {
     background: #fff;
-    border: 2px solid #337ab7;
+    border: 2px solid #fec825;
 }
 
 span.round-tab:hover {
-    color: #337ab7;
-    border: 2px solid #337ab7;
+    color: #0c4999;
+    border: 2px solid #fec825;
 }
 
 .page-sidebar .page-sidebar-menu li>a>.arrow.open:before, .page-sidebar .page-sidebar-menu li>a>.arrow:before, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li>a>.arrow.open:before, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li>a>.arrow:before
@@ -2454,9 +2464,9 @@ span.round-tab:hover {
   margin-top: -5px;
   margin-left: -25px;
   display: block;
-  height: 10px;
-  width: 50px;
-  background-color:  #337ab7;
+     height: 4px;
+    width: 20px;
+  background-color:  #0c4999;
   transition: all 0.2s ease-out;
 }
 .glyphicon-remove:after {
@@ -2487,5 +2497,40 @@ input.btn-primary
 
     margin-right: 15px;
     padding: 18px;
+
+}
+
+
+
+.page-content {
+   margin-right: 0px!important;
+      margin-top: 15px!important;
+    min-height: 600px;
+    padding: 25px 20px 10px;
+}
+
+.wizard li.active:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 1;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 10px solid transparent;
+    border-bottom-color: transparent;
+}
+
+.default .btn-lg{
+    border-radius: 50px!important;
+        background-color: #0c4999!important;
+}
+input[type="button"] {
+border-radius: 50px!important;
+        background-color: #0c4999!important;
+}
+.ui-select-bootstrap .ui-select-toggle > .caret
+{
+     
+    right: 174px!important;
 
 }

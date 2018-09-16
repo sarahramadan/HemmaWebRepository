@@ -32,7 +32,9 @@
     <div class="panel panel-primary font-md" id="anchor1">
         <form name="addEventPrincipleData" novalidate>
             <div class="panel panel-primary font-lg" ng-init="ShowEventinfo=false" ng-click="ShowEventinfo=!ShowEventinfo">
-                <div class="panel-heading">يوم الهمة الموعد والمكان</div>
+                <div class="panel-heading">  
+                            <i class="glyphicon glyphicon-map-marker"></i>
+                      يوم الهمة الموعد والمكان</div>
             </div>
             <div class="panel-body" ng-show="ShowEventinfo">
                 <div class="input-group input-group-md col-md-6">
@@ -91,7 +93,7 @@
     </div>
     <div class="panel panel-primary font-md" id="anchor2">
         <div class="panel panel-primary font-lg" ng-init="ShowEventProgramData=false" ng-click="ShowEventProgramData=!ShowEventProgramData">
-            <div class="panel-heading">فروع برنامج يوم الهمة</div>
+            <div class="panel-heading"> <i class="glyphicon glyphicon-tree-deciduous"></i>فروع برنامج يوم الهمة</div>
         </div>
         <div class="panel-body" ng-show="ShowEventProgramData && addEventPrincipleData.$valid ">
             <form name="addEventProgram" novalidate>
@@ -156,7 +158,8 @@
     </div>
     <div class="panel panel-primary font-lg" id="anchor3">
         <div class="panel panel-primary font-lg" ng-click="CheckValidDatewhenClick()">
-            <div class="panel-heading">الجدول الزمني  ليوم الهمة</div>
+            <div class="panel-heading">                            <i class="glyphicon glyphicon-list-alt"></i>
+الجدول الزمني  ليوم الهمة</div>
         </div>
         <div class="panel-body">
             <form name="AddProgramPlane" novalidate>
