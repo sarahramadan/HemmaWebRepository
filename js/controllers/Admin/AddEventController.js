@@ -1,7 +1,7 @@
-﻿angular.module('MetronicApp').controller('AddEventController', function ($rootScope, $scope, $http, $timeout, $filter, $q, CRUDFactory, $location, $anchorScroll) {
+﻿angular.module('MetronicApp').controller('AddEventController', function ($rootScope, $scope, $http, $timeout, $filter, $q, CRUDFactory, $location, $anchorScroll, EnterpriseFactory, $stateParams) {
     console.log("AddEventController");
     $scope.EventProgram = [{}];
-    $scope.obj = [];
+    $scope.obj = {};
     $scope.DayPlanobj = [];
     $scope.hideAddButton = false;
     $scope.hideRemoveButton = true;
@@ -137,9 +137,10 @@
             $scope.PrepareEventPlane();
             $scope.ShowEventPlanData = !$scope.ShowEventPlanData;
         } else {
-            bootbox.dialog({
-                message: '<p class="text-info">لاستكمال ملئ بيانات الحدث من فضلك تاكد من اختيارات تاريخ الحدث </p>'
-            });
+            $scope.ErrorPopUp("لاستكمال ملئ بيانات الحدث من فضلك تاكد من اختيارات تاريخ الحدث");
+            //bootbox.dialog({
+            //    message: '<p class="text-info">لاستكمال ملئ بيانات الحدث من فضلك تاكد من اختيارات تاريخ الحدث </p>'
+            //});
         }
     }
     $scope.getAllQuantity = function () {
@@ -191,16 +192,25 @@
 
     }
     $scope.sumbit = function () {
+        debugger;
         $scope.edit = true;
         $scope.edit1 = true;
         console.log("form", $scope.AddProgramPlane);
         if ($scope.addEventPrincipleData.$valid && $scope.addEventProgram.$valid && $scope.validDateFlag && $scope.AddProgramPlane.$valid) {
-            $scope.obj.EventProgram = $scope.EventProgramo;
-            $scope.obj.EventProgram = $scope.EventProgram;
-            $scope.obj.EventPlane = $scope.EventPlane;
-            console.log("$scope.obj", $scope.obj);
-
-            alert("valid");
+            if ($scope.eventDate.from) {
+                $scope.obj.StarDate = $filter('date')($scope.eventDate.from, "MM/dd/yyyy");
+            }
+            if ($scope.eventDate.to) {
+                $scope.obj.EndDate = $filter('date')($scope.eventDate.to, "MM/dd/yyyy");
+            }
+            //$scope.obj.EventProgram = $scope.EventProgramo;
+           $scope.obj.EventProgram = $scope.EventProgram;
+           $scope.obj.EventPlane = $scope.EventPlane;
+           console.log("$scope.obj", $scope.obj);
+            EnterpriseFactory.AddEvent($scope.obj).then(function (data) {
+                console.log(data);
+            });
+           // alert("valid");
         } else {
             angular.element('input.ng-invalid').first().focus();
             //if (!$scope.addEventPrincipleData.$valid) {
@@ -227,6 +237,19 @@
         } else {
             $anchorScroll();
         }
+    }
+    $scope.ErrorPopUp = function (errorMsg) {
+        bootbox.dialog({
+            message: "<div class='text-center'><span style='font-size: 100px;color: red' class='fa fa-times-circle-o text-center'></span><h4>!حدث خطا</h4>" + errorMsg + "</div>",
+            buttons: {
+                ok: {
+                    label: "إغلاق"
+                }
+            },
+            callback: function () {
+                return;
+            }
+        });
     }
     $scope.getAllQuantity();
     $scope.GetHours();

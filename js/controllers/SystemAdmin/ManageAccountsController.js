@@ -1,10 +1,9 @@
-﻿angular.module('MetronicApp').controller('ManageAccountsController', function ($rootScope, $scope, $http, $timeout, settings, NgTableParams, CRUDFactory, SystemAdminFactory,$filter) {
+﻿angular.module('MetronicApp').controller('ManageAccountsController', function ($rootScope, $scope, $http, $timeout, settings, NgTableParams, CRUDFactory, SystemAdminFactory, $filter, $state) {
     console.log("ManageAccountsController");
     $scope.Accounts = [];
     $rootScope.showLoader = false;
     $scope.filterObject = {};
     $scope.getAllAccounts = function () {
-        debugger;
         var initialParams = {
             count: settings.pageSize
         };
@@ -93,12 +92,14 @@
     }
     $scope.FormatDate = function (date) {
         if (date) {
-            debugger
             var date=new Date(date)
             var MeladyDate = $filter('date')(date, settings.mediumDate);
             var saudDateTime = $filter('date')(date.toLocaleDateString("ar-SA"), 'MMMM d, y');
             return MeladyDate + " الموافق" + saudDateTime;
         }
+    }
+    $scope.manageAccount = function (UID) {
+        $state.go("EnterpriseProfile", { id: UID });
     }
     $scope.getAllAccounts();
   
