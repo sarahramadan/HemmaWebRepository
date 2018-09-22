@@ -47,7 +47,6 @@ input[type="submit"],.w3l_header_left ul li a,.related-post-right h4 a,.comments
 	-o-transition: .5s ease-in;
 	-ms-transition: .5s ease-in;
 }
-.disabled { cursor: not-allowed !important; opacity: .5; }
 /*--/model--*/
 .modal-header h4 {
     font-size: 2em;
@@ -70,8 +69,6 @@ p {
 .header-w3-agileits {
     background: white;
     padding:0;
-    box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
-
 }
 .inner-header-agile {
     padding: 0 5em;
@@ -528,7 +525,7 @@ a.login.reg {
     z-index: 100;
     position: absolute;
     left: 24%;
-    top: -72%;
+        top: -124%;
     border: 1px solid rgba(226, 226, 226, 0.56);
     border-width: 0px 1px 1px;
 }
@@ -598,7 +595,7 @@ h3.w3ls-title:after {
 }
 /*-- about --*/
 div#about {
-    padding-top: 17em;
+    padding-top:7em;
     position: relative;
 }
 .wthree-about-w3left, .wthree-about-w3right {
@@ -1265,7 +1262,8 @@ button.btn1:hover i.fa.fa-paper-plane-o{
 @media screen and (max-width: 1080px){
 	.navbar-default .navbar-nav > li > a {
 		padding: 1em 0.5em 1.2em;
-	}
+
+    }
 	.banner-bottom-girds {
 		width: 64%;
 		left: 18%;
@@ -1407,6 +1405,8 @@ button.btn1:hover i.fa.fa-paper-plane-o{
 	}
 	.navbar-default .navbar-nav > li > a {
 		padding: 1em 0.8em 1.2em;
+
+        
 	}
 	.navbar-nav > li {
 		margin: 0 0.4em;
@@ -1516,6 +1516,7 @@ button.btn1:hover i.fa.fa-paper-plane-o{
 	}
 	.navbar-default .navbar-nav > li > a {
 		padding: 0.5em 0;
+
 	}
 }
 @media screen and (max-width: 736px){
@@ -1726,6 +1727,7 @@ button.btn1:hover i.fa.fa-paper-plane-o{
 	}
 	.navbar-default .navbar-nav > li > a {
 		width: 38%;
+
 	}
 	.b-wrapper h5 {
 		font-size: 1.7em;
@@ -1798,6 +1800,7 @@ button.btn1:hover i.fa.fa-paper-plane-o{
 	}
 	.navbar-default .navbar-nav > li > a {
 		width: 43%;
+
 	}
 	#about h5 {
 		line-height: 1.5;
@@ -1839,6 +1842,8 @@ button.btn1:hover i.fa.fa-paper-plane-o{
 	}
 	.navbar-default .navbar-nav > li > a {
 		width: 47%;
+
+        
 	}
 	.baner-info h4 {
 		letter-spacing: 1px;
@@ -1891,6 +1896,7 @@ button.btn1:hover i.fa.fa-paper-plane-o{
 @media screen and (max-width: 320px){
 	.navbar-default .navbar-nav > li > a {
 		width: 60%;
+
 	}
 	.banner-bottom-girds {
 		top: -3%;
@@ -2017,7 +2023,7 @@ col-xs-15 {
 }
 
 .carousel-inner{
-        height: 600px;
+        height: 400px;
 }
 
 ul.nav.navbar-nav{
@@ -2052,6 +2058,10 @@ a.dropdown-toggle{
     
     font-size: 34px;
     color: #0c4999;
+        border-bottom: 3px solid #fec825;
+    padding-bottom: 7px;
+    line-height: 1.75em;
+    display: inline;
 }
 
 
@@ -2163,7 +2173,7 @@ label.highlight {
 
 
 input, textarea {
-  font-size: 14px;
+  font-size: 22px;
   display: block;
   width: 100%;
   height: 100%;
@@ -2171,7 +2181,7 @@ input, textarea {
   background: none;
   background-image: none;
   border: 1px solid #a0b3b0;
-  color: #555;
+  color: #ffffff;
   border-radius: 0;
   transition: border-color .25s ease, box-shadow .25s ease;
 }
@@ -2197,8 +2207,7 @@ textarea {
 }
 .overlay h3{
         font-size: 47px;
-          margin-top: 133px;
-           color: #fff;
+    margin-top: 26px;
 
 }
 .overlay p{
@@ -2225,7 +2234,7 @@ textarea {
 /* Declare heights because of positioning of img element */
 .carousel .item {
   height: 400px;
-  background-color:#555;
+  background-color:#fff;
 }
 .carousel img {
   position: absolute;
@@ -2244,6 +2253,30 @@ button.close{
 .nav>li, .nav>li>a{
     display: inline-block;
 }
+
+
+@media screen and (max-width: 768px){
+	.navbar-default .navbar-nav > li > a {
+        color: #fff;
+	}
+   ul.nav.navbar-nav>li{
+    display: inline-block;
+    width: 194%;
+}
+}
+.header-w3-agileits {
+    background: white;
+    padding:0;
+    box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+
+
+}
+
+.pull-right>li>a
+{
+    color:#fff;
+}
+
 .label-as-badge {
     border-radius: 1em;
 }
@@ -2533,14 +2566,4 @@ border-radius: 50px!important;
      
     right: 174px!important;
 
-}
-/*dz-image img
-{width: 100%;height: 100%;}*/
-/*.dropzone .dz-preview .dz-image img{
-        height: 150px;
-        width:200px;
-        object-fit: cover;
-      }*/
-.dropzone .dz-preview .dz-remove{
-        right: -1px;
 }
