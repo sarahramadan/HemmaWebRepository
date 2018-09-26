@@ -1,4 +1,4 @@
-﻿/*.wizard {
+﻿.wizard {
     margin: 20px auto;
     background: #fff;
 }
@@ -137,7 +137,7 @@ span.round-tab:hover {
         position: absolute;
         left: 35%;
     }
-}*/
+}
 /*.ui-select-bootstrap .ui-select-toggle > .caret {
      position: absolute;
    right: initial!important;

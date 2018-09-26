@@ -210,7 +210,7 @@ MetronicApp.controller('SystemHeaderController', ['$scope', '$state', '$uibModal
                 $rootScope.user = data;
                 $rootScope.features = data.Feature;
                 if ($rootScope.user.RoleID != 1) {
-                   // $state.go("Login");
+                    $state.go("Login");
                 }
                 console.log("admin page user", $rootScope.user);
             });
