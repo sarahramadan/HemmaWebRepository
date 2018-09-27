@@ -86,11 +86,53 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
 
                     <ul class="nav navbar-nav">
-                        <li><a href="#/Home">الرئيسية </a></li>
+                        <!--<li><a href="#/Home">الرئيسية </a></li>
                         <li><a ng-click="RedirectToAbout()" class="scroll">حول اليوم </a></li>
                         <li><a href="#agileits-services" class="scroll">فروع البرنامج</a></li>
-                        <li><a href="#portfolio" class="scroll">الصور </a></li>
-                    </ul>
+                        <li><a href="#portfolio" class="scroll">الصور </a></li>-->
+                        <li><a href="#/Home">الرئيسية </a></li>
+                        <li class="dropdown" ng-repeat="feature in features track by $index">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">{{feature.FeatureNameAr}}</span> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="font-lg" ng-repeat="right in feature.Rights track by $index">
+                                   <a href="{{right.RightURL}}{{user.UserAccountUID}}">
+                                        <i class="icon-puzzle"></i>{{right.RightNameAr}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!--<li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">شئون طلاب </span> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">ملئ البيانات الأساسية</a></li>
+                                <li><a href="#">ادارة حساب المستخدم</a></li>
+                                <li><a href="#">اضافة يوم همة </a></li>
+
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">شئون تعليمية </span> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">ملئ البيانات الأساسية</a></li>
+                                <li><a href="#">ادارة حساب المستخدم</a></li>
+                                <li><a href="#">اضافة يوم همة </a></li>
+
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">التقارير  </span> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">ملئ البيانات الأساسية</a></li>
+                                <li><a href="#">ادارة حساب المستخدم</a></li>
+                                <li><a href="#">اضافة يوم همة </a></li>
+
+                            </ul>
+                        </li>-->
+
+
+                     </ul>
 
                 </div>
                 <div class="clearfix"> </div>

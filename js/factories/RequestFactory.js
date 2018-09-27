@@ -1,6 +1,6 @@
-﻿MetronicApp.factory('RequestFactory', ['$http', '$rootScope', 'appConfigs', '$state', function ($http, $rootScope, appConfigs, $state) {
+﻿MetronicApp.factory('RequestFactory', ['$http', '$rootScope', 'appConfigs', '$state', 'Upload', function ($http, $rootScope, appConfigs, $state, Upload) {
     return {
-        Request: function (method,url,data,responseType) {
+        Request: function (method, url, data, responseType) {
             var header = {};
             header['method'] = method;
             header['url'] = url;
@@ -20,8 +20,8 @@
                 $('.page-spinner-bar').addClass("hide");
 
                 if (status === 401) {
-                   // window.location = "/Login";
-                   $state.go('Login');
+                    // window.location = "/Login";
+                    $state.go('Login');
                 }
                 else if (status === 400) {
                     debugger;
@@ -76,7 +76,47 @@
 
             });
             return request;
-          
+
+        },
+        upload: function (method, url, data, file, responseType) {
+
+            var header = {};
+            header['method'] = method;
+            header['url'] = url; //+ '?token=' + $cookieStore.get('key');
+
+            if (data) {
+                header['fields'] = data;
+            }
+            if (file) {
+                header['file'] = file;
+            }
+            if (responseType) {
+                header['responseType'] = responseType;
+            }
+            $('.page-spinner-bar').removeClass("hide");
+            var result = Upload.upload(header).error(function (data, status, headers, config) {
+                $('.page-spinner-bar').addClass("hide");
+                if (status == 401){
+                    $state.go('Login');
+                }
+                else if (status == 500) {
+                    $rootScope.submitted = false;
+                    bootbox.alert({
+                        message: "حدث خطأ برجاء محاولة مرة اخري او مخاطبة المختص",
+                        buttons: {
+                            ok: {
+                                label: "إغلاق"
+                            }
+                        },
+                        callback: function () {
+                            return;
+                        }
+                    });
+                }                
+            }).success(function (data, status, headers, config) {
+                $('.page-spinner-bar').addClass("hide");
+            });
+            return result;
         }
     }
 }]);

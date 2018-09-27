@@ -525,7 +525,7 @@ a.login.reg {
     z-index: 100;
     position: absolute;
     left: 24%;
-    top: -72%;
+        top: -124%;
     border: 1px solid rgba(226, 226, 226, 0.56);
     border-width: 0px 1px 1px;
 }
@@ -595,7 +595,7 @@ h3.w3ls-title:after {
 }
 /*-- about --*/
 div#about {
-    padding-top: 17em;
+    padding-top:7em;
     position: relative;
 }
 .wthree-about-w3left, .wthree-about-w3right {
@@ -1262,7 +1262,8 @@ button.btn1:hover i.fa.fa-paper-plane-o{
 @media screen and (max-width: 1080px){
 	.navbar-default .navbar-nav > li > a {
 		padding: 1em 0.5em 1.2em;
-	}
+
+    }
 	.banner-bottom-girds {
 		width: 64%;
 		left: 18%;
@@ -1404,6 +1405,8 @@ button.btn1:hover i.fa.fa-paper-plane-o{
 	}
 	.navbar-default .navbar-nav > li > a {
 		padding: 1em 0.8em 1.2em;
+
+        
 	}
 	.navbar-nav > li {
 		margin: 0 0.4em;
@@ -1513,6 +1516,7 @@ button.btn1:hover i.fa.fa-paper-plane-o{
 	}
 	.navbar-default .navbar-nav > li > a {
 		padding: 0.5em 0;
+
 	}
 }
 @media screen and (max-width: 736px){
@@ -1723,6 +1727,7 @@ button.btn1:hover i.fa.fa-paper-plane-o{
 	}
 	.navbar-default .navbar-nav > li > a {
 		width: 38%;
+
 	}
 	.b-wrapper h5 {
 		font-size: 1.7em;
@@ -1795,6 +1800,7 @@ button.btn1:hover i.fa.fa-paper-plane-o{
 	}
 	.navbar-default .navbar-nav > li > a {
 		width: 43%;
+
 	}
 	#about h5 {
 		line-height: 1.5;
@@ -1836,6 +1842,8 @@ button.btn1:hover i.fa.fa-paper-plane-o{
 	}
 	.navbar-default .navbar-nav > li > a {
 		width: 47%;
+
+        
 	}
 	.baner-info h4 {
 		letter-spacing: 1px;
@@ -1888,6 +1896,7 @@ button.btn1:hover i.fa.fa-paper-plane-o{
 @media screen and (max-width: 320px){
 	.navbar-default .navbar-nav > li > a {
 		width: 60%;
+
 	}
 	.banner-bottom-girds {
 		top: -3%;
@@ -2014,7 +2023,7 @@ col-xs-15 {
 }
 
 .carousel-inner{
-        height: 600px;
+        height: 400px;
 }
 
 ul.nav.navbar-nav{
@@ -2049,6 +2058,10 @@ a.dropdown-toggle{
     
     font-size: 34px;
     color: #0c4999;
+        border-bottom: 3px solid #fec825;
+    padding-bottom: 7px;
+    line-height: 1.75em;
+    display: inline;
 }
 
 
@@ -2168,7 +2181,7 @@ input, textarea {
   background: none;
   background-image: none;
   border: 1px solid #a0b3b0;
-  color: #ffffff;
+  color: #555;
   border-radius: 0;
   transition: border-color .25s ease, box-shadow .25s ease;
 }
@@ -2194,8 +2207,7 @@ textarea {
 }
 .overlay h3{
         font-size: 47px;
-          margin-top: 133px;
-           color: #fff;
+    margin-top: 26px;
 
 }
 .overlay p{
@@ -2222,7 +2234,7 @@ textarea {
 /* Declare heights because of positioning of img element */
 .carousel .item {
   height: 400px;
-  background-color:#555;
+  background-color:#fff;
 }
 .carousel img {
   position: absolute;
@@ -2241,6 +2253,327 @@ button.close{
 .nav>li, .nav>li>a{
     display: inline-block;
 }
+
+
+@media screen and (max-width: 768px){
+	.navbar-default .navbar-nav > li > a {
+        color: #fff;
+	}
+   ul.nav.navbar-nav>li{
+    display: inline-block;
+    width: 194%;
+}
+}
+.header-w3-agileits {
+    background: white;
+    padding:0;
+    box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+
+
+}
+
+.pull-right>li>a
+{
+    color:#fff;
+}
+
 .label-as-badge {
     border-radius: 1em;
+}
+.label .label-success .label-as-badge .ng-binding {
+    background-color: #red!important;
+}
+
+.input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #FFF!important;
+    border: 0px solid transparent;
+    border-radius: 4px;
+}
+
+input#popupDatePicker{
+        font-size: 13px;
+}
+input.form-control.ng-pristine.ng-invalid.ng-invalid-required.ng-touched
+{
+        margin-bottom: 16px;
+        margin-right: 36px;
+        width: 94%;
+}
+
+input#popupDatePicker{
+        margin-right: 64px;
+            margin-bottom: 16px;
+        width: 94%;
+
+}
+
+
+/*calendar*/
+.calendar-wrapper {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+ right: 770px;
+    top: -201px;
+  display: inline-block;
+  width: 150px;
+  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.5)
+}
+
+.calendar {
+  padding-top: 100%;
+  background: white;
+  overflow: hidden;
+}
+
+.month {
+  margin: 0;
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 0;
+  padding: 5px 0;
+  text-align: center;
+  background: red;
+  color: white;
+  font-size: 1em;
+  text-transform: uppercase;
+  font-family: sans-serif;
+        right: 0px;
+}
+
+.day {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-family: sans-serif;
+  top: 36%;
+    font-size: 1.5em;
+     color: black; }
+
+.calendar-effect {
+  position: absolute;
+  top: 36%;
+    right: 0px;
+  opacity: 0.3;
+  width: 100%;
+  height: 110px;
+  background: transparent;
+}
+
+
+.input-group .form-control {
+    position: relative;
+    z-index: 2;
+    float: right;
+    width: 100%;
+    margin-bottom: 16px!important;
+    margin-right: 36px!important;
+}
+.label-success {
+background-color: #fff!important; 
+}
+
+
+.table thead tr th{
+    font-size: 14pt;
+}
+
+.panel-primary>.panel-heading
+{
+    background-color: #0c4999!important;
+        color: #fff;
+        border-color: #0c4999!important; 
+    cursor: pointer;
+}
+
+.btn.default:not(.btn-outline){
+        color: #fff!important; 
+    background-color: #0c4999!important; 
+    border-color: #0c4999!important; 
+}
+span.round-tab i {
+     color: #0c4999;
+}
+span.round-tab{
+        border: 2px solid  #0c4999;
+            left: -255px!important;
+
+}
+.connecting-line
+{
+    width: 50%;
+        background: #fec825;
+    left: 7px;
+}
+
+.page-sidebar, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover
+{
+    background-color: ##0c4999!important; 
+}
+
+.page-sidebar .page-sidebar-menu>li>a>i[class*=icon-], .page-sidebar .page-sidebar-menu>li>a>i[class^=icon-]
+{
+    color:#fec825!important;
+}
+
+.page-sidebar .page-sidebar-menu>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li>a
+{
+        border-top: 1px solid ##0c4999!important; 
+}
+
+.page-sidebar .page-sidebar-menu li:hover>a>.arrow.open:before, .page-sidebar .page-sidebar-menu li:hover>a>.arrow:before, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li:hover>a>.arrow.open:before, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li:hover>a>.arrow:before
+{
+    color:#fec825!important;
+}
+
+
+body {
+    background-color: #fff!important;
+}
+
+
+h1{
+    color:#0c4999;
+    border-bottom: 3px solid #fec825;
+    padding-bottom: 7px;
+    line-height: 1.75em;
+    display: inline;
+}
+
+.page-content
+{
+        background-color: #fff!important
+}
+
+.wizard {
+    margin: 20px auto;
+    background: #fff!important;
+}
+
+.wizard li.active span.round-tab i
+
+{
+        color: #0c4999;
+}
+
+.wizard li.active span.round-tab {
+    background: #fff;
+    border: 2px solid #fec825;
+}
+
+span.round-tab:hover {
+    color: #0c4999;
+    border: 2px solid #fec825;
+}
+
+.page-sidebar .page-sidebar-menu li>a>.arrow.open:before, .page-sidebar .page-sidebar-menu li>a>.arrow:before, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li>a>.arrow.open:before, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li>a>.arrow:before
+{
+        color:#fff!important;
+
+}
+
+.glyphicon-remove {
+  height: 50px;
+  width: 50px;
+  position: relative;
+  box-sizing: border-box;
+  line-height: 50px;
+  display: inline-block;
+}
+.glyphicon-remove:before,
+.glyphicon-remove:after {
+  transform: rotate(-45deg);
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -5px;
+  margin-left: -25px;
+  display: block;
+     height: 4px;
+    width: 20px;
+  background-color:  #0c4999;
+  transition: all 0.2s ease-out;
+}
+.glyphicon-remove:after {
+  transform: rotate(45deg);
+}
+.glyphicon-remove:hover:before,
+.glyphicon-remove:hover:after {
+  transform: rotate(0deg);
+}
+
+table.table.ng-table-responsive.table-bordered.table-striped.col-md-12,th
+{
+    text-align: center;
+}
+
+span.ui-select-placeholder.text-muted.ng-binding
+{
+    padding-right: 10px;
+}
+
+input.font-blue,span.font-blue
+{
+    margin-top: 32px;
+}
+
+input.btn-primary
+{
+
+    margin-right: 15px;
+    padding: 18px;
+
+}
+
+
+
+.page-content {
+   margin-right: 0px!important;
+      margin-top: 15px!important;
+    min-height: 600px;
+    padding: 25px 20px 10px;
+}
+
+.wizard li.active:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 1;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 10px solid transparent;
+    border-bottom-color: transparent;
+}
+
+.default .btn-lg{
+    border-radius: 50px!important;
+        background-color: #0c4999!important;
+}
+input[type="button"] {
+border-radius: 50px!important;
+        background-color: #0c4999!important;
+}
+.ui-select-bootstrap .ui-select-toggle > .caret
+{
+     
+    right: 174px!important;
+
+}
+/*dz-image img
+{width: 100%;height: 100%;}*/
+/*.dropzone .dz-preview .dz-image img{
+        height: 150px;
+        width:200px;
+        object-fit: cover;
+      }*/
+.dropzone .dz-preview .dz-remove{
+        right: -1px;
 }
