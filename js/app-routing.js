@@ -102,8 +102,16 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', fun
                                  name: 'MetronicApp',
                                  insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                                  files: [
-                                     'js/controllers/general/LoginController.js',
-                                     'js/factories/UserAccountFactory.js'
+                                     //'js/controllers/general/LoginController.js',
+                                     //'js/factories/UserAccountFactory.js'
+                                     'assets/CSS/style.css',
+                            'assets/CSS/zoomslider.css',
+                            'assets/js/jquery.zoomslider.min.js',
+                            'assets/global/plugins/bootstrap-switch/css/bootstrap-switch-rtl.min.css',
+                            'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js',
+                            'js/controllers/general/HomeController.js',
+                            'js/controllers/general/LoginController.js',
+                            'js/factories/UserAccountFactory.js'
                                  ]
                              });
                          }]
@@ -173,7 +181,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', fun
     /*=========================End Student==========================*/
     /*=========================Start Teacher==========================*/
          .state('TeacherProfile', {
-             url: "/TeacherProfile",
+             url: "/TeacherProfile/:id",
              templateUrl: "views/Teacher/TeacherProfile.html",
              parent: "Admin",
              data: { pageTitle: 'ملف تعريفي للمعلم' },
@@ -195,7 +203,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', fun
     /*=========================End Teacher==========================*/
     /*=========================Start Admin==========================*/
                   .state('EnterpriseProfile', {
-                      url: "/AdminProfile",
+                      url: "/AdminProfile/:id",
                       templateUrl: "views/Admin/AdminProfile.html",
                       parent: "Admin",
                       data: { pageTitle: 'ملف تعريفي للموسسة' },
@@ -209,7 +217,9 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', fun
                                       /*'assets/global/plugins/angularjs/plugins/ui-select/select.min.css',
                                       'assets/global/plugins/angularjs/plugins/ui-select/select.min.js',*/
                                       'js/controllers/Admin/AdminProfileController.js',
-                                       'js/factories/UserAccountFactory.js'
+                                       'js/factories/UserAccountFactory.js',
+                                       'js/factories/EnterpriseFactory.js'
+
                                   ]
                               });
                           }]
@@ -217,7 +227,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', fun
                   })
 
           .state('AddEvent', {
-              url: "/AddEvent",
+              url: "/AddEvent/:id",
               templateUrl: "views/Admin/AddEvent.html",
               parent: "Admin",
               data: { pageTitle: 'إضافة يوم همة' },
@@ -240,6 +250,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', fun
                               //   'assets/Calender/js/jquery.calendars.ummalqura-ar.js',
                               //   'assets/Calender/js/jquery.calendars.plus.min.js',
                                   'js/controllers/Admin/AddEventController.js',
+                                   'js/factories/EnterpriseFactory.js'
 
                           ]
                       });
