@@ -13,22 +13,22 @@
                     <div class="wizard-inner">
                         <div class="connecting-line"></div>
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="" ng-class="{'active':addEventPrincipleData.$valid}">
-                                <a ng-click="ScrollTo(1)" data-toggle="tab" aria-controls="step1" role="tab" title="اتمام ادخال البيانات الاساسية ليوم الهمة">
+                            <li role="presentation" class="" ng-class="{'active':validForm1 || form.addEventPrincipleData.$valid}">
+                                <a ng-click="ScrollTo(1,false)" data-toggle="tab" aria-controls="step1" role="tab" title="اتمام ادخال البيانات الاساسية ليوم الهمة">
                                     <span class="round-tab">
                                         <i class="glyphicon glyphicon-map-marker"></i>
                                     </span>
                                 </a>
                             </li>
-                            <li role="presentation" ng-class="{'active':addEventProgram.$valid}">
-                                <a ng-click="ScrollTo(2)" data-toggle="tab" aria-controls="step2" role="tab" title="اتمام ادخال برنامج يوم الهمة" ng-disabled="!addEventPrincipleData.$valid">
+                            <li role="presentation" ng-class="{'active':validForm2 || form1.addEventProgram.$valid}">
+                                <a ng-click="ScrollTo(2,false)" data-toggle="tab" aria-controls="step2" role="tab" title="اتمام ادخال برنامج يوم الهمة">
                                     <span class="round-tab">
                                         <i class="glyphicon glyphicon-tree-deciduous"></i>
                                     </span>
                                 </a>
                             </li>
-                            <li role="presentation" ng-class="{'active':AddProgramPlane.$valid}">
-                                <a ng-click="ScrollTo(3)" data-toggle="tab" aria-controls="complete" role="tab" title="ادخال الخطة اليومية" ng-disabled="!addEventPrincipleData.$valid || !addEventProgram.$valid">
+                            <li role="presentation" ng-class="{'active':validForm3 || form3.AddProgramPlane.$valid}">
+                                <a ng-click="ScrollTo(3,false)" data-toggle="tab" aria-controls="complete" role="tab" title="ادخال الخطة اليومية">
                                     <span class="round-tab">
                                         <i class="glyphicon glyphicon-list-alt"></i>
                                     </span>
@@ -38,26 +38,31 @@
                     </div>
                 </div>
             </section>
-            <div class="panel panel-primary font-md" id="anchor1">
-                <form name="addEventPrincipleData" autocomplete="off" novalidate>
-                    <div class="panel panel-primary font-lg" ng-init="ShowEventinfo=false" ng-click="ShowEventinfo=!ShowEventinfo">
+            <div class="panel panel-primary font-md" id="anchor1" ng-if="ShowEventinfo">
+                <form name="form.addEventPrincipleData" autocomplete="off" novalidate>
+                    <div class="panel panel-primary font-lg">
                         <div class="panel-heading">
                             <i style="color:#fec825;" class="glyphicon glyphicon-map-marker"></i>
                             يوم الهمة الموعد والمكان
                         </div>
                     </div>
-                    <div class="panel-body" ng-show="ShowEventinfo">
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <div class="alert alert-danger col-md-10 text-center" ng-if="showNotificationMsg">
+                                <p>من فضلك اكمل ملئ بيانات يوم الهمة الموعد والمكان للانتقال الي المراحل التالية</p>
+                            </div>
+                        </div>
                         <div class="input-group input-group-md col-md-6">
                             <span class="input-group-addon" id="sizing-addon1">اسم يوم الهمة</span>
                             <input type="text" class="form-control" placeholder="ادخل اسم الحدث" name="eventName" required ng-model="obj.HemmaEventAr" aria-describedby="sizing-addon1">
-                            <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('addEventPrincipleData','eventName', 'required')">من فضلك ادخل اسم الحدث</span>
+                            <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('form','addEventPrincipleData','eventName', 'required')">من فضلك ادخل اسم الحدث</span>
                         </div>
 
                         <div class="input-group input-group-md col-md-6">
 
                             <span class="input-group-addon" id="sizing-addon1">مكان يوم الهمة</span>
                             <input type="text" class="form-control" placeholder="ادخل مكان المقام بيه الحدث" name="eventPlace" required ng-model="obj.Place" aria-describedby="sizing-addon1">
-                            <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('addEventPrincipleData','eventPlace', 'required')">ممن فضلك ادخل مكان الحدث</span>
+                            <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('form','addEventPrincipleData','eventPlace', 'required')">ممن فضلك ادخل مكان الحدث</span>
                         </div>
                         <div class="input-group input-group-md col-md-6">
                             <span class="input-group-addon" id="sizing-addon1">بداية الحدث</span>
@@ -68,9 +73,10 @@
                                    showOnFocus="true"
                                    required
                                    placeholder="اختر تاريخ بداية الحدث "
-                                   kdatepicker />
+                                   kdatepicker 
+                                   ng-change="ChangeDateFrom(eventDate.from)"/>
+                            <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('form','addEventPrincipleData','fromDatePicker', 'required')">مطلوب اختيار بداية الحدث</span>
                         </div>
-                        <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('addEventPrincipleData','fromDatePicker', 'required')">مطلوب اختيار بداية الحدث</span>
                         <div class="input-group input-group-md col-md-6">
                             <span class="input-group-addon" id="sizing-addon1">نهاية الحدث </span>
                             <input type="text" id="popupDatePicker" name="toDatePicker" class="is-calendarPicker" ng-model='eventDate.to'
@@ -79,7 +85,8 @@
                                    dateFormat="MM dd, yyyy"
                                    showOnFocus="true"
                                    placeholder="اختر تاريخ نهاية الحدث "
-                                   kdatepicker />
+                                   kdatepicker 
+                                   ng-change="ChangeDateTo(eventDate.to)"/>
 
                         </div>
                         <span id="url2-error" class="font-red-mint error row" ng-show="validateDate(eventDate.from,eventDate.to,'to')">{{ErrorMessage}}</span>
@@ -96,20 +103,21 @@
                             </span>
                         </div>
                         <div class="input-group input-group-md col-md-6">
-                            <button class="btn default btn-lg" ng-click="SavePricipleData()">حفظ واستكمال التسجيل</button>
+                            <button class="btn default btn-lg" ng-click="ScrollTo()" ng-disabled="true"><i style="color:#fec825;" class="fa fa-chevron-circle-right"></i>السابق</button>
+                            <button class="btn default btn-lg" ng-click="ScrollTo(2,true)">التالي<i style="color:#fec825;" class="fa fa-chevron-circle-left"></i></button>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="panel panel-primary font-md" id="anchor2">
-                <div class="panel panel-primary font-lg" ng-init="ShowEventProgramData=false" ng-click="ShowEventProgramData=!ShowEventProgramData">
+            <div class="panel panel-primary font-md" id="anchor2" ng-if="ShowEventProgramData">
+                <div class="panel panel-primary font-lg">
                     <div class="panel-heading">
                         <i style="color:#fec825;" class="glyphicon glyphicon-tree-deciduous"></i>
                         فروع برنامج يوم الهمة
                     </div>
                 </div>
-                <div class="panel-body" ng-show="ShowEventProgramData && addEventPrincipleData.$valid ">
-                    <form name="addEventProgram" novalidate>
+                <div class="panel-body">
+                    <form name="form1.addEventProgram" novalidate>
                         <table class="table ng-table-responsive table-bordered table-striped col-md-12">
                             <thead  class="text-primary">
                                 <tr>
@@ -125,16 +133,16 @@
                                 <tr ng-repeat="EventProgramobj in EventProgram track by $index">
                                     <td class="col-xs-2">
                                         <input type="text" required name="ProgramName{{$index}}" placeholder="اسم الفرع" ng-model="EventProgramobj.ProgramName" class="col-xs-12" />
-                                        <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('addEventProgram','ProgramName'+{{$index}}, 'required')">مطلوب اسم الفرع</span>
+                                        <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('form1','addEventProgram','ProgramName'+{{$index}}, 'required')">مطلوب اسم الفرع</span>
                                     </td>
                                     <td class="col-xs-2">
                                         <input type="number" ng-restrict="^[0-9]" required name="ProgramQuantity{{$index}}" placeholder="عدد الاجزاء" ng-model="EventProgramobj.ProgramQuantity" class="col-xs-12" min="0" max="114" />
-                                        <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('addEventProgram','ProgramQuantity'+{{$index}}, 'required')">مطلوب ادخال عدد الاجزاء</span>
+                                        <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('form1','addEventProgram','ProgramQuantity'+{{$index}}, 'required')">مطلوب ادخال عدد الاجزاء</span>
                                     </td>
                                     <td class="col-xs-2">
                                         <input type="number" ng-restrict="^[0-9]" required name="ProgramQuantityUnit{{$index}}" placeholder="عدد الاوجه" ng-model="EventProgramobj.ProgramQuantityUnit" class="col-xs-12" min="0" max="GetMaxPage(EventProgramobj)" />
-                                        <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('addEventProgram','ProgramQuantityUnit'+{{$index}}, 'required')">مطلوب ادخال عدد الاوجة </span>
-                                        <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('addEventProgram','ProgramQuantityUnit'+{{$index}}, 'max')">ارجوا مراجعة عدد الوجة بعدد الجزاء</span>
+                                        <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('form1','addEventProgram','ProgramQuantityUnit'+{{$index}}, 'required')">مطلوب ادخال عدد الاوجة </span>
+                                        <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('form1','addEventProgram','ProgramQuantityUnit'+{{$index}}, 'max')">ارجوا مراجعة عدد الوجة بعدد الجزاء</span>
                                     </td>
 
                                     <td class="col-xs-2">
@@ -146,7 +154,7 @@
                                                 </div>
                                             </ui-select-choices>
                                         </ui-select>
-                                        <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('addEventProgram','ProgramVerseTo'+{{$index}}, 'required')">مطلوب اختيار من سورة</span>
+                                        <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('form1','addEventProgram','ProgramVerseTo'+{{$index}}, 'required')">مطلوب اختيار من سورة</span>
                                     </td>
                                     <td class="col-xs-2">
                                         <ui-select ng-model="EventProgramobj.ProgramVerseFrom" ng-change="MenueSelection2(EventProgramobj.ProgramVerseFrom)" theme="bootstrap" ng-required="true" name="ProgramVerseFrom{{$index}}">
@@ -157,27 +165,31 @@
                                                 </div>
                                             </ui-select-choices>
                                         </ui-select>
-                                        <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('addEventProgram','ProgramVerseFrom'+{{$index}}, 'required')">مطلوب اختيار الي السورة</span>
+                                        <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('form1','addEventProgram','ProgramVerseFrom'+{{$index}}, 'required')">مطلوب اختيار الي السورة</span>
                                     </td>
-                                    <td class="col-xs-2"><a href="#" ng-click="removeRecord('EventProgram',$index)" ng-hide="hideRemoveButton"><span class="glyphicon glyphicon-remove"></span></a></td>
+                                    <td class="col-xs-2"><a href="#" ng-click="removeRecord('EventProgram',$index)" ng-hide="hideRemoveButton"><span style="color:red;" class="glyphicon glyphicon-remove"></span></a></td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-2" colspan="6"><a href="#" ng-click="AddRecord('EventProgram',10)" ng-hide="hideAddButton"><span class="glyphicon glyphicon-plus"></span></a></td>
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="input-group input-group-md col-md-6">
+                            <button class="btn default btn-lg" ng-click="ScrollTo(1,true)"><i style="color:#fec825;" class="fa fa-chevron-circle-right"></i>السابق</button>
+                            <button class="btn default btn-lg" ng-click="ScrollTo(3,true)">التالي<i style="color:#fec825;" class="fa fa-chevron-circle-left"></i></button>
+                        </div>
                     </form>
                 </div>
             </div>
-            <div class="panel panel-primary font-lg" id="anchor3">
-                <div class="panel panel-primary font-lg" ng-click="CheckValidDatewhenClick()">
+            <div class="panel panel-primary font-lg" id="anchor3" ng-if="ShowEventPlanData">
+                <div class="panel panel-primary font-lg">
                     <div class="panel-heading">
                         <i style="color:#fec825;" class="glyphicon glyphicon-list-alt"></i>
                         الجدول الزمني  ليوم الهمة
                     </div>
                 </div>
-                <div class="panel-body" ng-show="ShowEventPlanData && addEventPrincipleData.$valid && validDateFlag">
-                    <form name="AddProgramPlane" novalidate>
+                <div class="panel-body">
+                    <form name="form3.AddProgramPlane" novalidate>
                         <uib-tabset active="active">
                             <uib-tab index="$index" ng-repeat="DayPlan in EventPlane track by $index" ng-init="parentOrder=$index" heading="{{DayOrderEnum[$index+1]}}">
                                 <div class="">
@@ -199,22 +211,22 @@
 
                                                 <td class="col-md-1"><span class="font-blue">{{$index+1}}</span></td>
                                                 <td class="col-md-2">
-                                                    <input type="text" name="{{parentOrder}}PlaneAgenda{{$index}}" placeholder="اسم الفقرة" ng-model="record.Agenda" class="font-blue col-xs-12" ng-required="true" />{{parentOrder+'-'+$index}}
-                                                    <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError1('AddProgramPlane',{{parentOrder}}+'PlaneAgenda'+{{$index}}, 'required')">مطلوب اسم الفقرة</span>
+                                                    <input type="text" name="{{parentOrder}}PlaneAgenda{{$index}}" placeholder="اسم الفقرة" ng-model="record.Agenda" class="font-blue col-xs-12" ng-required="true" /><!--{{parentOrder+'-'+$index}}-->
+                                                    <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('form3','AddProgramPlane',{{parentOrder}}+'PlaneAgenda'+{{$index}}, 'required')">مطلوب اسم الفقرة</span>
                                                 </td>
                                                 <td class="col-md-2">
                                                     <input type="text" placeholder="اسم المقدم" name="{{parentOrder}}PlanePresenter{{$index}}" ng-model="record.Presenter" class="font-blue col-xs-12" ng-required="true" />
-                                                    <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError1('AddProgramPlane',{{parentOrder}}+'PlanePresenter'+{{$index}}, 'required')">مطلوب اسم المقدم الفقرة</span>
+                                                    <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('form3','AddProgramPlane',{{parentOrder}}+'PlanePresenter'+{{$index}}, 'required')">مطلوب اسم المقدم الفقرة</span>
                                                 </td>
                                                 <td class="col-md-2">
                                                     <uib-timepicker class="col-md-6" name="{{parentOrder}}FromTime{{$index}}" ng-model="record.FromTime" minute-step="5" hour-step="1" ng-required="true"></uib-timepicker>
-                                                    <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError1('AddProgramPlane',{{parentOrder}}+'FromTime'+{{$index}}, 'required')">مطلوب اختيار الوقت</span>
+                                                    <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('form3','AddProgramPlane',{{parentOrder}}+'FromTime'+{{$index}}, 'required')">مطلوب اختيار الوقت</span>
 
                                                 </td>
                                                 <td class="col-md-2">
                                                     <uib-timepicker class="col-md-6" name="{{parentOrder}}ToTime{{$index}}" ng-model="record.ToTime" minute-step="5" hour-step="1" show-meridian="true" ng-required="true"></uib-timepicker>
-                                                    <p>{{record.ToTime| date:'short'}}</p>
-                                                    <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError1('AddProgramPlane',{{parentOrder}}+'ToTime'+{{$index}}, 'required')">مطلوب اختيار الوقت</span>
+                                                    <!--<p>{{record.ToTime| date:'short'}}</p>-->
+                                                    <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('form3','AddProgramPlane',{{parentOrder}}+'ToTime'+{{$index}}, 'required')">مطلوب اختيار الوقت</span>
 
                                                 </td>
                                                 <td class="col-xs-2">
@@ -234,6 +246,10 @@
                                 </div>
                             </uib-tab>
                         </uib-tabset>
+                        <div class="input-group input-group-md col-md-6">
+                            <button class="btn default btn-lg" ng-click="ScrollTo(2,true)"><i style="color:#fec825;" class="fa fa-chevron-circle-right"></i>السابق</button>
+                            <button class="btn default btn-lg" ng-click="ScrollTo()" ng-disabled="true">التالي<i style="color:#fec825;" class="fa fa-chevron-circle-left"></i></button>
+                        </div>
                     </form>
                 </div>
             </div>

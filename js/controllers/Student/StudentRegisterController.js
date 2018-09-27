@@ -9,11 +9,12 @@
         $q.all([$scope.p1, $scope.p2, $scope.p3]).then(function (data) {
             $scope.Nationalites = data[0].data;
             $scope.GradeClassification = data[1].data;
+            debugger;
             $scope.Events = data[2].data;
         });
     };
     
-    $scope.Events=[{HemmaEventAr:"سوم الهمة الاول",Enterprise:{EnterpriseAr:"الموسسة الازلي"}},{HemmaEventAr:"سوم الهمة التاني",Enterprise:{EnterpriseAr:"الموسسة الازلي"}}]
+    //$scope.Events=[{HemmaEventAr:"سوم الهمة الاول",Enterprise:{EnterpriseAr:"الموسسة الازلي"}},{HemmaEventAr:"سوم الهمة التاني",Enterprise:{EnterpriseAr:"الموسسة الازلي"}}]
     $scope.SelectEvent = function (eventID) {
         if (eventID) {
             $scope.EventProgram = $filter('filter')($scope.Events, function (item) { return item.HemmaEventID === eventID; })[0].HemmaEventPrograms;

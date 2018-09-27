@@ -1,4 +1,4 @@
-﻿<h2>Admin profile</h2>
+﻿<!--<h2>Admin profile</h2>-->
 <div class="row">
     <div class="col-md-12">
         <!-- BEGIN PROFILE SIDEBAR -->
@@ -14,7 +14,7 @@
                 <!-- END SIDEBAR USERPIC -->
                 <!-- SIDEBAR USER TITLE -->
                 <div class="profile-usertitle">
-                    <div class="profile-usertitle-name"> اسم الدار </div>
+                    <div class="profile-usertitle-name"> {{enterpriseInfo.EnterpriseAr}}</div>
                     <!--<div class="profile-usertitle-job"> Developer </div>-->
                 </div>
                 <!-- END SIDEBAR USER TITLE -->
@@ -52,17 +52,17 @@
                 <!-- STAT -->
                 <div class="row list-separated profile-stat">
                     <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase profile-stat-title"> 37 </div>
+                        <div class="uppercase profile-stat-title"> {{enterpriseInfo.EventNumber}} </div>
                         <div class="uppercase profile-stat-text"> عدد الايام الهمة </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase profile-stat-title"> 51 </div>
+                        <div class="uppercase profile-stat-title"> {{enterpriseInfo.StudentNumber}} </div>
                         <div class="uppercase profile-stat-text"> عدد الطلبة المتقدمين </div>
                     </div>
-                    <!--<div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase profile-stat-title"> 61 </div>
-                        <div class="uppercase profile-stat-text"> Uploads </div>
-                    </div>-->
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <div class="uppercase profile-stat-title"> {{enterpriseInfo.TeacherNumber}} </div>
+                        <div class="uppercase profile-stat-text"> عدد المدرسين المشتركين </div>
+                    </div>
                 </div>
                 <!-- END STAT -->
                 <div>
@@ -115,11 +115,11 @@
                                 <!-- PERSONAL INFO TAB -->
                                 <div class="tab-pane active" ng-class="{'active':personalInfoFlag==true}" id="tab_1_1" ng-show="personalInfoFlag==true">
                                     <form role="form" name="EnterpriseInfo" novalidate>
-                                        <!--<div class="row">
+                                        <div class="row">
                                             <div class="form-group form-md-line-input has-info col-md-10 footerBtn">
                                                 <div class="input-group col-xs-12">
-                                                    <input type="text" ng-model="newEnterpriseObj.UserName" class="form-control" name="entrpriseName1" placeholder="ادخل اسم المستخدم ......" required ng-minlength="3" ng-maxlength="100">
-                                                    <label for="form_control_1">اسم المستخدم<span class="font-red-mint">*</span></label>
+                                                    <input type="text" ng-model="enterpriseInfo.EnterpriseAr" class="form-control" name="entrpriseName1" placeholder="ادخل اسم المستخدم ......" required ng-minlength="3" ng-maxlength="100">
+                                                    <label for="form_control_1">اسم المؤسسة<span class="font-red-mint">*</span></label>
 
                                                 </div>
                                                 <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(EnterpriseInfo,'entrpriseName1', 'required' )">مطلوب ادخال اسم المستخدم</span>
@@ -141,27 +141,8 @@
                                                 </div>
                                                 <span id="url2-error" class="error font-red-mint" ng-show="edit && hasError(EnterpriseInfo,'enterpriseEmail1', 'required' )">مطلوب إدخال البريد الالكتروني</span>
                                                 <span id="url2-error" class="error font-red-mint" ng-show="edit && hasError(EnterpriseInfo,'enterpriseEmail1', 'email' )">  البريد الالكتروني غير  مطابق للتنسيق مثال :example@gmail.com </span>
-                                            </div>
-                                            <div class="form-group form-md-line-input has-info col-md-10 footerBtn">
-                                                <div class="input-group col-xs-12">
-                                                    <input type="password" ng-model="newEnterpriseObj.UserPassword" class="form-control" name="enterprisePassword1" placeholder="ادخل رقم الهوية ......" required ng-minlength="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" autocomplete="current-password">
-                                                    <label for="form_control_1">ادخل كلمة المرور<span class="font-red-mint">*</span></label>
-
-                                                </div>
-                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(EnterpriseInfo,'enterprisePassword1', 'required' )">مطلوب إدخال كلمة المرور</span>
-                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(EnterpriseInfo,'enterprisePassword1', 'pattern' )">كلمة المرور عبارة عن احرف انجليزية تحتوي علي ارقام وحروف كبيرة وصغيرة ولا تقل عن 6 احرف مثال:Hemma123 </span>
-                                            </div>
-                                            <div class="form-group form-md-line-input has-info col-md-10 footerBtn">
-                                                <div class="input-group col-xs-12">
-                                                    <input type="password" ng-model="newEnterpriseObj.ConfirmPassword" class="form-control" name="enterpriseConfirmPassword1" placeholder="ادخل كلمة المرور ......" required ng-minlength="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" autocomplete="new-password" compare-to="newEnterpriseObj.UserPassword">
-                                                    <label for="form_control_1">تاكيد كلمة المرور<span class="font-red-mint">*</span></label>
-
-                                                </div>
-                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(EnterpriseInfo,'enterpriseConfirmPassword1', 'required' )">مطلوب إدخال تاكيد كلمة المرور</span>
-                                                <span id="url2-error" class="font-red-mint error" ng-show="edit && hasError(EnterpriseInfo,'enterpriseConfirmPassword1', 'pattern' )">كلمة المرور يجب ان تحتوي علي الاقل حرف كبير  و حرف صغير و رقم ولا تقل عن ستة احرف </span>
-                                                <span id="url2-error" class="font-red-mint error" ng-show="hasError(addEnterpriseForm,'enterpriseConfirmPassword', 'compareTo' )">تاكيد كلمة المرور غير مطابقة لكلمة المرور الاصلية </span>
-                                            </div>
-                                        </div>-->
+                                            </div>                                   
+                                        </div>
                                         <!--<div class="margiv-top-10">
                                             <a href="javascript:;" class="btn green" ng-hide="DisabledAccount"> Save Changes </a>
                                             <a href="javascript:;" class="btn default"> Cancel </a>
@@ -253,8 +234,8 @@
                 </div>
             </div>
         </div>
-        <button ng-click="SuccessPopUp()"> ShowCorrect pop up</button>
-        <button ng-click="ErrorPopUp()">Show error pop up</button>
+        <!--<button ng-click="SuccessPopUp()"> ShowCorrect pop up</button>
+        <button ng-click="ErrorPopUp()">Show error pop up</button>-->
         <!-- END PROFILE CONTENT -->
     </div>
 </div>

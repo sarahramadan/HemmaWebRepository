@@ -169,7 +169,7 @@ MetronicApp.controller('AdminHeaderController', ['$scope', '$state', '$uibModal'
                 console.log("admin page user", $rootScope.user);
             });
         } else {
-           // $state.go("Login");
+            $state.go("Login");
         }
 
     });
