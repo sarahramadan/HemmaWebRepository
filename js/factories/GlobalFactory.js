@@ -7,6 +7,10 @@
             //filterObject.PageSize = settings.pageSize;
             return RequestFactory.Request('POST', appConfigs.apiBaseURL + ControllerName + "/FilteredList", filterObject, null);
         },
+        getPaginatedListAndParameter: function (ControllerName, filterObject,UID) {
+            //filterObject.PageSize = settings.pageSize;
+            return RequestFactory.Request('POST', appConfigs.apiBaseURL + ControllerName + "/FilteredList/" + UID, filterObject, null);
+        },
         get: function (ControllerName, id) {
             return RequestFactory.Request('GET', appConfigs.apiBaseURL + ControllerName + '/' + id, null, null);
         },

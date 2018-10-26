@@ -1,0 +1,116 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE FORM PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption font-red-sunglo font-lg col-xs-12 col-md-12">
+                    <span class="caption-subject bold uppercase"><i style="font-size:26px;color:#fec825;vertical-align: middle;" class="fa fa-th-list"></i>
+ قائمة بأيام الهمة: </span>
+                </div>
+                <div class="float-left col-xs-12 col-md-12">
+                    <button class="btn blue btn-lg float-left col-xs-12 col-md-3" ng-click="addEventFun()"> <i style="font-size:26px;color:#fec825;vertical-align: middle;" class="fa fa-plus-square  float-left"></i> إضافة يوم همة جديد</button>
+                
+                    <!--<button class="btn blue btn-lg float-left col-xs-12 col-md-3" ng-click="addEventFun()"> <i style="font-size:26px;color:#fec825;vertical-align: middle;" class="fa fa-filter  float-left"></i> تنقية القائمة</button>-->
+                </div>
+                
+            </div>
+            <div class="panel-body">
+                <table ng-table="eventsTable" class="table text-center">
+                    <tr class="text-primary">
+                        <td width="6%" title="'رقم'" sortable="'HemmaEventNumber'">
+                        </td>
+                        <td width="10%" title="'اسم اليوم'" sortable="'HemmaEventAr'">
+                        </td>
+                        <td width="15%" title="'تاريخ البداية'" sortable="'StarDate'">
+                        </td>
+                        <td width="15%" title="'تاريخ الاإنتهاء'" sortable="'EndDate'">
+                        </td>
+                        <td width="13%" title="'المكان'" sortable="'Place'">
+                        </td>
+                        <td width="8.5%" title="'الحدث ساري'" sortable="'IsFinish'">
+                        </td>
+                        <td width="8.5%" title="'تفعيل الحدث'" sortable="'IsActive'">
+                        </td>
+                        <td width="11%" title="'إحصائيات'"></td>
+                        <td width="22%" title="'العمليات'">
+                        </td>
+                        </tr>
+                        <tr class="filters text-primary">
+                            <td><input type="number" class="form-control" placeholder="#" ng-model="filterObject.SearchObject.HemmaEventNumber"></td>
+                            <td><input type="text" class="form-control" placeholder="اسم الحدث" ng-model="filterObject.SearchObject.HemmaEventAr"></td>
+                            <td><input type="text" id="popupDatePicker1" name="fromDatePicker" class="is-calendarPicker" ng-model='eventDate.from'
+                                 calendarType="ummalqura"
+                                 language="ar"
+                                 dateFormat="MM dd, yyyy"
+                                 showOnFocus="true"
+                                 required
+                                 placeholder="تاريخ بداية الحدث "
+                                 kdatepicker
+                                 autocomplete="off" 
+                                       ng-change="ChangeDateFrom(eventDate.from)"/>                           
+                            <td><input type="text" id="popupDatePicker1" name="fromDatePicker" class="is-calendarPicker" ng-model='eventDate.to'
+                                       calendarType="ummalqura"
+                                       language="ar"
+                                       dateFormat="MM dd, yyyy"
+                                       showOnFocus="true"
+                                       required
+                                       placeholder="تاريخ انتهاء الحدث "
+                                       kdatepicker
+                                       autocomplete="off" 
+                                       ng-change="ChangeDateTo(eventDate.to)"/>
+                            <td><input type="text" class="form-control" placeholder="مكان الحدث" ng-model="filterObject.SearchObject.Place"></td>
+                            <td><select style="padding:4px"  class="form-control" ng-model="filterObject.SearchObject.IsFinish">
+                                    <option value="" placeholder="هل الحدث منتهي؟">الكل</option>    
+                                    <option value="false"> منتهي</option>
+                                    <option value="true"> ساري</option>
+                                </select>
+                            </td>
+                            <td><select style="padding:4px" class="form-control" ng-model="filterObject.SearchObject.IsActive">
+                                    <option value="" placeholder="هل الحدث مفعل؟">الكل</option>
+                                    <option value="true"> مفعل</option>
+                                    <option value="false"> معطل</option>
+                                </select>
+                            </td>
+                            <td></td>
+                            <td>
+                                <button title="بحث" class="btn-success" ng-click="search()" ng-disabled="showLoader"><i class="fa fa-search" aria-hidden="true"></i>بحث</button>
+                                <button title="الغاء البحث" class="btn-default" ng-click="clearSearch()" ng-disabled="showLoader"><i class="fa fa-times-circle" aria-hidden="true"></i>الغاء</button>
+                            </td>
+
+                        </tr>
+                    <tr ng-repeat="row in eventList track by $index">
+                        <td>
+                            {{row.HemmaEventNumber}}
+                        </td>
+                        <td>
+                            {{row.HemmaEventAr}}
+                        </td>
+                        <td>
+                            {{formateDate(row.StarDate)}}
+                        </td>
+                        <td>
+                            {{formateDate(row.EndDate)}}
+                        </td>
+                        <td>
+                            {{row.Place}}
+                        </td>
+                        <td>
+                            <span ng-if="row.IsFinish"><i style="color:black" class="fa fa-hourglass-end fa-lg" aria-hidden="true"></i> منتهي</span>
+                            <span ng-if="!row.IsFinish"><i style="color:#fec825" class="fa fa-hourglass-start fa-lg" aria-hidden="true"></i> ساري</span>
+                        </td>
+                        <td>
+                            <span ng-if="row.IsActive"><i style="color:#fec825" class="fa fa-lightbulb-o fa-lg" aria-hidden="true"></i> مفعل</span>
+                            <span ng-if="!row.IsActive"><i style="color:black" class="fa fa-lightbulb-o fa-lg" aria-hidden="true"></i> معطل</span>
+                        </td>
+                        <td class="text-left"><span>عدد الطلبة:{{row.StudentNumber}} </span><br /><span>عدد المعلمين:{{row.TeacherNumber}}</span></td>
+                        <td>
+                            <button title="تفعيل يوم همة" style="width:100%" ng-if="row.IsActive" class="btn-primary" ng-click="deactiveEvent(row)" ng-disabled="showLoader || row.IsFinish==true"><i style="color:black" class="fa fa-lightbulb-o fa-lg" aria-hidden="true"></i>تعطيل الحدث</button>                            
+                            <button title="تعطيل يوم همة" style="width:100%" ng-if="!row.IsActive" class="btn-primary" ng-click="activeEvent(row)" ng-disabled="showLoader || row.IsFinish==true"><i style="color:#fec825" class="fa fa-lightbulb-o fa-lg" aria-hidden="true"></i>تفعيل الحدث</button>
+                            <button title="تعديل يوم همة" style="width:100%" class="btn-success green-dark" ng-click="editEvent(row)" ng-disabled="showLoader || row.IsFinish==true"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>تعديل الحدث</button>
+                         </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

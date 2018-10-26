@@ -17,7 +17,7 @@ html, body{
 
 	background:#ffffff;
 	margin:0px!important;
-    overflow-x: visible;
+    overflow-x: hidden;
 }
 p{
 	margin:0;
@@ -2177,15 +2177,15 @@ label.highlight {
 
 
 input, textarea {
-  font-size: 22px;
+  font-size: 14px;
   display: block;
   width: 100%;
   height: 100%;
-  padding: 5px 10px;
+  padding: 4px 10px;
   background: none;
   background-image: none;
-  border: 1px solid #a0b3b0;
-  color: #ffffff;
+  border: 1px solid #c2cad8;
+  color: #555;
   border-radius: 0;
   transition: border-color .25s ease, box-shadow .25s ease;
 }
@@ -2313,7 +2313,7 @@ input.form-control.ng-pristine.ng-invalid.ng-invalid-required.ng-touched
 
 input#popupDatePicker{
         margin-right: 64px;
-            margin-bottom: 16px;
+        margin-bottom: 16px;
         width: 94%;
 
 }
@@ -2566,12 +2566,12 @@ input[type="button"] {
 border-radius: 50px!important;
         background-color: #00a79d!important;
 }
-.ui-select-bootstrap .ui-select-toggle > .caret
+/*.ui-select-bootstrap .ui-select-toggle > .caret
 {
      
     right: 174px!important;
 
-}
+}*/
 
 .portlet.light {
     padding: 12px 20px 15px!important;
@@ -2587,7 +2587,7 @@ border-radius: 50px!important;
 
 /*******footer style ******************/
 .footer-distributed{
-	background-color: #00a79d;
+	background-color: #292c2f;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
 	box-sizing: border-box;
 	width: 100%;
@@ -2774,3 +2774,44 @@ input.form-control.ng-pristine.ng-untouched.ng-invalid.ng-invalid-required, .for
 {
         right: 530px!important;
 }
+
+.dropzone .dz-preview .dz-remove {
+    right: -1px;
+}
+
+.float-left{
+    float:left;
+        margin-right: 5px;
+}
+button[disabled], html input[disabled]{
+    opacity: 0.65; 
+  cursor: not-allowed;
+}
+
+
+h3 img {
+    max-height: 50px;
+}
+#map { 
+    height: 400px;
+    margin: 20px 0;
+    border-radius: 5px;
+    border: 1px solid silver;
+}
+
+/*fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+}
+
+legend.scheduler-border {
+        font-size: 1.2em !important;
+        font-weight: bold !important;
+        text-align: right !important;
+        width:auto;
+        padding:0 10px;
+        border-bottom:none;
+    }*/

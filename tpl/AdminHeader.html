@@ -95,7 +95,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">{{feature.FeatureNameAr}}</span> <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="font-lg" ng-repeat="right in feature.Rights track by $index">
-                                    <a href="{{right.RightURL}}">
+                                   <a href="{{right.RightURL}}{{user.UserAccountUID}}">
                                         <i class="icon-puzzle"></i>{{right.RightNameAr}}
                                     </a>
                                 </li>

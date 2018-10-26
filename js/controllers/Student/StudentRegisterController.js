@@ -1,19 +1,25 @@
-﻿angular.module('MetronicApp').controller('StudentRegisterController', function ($rootScope, $scope, $http, $timeout, CRUDFactory, $q, $filter,$state) {
+﻿angular.module('MetronicApp').controller('StudentRegisterController', function ($rootScope, $scope, $http, $timeout, CRUDFactory, $q, $filter, $state, LookupFactory) {
     $scope.StudentObj = { GenderID: 1, StudentEventRegisters :[]};
     $scope.edit = false;
     $scope.EventProgram = [];
+    $rootScope.showLoader = true;
     $scope.GetAllLookups = function () {
+        $rootScope.showLoader = true;
         $scope.p1 = CRUDFactory.getList("LookUps/GetAllNationality");
         $scope.p2 = CRUDFactory.getList("LookUps/GetAllGradeClassification");
-        $scope.p3 = CRUDFactory.getList("LookUps/GetAvailableEvents");
-        $q.all([$scope.p1, $scope.p2, $scope.p3]).then(function (data) {
+       // $scope.p3 = CRUDFactory.getList("LookUps/GetAvailableEvents");
+        $scope.p4 = CRUDFactory.getList("LookUps/GetCountries");
+
+        $q.all([$scope.p1, $scope.p2, $scope.p3, $scope.p4]).then(function (data) {
+            $rootScope.showLoader = false;
             $scope.Nationalites = data[0].data;
             $scope.GradeClassification = data[1].data;
-            $scope.Events = data[2].data;
+           // $scope.Events = data[2].data;
+            $scope.CountryList = data[3].data;
         });
     };
     
-    $scope.Events=[{HemmaEventAr:"سوم الهمة الاول",Enterprise:{EnterpriseAr:"الموسسة الازلي"}},{HemmaEventAr:"سوم الهمة التاني",Enterprise:{EnterpriseAr:"الموسسة الازلي"}}]
+    //$scope.Events=[{HemmaEventAr:"سوم الهمة الاول",Enterprise:{EnterpriseAr:"الموسسة الازلي"}},{HemmaEventAr:"سوم الهمة التاني",Enterprise:{EnterpriseAr:"الموسسة الازلي"}}]
     $scope.SelectEvent = function (eventID) {
         if (eventID) {
             $scope.EventProgram = $filter('filter')($scope.Events, function (item) { return item.HemmaEventID === eventID; })[0].HemmaEventPrograms;
@@ -22,15 +28,16 @@
     $scope.Cancel = function () {
         $scope.edit = false;
         $scope.addStudentForm.$setPristine();
-        $scope.addStudentForm.$dirty();
-        $scope.StudentObj = { GenderID: 1};
+        //$scope.addStudentForm.$dirty();
+        $scope.StudentObj = { GenderID: 1 };
+        $rootScope.showLoader = false;
     }
     $scope.saveStudentData = function () {
         $scope.edit = true;
         if ($scope.addStudentForm.$valid) {
-            $rootScope.submitted = true;
+            $rootScope.showLoader = true;
             CRUDFactory.add("Registers/Student", $scope.StudentObj).then(function (data) {
-                $rootScope.submitted = false;
+                $rootScope.showLoader = false;
                 if (data.data.ErrorMessage.length > 0) {
                     var errorMsg = "";
                     data.data.ErrorMessage.forEach(function (item) {
@@ -62,14 +69,14 @@
                     label: "إغلاق",
                     className: "btn-default",
                     callback: function () {
-                        return;
+                                                return;
                     }
                 },
                 back: {
                     label: "الصفحة الرئيسية",
                     className: "btn blue",
                     callback: function () {
-                        $state.go("HomePage");
+                        $state.go("Home");
                     }
                 }
             },
@@ -89,6 +96,24 @@
                 return;
             }
         });
+    }
+    $scope.SelectCities = function (countryID) {
+        if (countryID) {
+            $rootScope.showLoader = true;
+            LookupFactory.GetCitiesByCountryID(countryID).then(function (data) {
+                $rootScope.showLoader = false;
+                $scope.Cities = data.data;
+            })
+        }
+    }
+    $scope.SelectCity = function (cityID) {
+        if (cityID) {
+            $rootScope.showLoader = true;
+            LookupFactory.GetEventsByCityID(cityID).then(function (data) {
+                $rootScope.showLoader = false;
+                $scope.Events = data.data;
+            })
+        }
     }
 $scope.GetAllLookups();
 });

@@ -1,4 +1,9 @@
-﻿/// <reference path="../assets/js/easyResponsiveTabs.js" />
+﻿/// <reference path="factories/LookupFactory.js" />
+/// <reference path="controllers/Admin/ListEventsController.js" />
+/// <reference path="../views/Admin/ListEvents.html" />
+/// <reference path="../views/Admin/ListEvents.html" />
+/// <reference path="controllers/Admin/ListEventController.js" />
+/// <reference path="../assets/js/easyResponsiveTabs.js" />
 /// <reference path="../assets/js/calender/jquery.calendars.min.js" />
 /// <reference path="../assets/js/ngTable.js" />
 /* Setup Rounting For All Pages */
@@ -172,6 +177,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', fun
                                     /*'assets/global/plugins/angularjs/plugins/ui-select/select.min.css',
                                     'assets/global/plugins/angularjs/plugins/ui-select/select.min.js',*/
                                     'js/controllers/Student/StudentRegisterController.js',
+                                    'js/factories/LookupFactory.js'
                                 ]
                             });
                         }]
@@ -277,7 +283,28 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', fun
                  }]
              }
          })
+           .state('ListEvents', {
+               url: "/ListEvents/:id",
+               templateUrl: "views/Admin/ListEvents.html",
+               parent: "Admin",
+               data: { pageTitle: 'قائمة بايام الهمة' },
+               controller: "ListEventsController",
+               resolve: {
+                   deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                       return $ocLazyLoad.load({
+                           name: 'MetronicApp',
+                           insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                           files: [
+                                'assets/CSS/jquery.calendars.picker.css',
+                                   'js/controllers/Admin/ListEventsController.js',
+                                    'js/factories/EnterpriseFactory.js',
+                                    'js/service/GeneralService.js'
 
+                           ]
+                       });
+                   }]
+               }
+           })
     /*=========================End Admin==========================*/
         /*=========================Start System Admin==========================*/
                   .state('ManageAccounts', {

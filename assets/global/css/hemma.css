@@ -138,10 +138,10 @@ span.round-tab:hover {
         left: 35%;
     }
 }
-/*.ui-select-bootstrap .ui-select-toggle > .caret {
+.ui-select-bootstrap .ui-select-toggle > .caret {
      position: absolute;
    right: initial!important;
-   left: 10px; *//* or any other value - it should be the same as the original right value 
+   left: 10px; /* or any other value - it should be the same as the original right value*/ 
     margin-top: -2px;
 }
 
@@ -155,7 +155,7 @@ span.round-tab:hover {
  .ui-select-bootstrap > .ui-select-match > .btn > span.pull-left {
      float: right !important;
  }
- .registerModel .modal-content{
+/*.registerModel .modal-content{
      width:250px;
      height:250px;
  }
@@ -169,3 +169,4 @@ span.round-tab:hover {
 .customMargin{
     margin-top:130px;
 }*/
+
