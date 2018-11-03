@@ -54,7 +54,7 @@
 
                                 <div class="form-group form-md-line-input has-info col-md-6">
                                     <div class="input-group col-xs-12">
-                                        <ui-select ng-model="StudentObj.GradeClassificationID" ng-required="true" name="gradeClassification" ng-change="SelectEvent(StudentObj.StudentEventRegisters[0].HemmaEventID)" class="form-control">
+                                        <ui-select ng-model="StudentObj.GradeClassificationID" ng-required="true" name="gradeClassification" ng-change="SelectEvent(StudentObj.StudentEventRegisters[0].HemmaEventID)" class="">
                                             <ui-select-match placeholder="اختر الفئة العمرية......">{{$select.selected.GradeClaasificationAr}}</ui-select-match>
                                             <ui-select-choices repeat="item.GradeClassificationID as item in GradeClassification| filter: $select.search">
                                                 <div>
@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="form-group form-md-line-input has-info col-md-6">
                                     <div class="input-group col-xs-12">
-                                        <ui-select ng-model="StudentObj.NationalityID" ng-required="true" name="studentNationality" class="form-control">
+                                        <ui-select ng-model="StudentObj.NationalityID" ng-required="true" name="studentNationality" class="">
                                             <ui-select-match placeholder="اختر الجنسية......">{{$select.selected.NationalityAr}}</ui-select-match>
                                             <ui-select-choices repeat="nationality.NationalityID as nationality in Nationalites| filter: $select.search">
                                                 <div>
@@ -88,7 +88,7 @@
 
                                 <div class="form-group form-md-line-input has-info col-md-6">
                                     <div class="input-group col-xs-12">
-                                        <ui-select ng-model="StudentObj.CountryID" ng-required="true" name="Country" ng-change="SelectCities(StudentObj.CountryID)" class="form-control">
+                                        <ui-select ng-model="StudentObj.CountryID" ng-required="true" name="Country" ng-change="SelectCities(StudentObj.CountryID)" class="">
                                             <ui-select-match placeholder="اختر بلد الإقامة......">{{$select.selected.CountryNameAR}}</ui-select-match>
                                             <ui-select-choices repeat="item.CountryID as item in CountryList| filter: $select.search">
                                                 <div>
@@ -103,7 +103,7 @@
                                 </div>
                                 <div class="form-group form-md-line-input has-info col-md-6">
                                     <div class="input-group col-xs-12">
-                                        <ui-select ng-model="StudentObj.CityID" ng-required="true" name="City" class="form-control" ng-change="SelectCity(StudentObj.CityID)">
+                                        <ui-select ng-model="StudentObj.CityID" ng-required="true" name="City" class="" ng-change="SelectCity(StudentObj.CityID)">
                                             <ui-select-match placeholder="اختر المدينة......">{{$select.selected.CityNameAr}}</ui-select-match>
                                             <ui-select-choices repeat="City.CityID as City in Cities| filter: $select.search">
                                                 <div>
@@ -122,7 +122,7 @@
 
                                 <div class="form-group form-md-line-input has-info col-md-6">
                                     <div class="input-group col-xs-12">
-                                        <ui-select ng-model="StudentObj.HemmaEventID" ng-required="true" name="event" ng-change="SelectEvent(StudentObj.HemmaEventID)" class="form-control">
+                                        <ui-select ng-model="StudentObj.HemmaEventID" ng-required="true" name="event" ng-change="SelectEvent(StudentObj.HemmaEventID)" class="">
                                             <ui-select-match class="col-xs-12" placeholder="اختر يوم الهمة......">{{$select.selected.HemmaEventAr}}</ui-select-match>
                                             <ui-select-choices class="col-xs-12" repeat="item.HemmaEventID as item in Events| filter: $select.search">
                                                 <div>
@@ -142,7 +142,7 @@
                                 </div>
                                 <div class="form-group form-md-line-input has-info col-md-6">
                                     <div class="input-group col-xs-12">
-                                        <ui-select ng-model="StudentObj.HemmaEventProgramID" ng-required="EventProgram.length>0" name="seventProgram" class="form-control">
+                                        <ui-select ng-model="StudentObj.HemmaEventProgramID" ng-required="EventProgram.length>0" name="seventProgram" class="">
                                             <ui-select-match placeholder="اختر البرنامج......">{{$select.selected.ProgramName}}</ui-select-match>
                                             <ui-select-choices repeat="item.HemmaEventProgramID as item in EventProgram| filter: $select.search">
                                                 <div>
@@ -161,7 +161,7 @@
                             <br>
                             <div class="col-md-12 col-lg-12">
                                 <div class="form-group form-md-line-input has-info col-md-6">
-                                    <div for="form_control_1">اختر نوع الجنس<span class="font-red-mint">*</span></div>
+                                    <div class="gender" for="form_control_1">اختر نوع الجنس<span class="font-red-mint">*</span></div>
 <br />
                                     <div class="input-group col-xs-12">
                                         <div class="radio-inline">

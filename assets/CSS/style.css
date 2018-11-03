@@ -2617,7 +2617,7 @@ border-radius: 50px!important;
 /* Footer left */
 
 .footer-distributed .footer-left{
-	width: 40%;
+	width: 33%;
 }
 
 /* The company logo */
@@ -2656,7 +2656,7 @@ border-radius: 50px!important;
 /* Footer Center */
 
 .footer-distributed .footer-center{
-	width: 35%;
+	width: 33%;
 }
 
 .footer-distributed .footer-center i{
@@ -2700,7 +2700,7 @@ border-radius: 50px!important;
 /* Footer Right */
 
 .footer-distributed .footer-right{
-	width: 20%;
+	width: 33%;
 }
 
 .footer-distributed .footer-company-about{
@@ -3152,4 +3152,33 @@ h4.light {
 #projectFacts p
 {
         color: #fdc06c;
+}
+
+
+
+.gender
+{
+    color:#00a79d!important;
+}
+
+.btn.blue:not(.btn-outline) {
+    color: #FFF;
+    background-color: #00a79d!important;
+    border-color:#00a79d!important;
+        margin: 4%;
+}
+
+.footer-company-about, .footer-icons ,.footer-center,.footer-right
+{
+    text-align: right;
+}
+
+#uniform-radio6 input, #uniform-radio7 input
+{
+        margin-right: -12px!important;
+}
+
+.form-group.form-md-line-input .input-group>label
+{
+    margin-top: -32px!important;
 }
