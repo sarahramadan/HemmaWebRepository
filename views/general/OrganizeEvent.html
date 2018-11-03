@@ -1,5 +1,4 @@
-﻿
-<div class="row">
+﻿<div class="row">
     <div class="col-md-12">
        
         
@@ -140,11 +139,241 @@
                     <div class="container">
                         <h3 class="w3ls-title">الجدول الزمني لايام الهمة </h3>
                         
-                        
+                        <uib-tabset active="active">
+                            <uib-tab index="$index" ng-repeat="DayPlan in EventPlane track by $index" ng-init="parentOrder=$index" heading="{{DayOrderEnum[$index+1]}}">
+                                <div class="">
+                                    <table class="table ng-table-responsive table-bordered table-striped col-md-12">
+
+                                        <thead class="text-primary">
+                                            <tr>
+                                                <th class="col-md-2">رقم</th>
+                                                <th class="col-md-2">الفقرة</th>
+                                                <th class="col-md-2"> المقدم</th>
+                                                <th class="col-md-2">من</th>
+                                                <th class="col-md-2">الي</th>
+                                                <th class="col-md-2">ملحوظات</th>
+                                                <th class="col-md-2">الغاء </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="record in DayPlan.HemmaEventPlane track by $index">
+
+                                                <td class="col-md-1"><span class="font-blue">{{$index+1}}</span></td>
+                                                <td class="col-md-2">
+                                                    <input type="text" name="{{parentOrder}}PlaneAgenda{{$index}}" placeholder="اسم الفقرة" ng-model="record.Agenda" class="font-blue col-xs-12" ng-required="true" /><!--{{parentOrder+'-'+$index}}-->
+                                                    <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('form3','AddProgramPlane',{{parentOrder}}+'PlaneAgenda'+{{$index}}, 'required')">مطلوب اسم الفقرة</span>
+                                                </td>
+                                                <td class="col-md-2">
+                                                    <input type="text" placeholder="اسم المقدم" name="{{parentOrder}}PlanePresenter{{$index}}" ng-model="record.Presenter" class="font-blue col-xs-12" ng-required="true" />
+                                                    <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('form3','AddProgramPlane',{{parentOrder}}+'PlanePresenter'+{{$index}}, 'required')">مطلوب اسم المقدم الفقرة</span>
+                                                </td>
+                                                <td class="col-md-2">
+                                                    <uib-timepicker class="col-md-6" name="{{parentOrder}}FromTime{{$index}}" ng-model="record.FromTime" minute-step="5" hour-step="1" ng-required="true"></uib-timepicker>
+                                                    <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('form3','AddProgramPlane',{{parentOrder}}+'FromTime'+{{$index}}, 'required')">مطلوب اختيار الوقت</span>
+
+                                                </td>
+                                                <td class="col-md-2">
+                                                    <uib-timepicker class="col-md-6" name="{{parentOrder}}ToTime{{$index}}" ng-model="record.ToTime" minute-step="5" hour-step="1" show-meridian="true" ng-required="true"></uib-timepicker>
+                                                    <!--<p>{{record.ToTime| date:'short'}}</p>-->
+                                                    <span id="url2-error" class="font-red-mint error" ng-show="edit1 && hasError('form3','AddProgramPlane',{{parentOrder}}+'ToTime'+{{$index}}, 'required')">مطلوب اختيار الوقت</span>
+
+                                                </td>
+                                                <td class="col-xs-2">
+                                                    <input type="text" placeholder="ملحوظات" name="{{parentOrder}}PlaneNote{{$index}}" class="font-blue col-xs-12" ng-model="record.Note" />
+                                                </td>
+                                                <td class="col-xs-2">
+                                                    <input type="hidden" class="font-blue col-xs-12" ng-hide="true" ng-model="record.AgendaIndex" ng-init="record.AgendaIndex=$index+1" />
+                                                    <input type="hidden" class="font-blue col-xs-12" ng-hide="true" ng-model="record.EventDate" ng-init="record.EventDate=DayPlan.EventDate" />
+                                                    <input type="hidden" class="font-blue col-xs-12" ng-hide="true" ng-model="record.EventDateHijri" ng-init="record.EventDateHijri=DayPlan.EventHijriDate" />
+                                                    <a href="#" ng-hide="hideRemovePlaneButton" ng-click="removePlaneRecord('EventPlane',parentOrder,$index)"><span class="glyphicon glyphicon-remove"></span></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-2" colspan="6"><a ng-hide="hideAddPlaneButton" href="#" ng-click="AddPlaneRecord('EventPlane',5,parentOrder)"><span class="glyphicon glyphicon-plus"></span></a></td>
+                                            </tr>
+                                    </table>
+                                </div>
+                            </uib-tab>
+                        </uib-tabset>
                         
                        
                         <div class="sap_tabs">
-                            <div id="horizontalTab">
+                            <uib-tabset active="active">
+                                <uib-tab index="1" heading="اليوم الاول">
+                                    <div class="">
+                                        <div class="col-md-3 portfolio-grids">
+                                            <a href="assets/images/g1.jpg" data-lightbox="example-set" data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">
+                                                <img src="assets/images/g1.jpg" class="img-responsive zoom-img" alt="" />
+                                                <div class="b-wrapper">
+                                                    <h5>الاول</h5>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3 portfolio-grids">
+                                            <a href="assets/images/g2.jpg" data-lightbox="example-set" data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">
+                                                <img src="assets/images/g2.jpg" class="img-responsive zoom-img" alt="" />
+                                                <div class="b-wrapper">
+                                                    <h5>TechEdu</h5>
+                                                    <p>gvdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdffg</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3 portfolio-grids">
+                                            <a href="assets/images/g3.jpg" data-lightbox="example-set" data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">
+                                                <img src="assets/images/g3.jpg" class="img-responsive zoom-img" alt="" />
+                                                <div class="b-wrapper">
+                                                    <h5>الثاني</h5>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3 portfolio-grids">
+                                            <a href="assets/images/g8.jpg" data-lightbox="example-set" data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">
+                                                <img src="assets/images/g8.jpg" class="img-responsive zoom-img" alt="" />
+                                                <div class="b-wrapper">
+                                                    <h5>الثالث</h5>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3 portfolio-grids">
+                                            <a href="assets/images/g5.jpg" data-lightbox="example-set" data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">
+                                                <img src="assets/images/g5.jpg" class="img-responsive zoom-img" alt="" />
+                                                <div class="b-wrapper">
+                                                    <h5>TechEdu</h5>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3 portfolio-grids">
+                                            <a href="assets/images/g6.jpg" data-lightbox="example-set" data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">
+                                                <img src="assets/images/g6.jpg" class="img-responsive zoom-img" alt="" />
+                                                <div class="b-wrapper">
+                                                    <h5>TechEdu</h5>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3 portfolio-grids">
+                                            <a href="assets/images/g4.jpg" data-lightbox="example-set" data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">
+                                                <img src="assets/images/g4.jpg" class="img-responsive zoom-img" alt="" />
+                                                <div class="b-wrapper">
+                                                    <h5>TechEdu</h5>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3 portfolio-grids">
+                                            <a href="assets/images/g7.jpg" data-lightbox="example-set" data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">
+                                                <img src="assets/images/g7.jpg" class="img-responsive zoom-img" alt="" />
+                                                <div class="b-wrapper">
+                                                    <h5>TechEdu</h5>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                </uib-tab>
+                                <uib-tab index="1" heading="اليوم الاول">
+                                    <div class="">
+                                        <div class="col-md-3 portfolio-grids">
+                                            <a href="assets/images/g3.jpg" data-lightbox="example-set" data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">
+                                                <img src="assets/images/g3.jpg" class="img-responsive zoom-img" alt="" />
+                                                <div class="b-wrapper">
+                                                    <h5>TechEdu</h5>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3 portfolio-grids">
+                                            <a href="assets/images/g1.jpg" data-lightbox="example-set" data-title="Lorem Ipsum is simply dummy the when an unknown galley of type and scrambled it to make a type specimen.">
+                                                <img src="assets/images/g1.jpg" class="img-responsive zoom-img" alt="" />
+                                                <div class="b-wrapper">
+                                                    <h5>TechEdu</h5>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                </uib-tab>
+                                <uib-tab index="1" heading="اليوم الاول">
+                                    <div class="">
+                                        <table class="table ng-table-responsive table-bordered table-striped col-md-12">
+
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-md-2">رقم</th>
+                                                    <th class="col-md-2">الفقرة</th>
+                                                    <th class="col-md-2"> المقدم</th>
+                                                    <th class="col-md-2">من</th>
+                                                    <th class="col-md-2">الي</th>
+                                                    <th class="col-md-2">ملحوظات</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+
+                                                    <td class="col-md-1"><span>{{$index+1}}</span></td>
+                                                    <td class="col-md-2">
+                                                        الفقرة الاولي 
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        الشيخ الحمد
+                                                    </td>
+                                                    <td class="col-md-2">
+10:30 AM
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                       1:00 PM
+
+                                                    </td>
+                                                    <td class="col-xs-2">
+                                                        التجمع في الساحة الكبيرة
+                                                    </td>
+                                                  
+                                                </tr>
+                                                <tr>
+
+                                                    <td class="col-md-1"><span >2</span></td>
+                                                    <td class="col-md-2">
+                                                        الفقرة الاولي
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        الشيخ الحمد
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        10:30 AM
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        1:00 PM
+
+                                                    </td>
+                                                    <td class="col-xs-2">
+                                                        التجمع في الساحة الكبيرة
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+
+                                                    <td class="col-md-1"><span>3</span></td>
+                                                    <td class="col-md-2">
+                                                        الفقرة الاولي
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        الشيخ الحمد
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        10:30 AM
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        1:00 PM
+
+                                                    </td>
+                                                    <td class="col-xs-2">
+                                                        التجمع في الساحة الكبيرة
+                                                    </td>
+
+                                                </tr>
+                                               
+                                        </table>
+                                    </div>
+                                </uib-tab>
+                            </uib-tabset>
+                            <!--<div id="horizontalTab">
                                 <ul class="resp-tabs-list">
                                     <li class="resp-tab-item"><span>الكل </span></li>
                                     <li class="resp-tab-item"><span>اليوم الاول </span></li>
@@ -331,7 +560,7 @@
                                         <div class="clearfix"> </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
