@@ -3645,3 +3645,19 @@ span.caption-subject.font-green.bold.uppercase
          height: 211px!important;  
 
 }
+
+.jumbotron
+{
+    background-color: transparent;
+}
+
+
+h1
+{
+    border-bottom: 0px  ; 
+}
+
+.jumbotron .h1, .jumbotron h1
+{
+        font-weight: bold;
+}
