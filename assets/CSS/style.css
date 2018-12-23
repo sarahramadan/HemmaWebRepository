@@ -590,8 +590,10 @@ h3.w3ls-title,h2.w3ls-title {
     color: #00a79d;
 	font-size:2.5em;
 	font-weight:600;
+    text-align: center;
 }
 h3.w3ls-title:after {
+/*
     background: #e2dfdf;
     content: "";
     display: block;
@@ -605,6 +607,7 @@ h3.w3ls-title:after {
     -o-transition: all 0.4s ease;
     -ms-transition: all 0.4s ease;
     transition: all 0.4s ease;
+*/
 }
 /*-- about --*/
 div#about {
@@ -710,13 +713,14 @@ a.close {
 
 /*-- //about --*/
 /*-- services --*/
+/*
 div#agileits-services {
-    background: url(../images/s2.jpg) no-repeat center;
     background-size: cover;
 }
+*/
 .agileits-services-row {
     padding: 2em 0;
-    background: rgba(12, 12, 12, 0.18);
+/*    background: rgba(12, 12, 12, 0.18);*/
 }
 .agileits-services-grids {
     text-align: center;
@@ -724,7 +728,7 @@ div#agileits-services {
 .agileits-services-grids h4 {
     font-size: 1.5em;
     margin: 1em 0 .5em;
-    color: #fff;
+    color: #111;
     line-height: 1.5em;
     font-weight: 600;
     position: relative;
@@ -744,11 +748,10 @@ div#agileits-services {
 } 
 
 .agileits-services-row p{
-    color: white;
+    color: grey;
 }
 /*-- Effect 1--*/
 .agileits-services-grids span {
-    font-size: 1.8em;
     color: #00a79d;
     display: inline-block;
     text-decoration: none;
@@ -787,8 +790,8 @@ div#agileits-services {
 	opacity: 0;
 }
 .agileits-services-grids:hover span {
-    background: #fdc06c;
-    color: #fff !important;
+    color: #fdc06c;
+/*    color: #fff !important;*/
 }
 .agileits-services-grids:hover span:after {
   -webkit-transform: scale(1);
@@ -804,7 +807,8 @@ div#agileits-services {
     background-size: cover;
 }  
 .wthree-testi  h3,div#agileits-services h3 ,.subscribe h3{
-    color: #fff;
+    color: #00a79d;
+    text-align: center;
 }
 .wthree-testi  h3.w3ls-title:after,div#agileits-services  h3.w3ls-title:after{
     background: rgba(226, 223, 223, 0.2);
@@ -3222,7 +3226,6 @@ p{
 article {
   margin: 20px;
   background: #FFF;
-  font-family: "Open Sans";
   box-shadow:1px 2px 3px rgba(0,0,0,.2);
   position: relative;
 }
@@ -3290,7 +3293,7 @@ article.info:before{
 
 article.video:before{
   content: "\f03d";
-  background: #82F;
+  background: #fdc06c;
 }
   
 article.announcement:before{
@@ -3660,4 +3663,111 @@ h1
 .jumbotron .h1, .jumbotron h1
 {
         font-weight: bold;
+}
+
+#agileits-services
+{
+    margin: 20px;
+    background: #FFF;
+    box-shadow: 1px 2px 3px rgba(0,0,0,.2);
+}
+
+.numberCircle {
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    background: #fff;
+    border: 2px solid black;
+    color: black;
+    text-align: center;
+    font: 32px Arial, sans-serif;
+    display: inline-block;
+}
+
+
+/*GALLERY*/
+.gallery {
+/*  background-color: #fff;*/
+/*  box-shadow: 0 0 2vw 0.1vw rgba(0, 0, 0, 0.8);*/
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+.gallery figure {
+  flex: 1 1 200px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.4);
+}
+.gallery figure figcaption {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: right;
+  padding: 0.2em 0.4em 0.2em;
+  -webkit-transform: translateY(101%);
+          transform: translateY(101%);
+  transition: -webkit-transform 200ms ease-in-out;
+  transition: transform 200ms ease-in-out;
+  transition: transform 200ms ease-in-out, -webkit-transform 200ms ease-in-out;
+}
+.gallery figure:hover figcaption {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+.gallery figure img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  transition: all 180ms ease-in;
+}
+.gallery figure:hover img {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  -webkit-filter: blur(4px) brightness(0.3);
+          filter: blur(4px) brightness(0.3);
+}
+
+@media screen and (min-width: 400px) {
+  .gallery {
+    padding: 0.5vw;
+  }
+  .gallery figure {
+    margin: 0.5vw;
+  }
+}
+@media screen and (min-width: 900px) {
+  .gallery figure {
+    flex: 1 1 300px;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .gallery figure {
+    flex: 1 1 400px;
+  }
+}
+
+
+.nav-tabs
+{
+    border-bottom: 0px solid #ddd;
+}
+
+.thumb img
+{
+    margin-top: 20px;
 }
