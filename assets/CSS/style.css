@@ -728,7 +728,7 @@ div#agileits-services {
 .agileits-services-grids h4 {
     font-size: 1.5em;
     margin: 1em 0 .5em;
-    color: #111;
+    color: rgba(255, 255, 255, 0.8);
     line-height: 1.5em;
     font-weight: 600;
     position: relative;
@@ -748,11 +748,11 @@ div#agileits-services {
 } 
 
 .agileits-services-row p{
-    color: grey;
+    color: rgba(255, 255, 255, 0.8);
 }
 /*-- Effect 1--*/
 .agileits-services-grids span {
-    color: #00a79d;
+    color: rgba(255, 255, 255, 0.8);
     display: inline-block;
     text-decoration: none;
     z-index: 1;
@@ -3770,4 +3770,9 @@ h1
 .thumb img
 {
     margin-top: 20px;
+}
+
+.agileits-services-row
+{
+        background: #00a79d;
 }
